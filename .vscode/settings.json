@@ -6,4 +6,5 @@
   "eslint.codeAction.showDocumentation": {
     "enable": true
   },
+  "css.customData": [".vscode/css_custom_data.json"]
 }
