@@ -18,6 +18,7 @@ module.exports = {
         secondary: '#DA99F7',
         bg1: '#FAFAFA',
         gray_60: '#DEDEDE',
+        gray_70: '#728197',
         purple: '#5C17E5',
       },
       boxShadow: {
@@ -31,6 +32,8 @@ module.exports = {
       height: px0_1000,
       maxWidth: px0_1000,
       maxHeight: px0_1000,
+      minWidth: px0_1000,
+      minHeight: px0_1000,
       spacing: px0_300,
       borderRadius: px0_100,
     },
