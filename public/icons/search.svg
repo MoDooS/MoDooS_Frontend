@@ -1,4 +1,4 @@
 <!-- 돋보기 -->
-<svg width="28" height="27" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M23.8314 23.4564L17.1939 16.8189M19.4064 11.2877C19.4064 15.5645 15.9395 19.0314 11.6627 19.0314C7.38594 19.0314 3.91895 15.5645 3.91895 11.2877C3.91895 7.01094 7.38594 3.54395 11.6627 3.54395C15.9395 3.54395 19.4064 7.01094 19.4064 11.2877Z" stroke="#A1A1AA" stroke-width="2.2125" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="current" height="current" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M23.8314 23.4564L17.1939 16.8189M19.4064 11.2877C19.4064 15.5645 15.9395 19.0314 11.6627 19.0314C7.38594 19.0314 3.91895 15.5645 3.91895 11.2877C3.91895 7.01094 7.38594 3.54395 11.6627 3.54395C15.9395 3.54395 19.4064 7.01094 19.4064 11.2877Z" stroke="#A1A1AA" stroke-width="2.2125" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
 </svg>
