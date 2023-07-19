@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@svgr/webpack": "^8.0.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
