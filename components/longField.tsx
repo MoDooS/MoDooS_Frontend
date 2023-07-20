@@ -30,7 +30,7 @@ const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
 
   return (
     <div className='relative'>
-      <div {...props} className='flex text-13 text-gray_70 justify-between w-424'>
+      <div {...props} className='flex text-13 text-gray_70 justify-between max-w-360 w-full mt-15'>
         {label}
         <button onClick={handlePasswordButtonClick}>{hasMark && <QuestionMark width='17px' />}</button>
       </div>
@@ -41,9 +41,10 @@ const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
       <input
         type='text'
         onChange={handleChange}
-        className='border border-gray_70 w-424 py-13 px-17 rounded-17 placeholder-gray_70 placeholder: text-15'
+        className='border border-gray_70 w-full w-360  py-11 px-15 mt-4 rounded-17 placeholder-gray_70 placeholder: text-15'
         placeholder={placeholder}
       ></input>
+
       {errMsg && (
         <div className='ml-14 mt-4 flex text-13 text-red mb-20'>
           <Warning width='17px' />

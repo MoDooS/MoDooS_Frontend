@@ -1,49 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import LongField from '../components/longField';
-import MainBtn from '@/components/mainBtn';
-import Image from 'next/image';
 import BasicLayout from '@/components/layouts/basicLayout';
+import LongField from '@/components/longField';
+import MainBtn from '@/components/mainBtn';
+import ShortField from '@/components/shortField';
+import Image from 'next/image';
 
-const LoginForm: React.FC = () => {
-  const [activation, setActivation] = useState(false);
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailErr, setEmailErr] = useState('이메일이 일치하지 않습니다.');
-  const [passwordErr, setPasswordErr] = useState('');
-
-  const handleEmailChange = (value: string) => {
-    setEmail(value);
+const RepasswordForm: React.FC = () => {
+  const handleNicknameChange = (value: string) => {
+    // setForm((prev) => ({ ...prev, nickname: value }));
   };
-
-  const handlePasswordChange = (value: string) => {
-    setPassword(value);
-  };
-
   return (
     <BasicLayout>
-      <div className='flex-col'>
+      <div className='flex-col mb-60'>
         <Image src={'/imgs/logo_1.png'} alt='logo' width={160} height={0} className='mx-auto mt-45' />
         <div className='flex justify-center'>
           <form className='flex-col mt-30'>
+            {' '}
             <LongField
               field={{
                 label: '이메일',
                 placeholder: 'matthew10164@gmail.com',
-                onChange: handleEmailChange,
-                errMsg: emailErr,
+                onChange: handleNicknameChange,
+              }}
+            />
+            <MainBtn text='매일 보내기' />
+            <ShortField
+              field={{
+                label: '코드입력',
+                placeholder: '모스부호',
+                onChange: handleNicknameChange,
+
+                // errMsg: emailErr,
               }}
             />
             <LongField
               field={{
-                label: '비밀번호',
+                label: '새 비밀번호',
                 placeholder: '****',
-                onChange: handlePasswordChange,
+                onChange: handleNicknameChange,
               }}
-              hasMark={true}
-            />{' '}
+            />
+            <LongField
+              field={{
+                label: '비밀번호 재확인',
+                placeholder: 'matthew10164@gmail.com',
+                onChange: handleNicknameChange,
+              }}
+            />
+            <MainBtn text='비밀번호 변경하기' />
             <br />
-            <MainBtn text='로그인' />
             <div className='flex-col justify-center mt-37 space-y-3'>
               <div className='text-15 text-gray_70 font-normal text-center'>
                 회원이 아니신가요?{' '}
@@ -65,4 +69,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default RepasswordForm;
