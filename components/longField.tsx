@@ -41,7 +41,7 @@ const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
       <input
         type='text'
         onChange={handleChange}
-        className='border border-gray_70 w-full w-360  py-11 px-15 mt-4 rounded-17 placeholder-gray_70 placeholder: text-15'
+        className='border border-gray_70 w-360 py-11 px-15 mt-4 rounded-17 placeholder-gray_70 placeholder: text-15'
         placeholder={placeholder}
       ></input>
 
