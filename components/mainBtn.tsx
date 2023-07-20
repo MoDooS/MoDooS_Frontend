@@ -6,7 +6,7 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
 
 const MainBtn: React.FC<Props> = ({ text, ...props }) => {
   return (
-    <button type='submit' className='max-w-360 w-full text-17 text-gray_70 py-13  mt-29 bg-gray rounded-17'>
+    <button type='submit' className='max-w-360 w-full text-17 text-gray_70 py-13  mt-20 bg-gray rounded-17'>
       {text}
     </button>
   );
