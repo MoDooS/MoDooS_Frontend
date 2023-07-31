@@ -1,7 +1,7 @@
 import BasicLayout from '@/components/layouts/basicLayout';
-import LongField from '@/components/longField';
-import MainBtn from '@/components/mainBtn';
-import ShortField from '@/components/shortField';
+import LongField from '@/components/auth/longField';
+import MainBtn from '@/components/auth/mainBtn';
+import ShortField from '@/components/auth/shortField';
 import Image from 'next/image';
 import { validateEmail, validatePassword, validateNickname } from '@/utils/validation';
 import { LoginFormType } from '@/pages/login';

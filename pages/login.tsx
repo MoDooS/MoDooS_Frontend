@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import LongField from '../components/longField';
-import MainBtn from '@/components/mainBtn';
+import LongField from '../components/auth/longField';
+import MainBtn from '@/components/auth/mainBtn';
 import Image from 'next/image';
 import BasicLayout from '@/components/layouts/basicLayout';
 import { validateEmail, validatePassword } from '@/utils/validation';

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import BasicLayout from '@/components/layouts/basicLayout';
-import ShortField from '../components/shortField';
-import MainBtn from '@/components/mainBtn';
-import LongField from '@/components/longField';
+import ShortField from '../components/auth/shortField';
+import MainBtn from '@/components/auth/mainBtn';
+import LongField from '@/components/auth/longField';
 import { validateEmail, validatePassword, validateNickname } from '@/utils/validation';
 
 interface JoinFormType {
