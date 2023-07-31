@@ -22,6 +22,12 @@ html {
 
 input {
   outline: none;
+  appearance: none;
+}
+
+textarea {
+  outline: none;
+  resize: none;
 }
 
 body {

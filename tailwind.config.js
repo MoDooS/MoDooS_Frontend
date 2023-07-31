@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         primary: '#AC03FB',
         secondary: '#DA99F7',
+        danger: '#F14A58',
         bg1: '#FAFAFA',
         red: '#B1000F',
         dark_blue: '#445275',
@@ -25,9 +26,11 @@ module.exports = {
         gray_90: '#9AA8BC',
         purple: '#5C17E5',
         purple_sub: '#AC11F4',
+        bg1: '#F9FAFB',
+        backdrop: 'rgba(0,0,0,0.3)',
       },
       boxShadow: {
-        neumorphism: '0px 9.912036895751953px 19.824073791503906px 0px rgba(0, 0, 0, 0.16)',
+        neumorphism: '0px 10px 20px 0px rgba(0, 0, 0, 0.16)',
       },
       borderWidth: px0_10,
       // fontSize: px0_100, // fontsize를 rem 대신 px로 할거면 주석 해제
@@ -44,6 +47,20 @@ module.exports = {
       top: px0_1000,
       left: px0_1000,
       right: px0_1000,
+    },
+    zIndex: {
+      header: 80,
+      dropdown: 90,
+      backdrop_1: 100,
+      backdrop_2: 101,
+      modal_component: 102,
+    },
+    zIndex: {
+      header: 80,
+      dropdown: 90,
+      backdrop_1: 100,
+      backdrop_2: 101,
+      modal_component: 102,
     },
   },
   plugins: [],
