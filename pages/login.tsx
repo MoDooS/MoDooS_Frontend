@@ -3,21 +3,41 @@ import LongField from '../components/longField';
 import MainBtn from '@/components/mainBtn';
 import Image from 'next/image';
 import BasicLayout from '@/components/layouts/basicLayout';
+import { validateEmail, validatePassword } from '@/utils/validation';
+
+export interface LoginFormType {
+  email: string;
+  password: string;
+}
+
+const initialForm: LoginFormType = {
+  email: '',
+  password: '',
+};
 
 const LoginForm: React.FC = () => {
+  const [form, setForm] = useState<LoginFormType>(initialForm);
   const [activation, setActivation] = useState(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailErr, setEmailErr] = useState('이메일이 일치하지 않습니다.');
+  const [emailErr, setEmailErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
 
+  useEffect(() => {
+    if (form.email && form.password && !emailErr && !passwordErr) {
+      setActivation(true);
+    } else {
+      setActivation(false);
+    }
+  }, [form, emailErr, passwordErr]);
+
   const handleEmailChange = (value: string) => {
-    setEmail(value);
+    setForm((prev) => ({ ...prev, email: value }));
+    setEmailErr(validateEmail(value));
   };
 
   const handlePasswordChange = (value: string) => {
-    setPassword(value);
+    setForm((prev) => ({ ...prev, password: value }));
+    setPasswordErr(validatePassword(value));
   };
 
   return (
@@ -29,7 +49,7 @@ const LoginForm: React.FC = () => {
             <LongField
               field={{
                 label: '이메일',
-                placeholder: 'matthew10164@gmail.com',
+                placeholder: 'matthew10164@mju.ac.kr',
                 onChange: handleEmailChange,
                 errMsg: emailErr,
               }}
@@ -37,13 +57,15 @@ const LoginForm: React.FC = () => {
             <LongField
               field={{
                 label: '비밀번호',
+                type: 'password',
                 placeholder: '****',
                 onChange: handlePasswordChange,
+                errMsg: passwordErr,
               }}
               hasMark={true}
             />{' '}
             <br />
-            <MainBtn text='로그인' />
+            <MainBtn text='로그인' activation={activation} />
             <div className='flex-col justify-center mt-37 space-y-3'>
               <div className='text-15 text-gray_70 font-normal text-center'>
                 회원이 아니신가요?{' '}

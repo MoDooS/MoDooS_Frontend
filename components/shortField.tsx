@@ -5,17 +5,20 @@ import { Timer } from './timer';
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   field: FieldType;
   btnText?: string;
+  activation?: boolean;
 }
 
 export interface FieldType {
   label?: string;
   placeholder: string;
+  type?: string;
   errMsg?: string;
+  authMsg?: string;
   onChange: (value: string) => void;
 }
 
-const ShortField: React.FC<Props> = ({ field, btnText, ...props }) => {
-  const { label, placeholder, errMsg, onChange } = field;
+const ShortField: React.FC<Props> = ({ field, btnText, activation, ...props }) => {
+  const { label, placeholder, errMsg, authMsg, type, onChange } = field;
   const _btnText = btnText;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,15 +33,22 @@ const ShortField: React.FC<Props> = ({ field, btnText, ...props }) => {
 
       <div className='flex'>
         <input
-          type='text'
+          type={type}
           onChange={handleChange}
-          className='border border-gray_70 py-9 px-15 mt-4 mr-10 max-w-280 w-full rounded-17 placeholder-gray_70 placeholder: text-14'
+          className={`border ${errMsg ? 'border-input_red' : 'border-gray_70'} ${
+            authMsg ? 'border-purple_sub' : 'border-gray_70'
+          }  py-9 px-15 mt-4 mr-10 max-w-280 w-full rounded-17 placeholder-gray_70 placeholder: text-14`}
           placeholder={placeholder}
         ></input>
         {_btnText ? (
-          <div className='flex text-gray_90 text-16 bg-gray w-72 h-50 px-7 py-5 rounded-17 items-center justify-center'>
+          <button
+            className={`${
+              activation ? 'bg-purple_sub text-white' : 'bg-gray text-gray_90'
+            } flex text-16 w-72 h-50 px-7 py-5 rounded-17 items-center justify-center
+            `}
+          >
             {_btnText}
-          </div>
+          </button>
         ) : (
           <Timer />
         )}
@@ -50,6 +60,7 @@ const ShortField: React.FC<Props> = ({ field, btnText, ...props }) => {
           &nbsp;{errMsg}
         </div>
       )}
+      {authMsg && <div className='ml-14 mt-4 flex text-13 text-purple_sub mb-20'>&nbsp;{authMsg}</div>}
     </div>
   );
 };
