@@ -1,13 +1,20 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useState } from 'react';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   text: string;
+  activation?: boolean;
 }
 
-const MainBtn: React.FC<Props> = ({ text, ...props }) => {
+const MainBtn: React.FC<Props> = ({ text, activation, ...props }) => {
+  const [txt, setTxt] = useState(text);
   return (
-    <button type='submit' className='text-17 text-gray_70 w-424 py-16 px-182 mt-29 bg-gray rounded-17'>
-      {text}
+    <button
+      type='submit'
+      className={`${
+        activation ? 'bg-purple_sub text-white' : 'bg-gray text-gray_70 '
+      } max-w-360 w-full text-17 py-13 mt-20 rounded-17`}
+    >
+      {txt}
     </button>
   );
 };

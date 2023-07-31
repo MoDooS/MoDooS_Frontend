@@ -19,6 +19,7 @@ module.exports = {
         danger: '#F14A58',
         bg1: '#FAFAFA',
         red: '#B1000F',
+        input_red: '#F14A58',
         dark_blue: '#445275',
         gray: '#ECEFF4',
         gray_60: '#DEDEDE',
