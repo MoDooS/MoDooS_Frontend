@@ -1,34 +1,84 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChevronBottomIcon from '../../../public/icons/chevron_bottom.svg';
 import CalendarIcon from '../../../public/icons/calendar.svg';
 import useDatePicker from '@/hooks/useDatePicker';
 import dayjs from 'dayjs';
-import DatePicker from '@/components/datePicker/datePicker';
+import DatePicker, { SelectMode } from '@/components/datePicker/datePicker';
+import { addLeadingZero } from '@/utils/addLeadingZero';
+import { cls } from '@/utils/cls';
 
 type Props = {
   moveNextPage: () => void;
 };
+
+const dateFormatInitText = 'YYYY-MM-DD';
 
 const studyMethods = ['온라인', '오프라인', '온라인/오프라인 병행'];
 const studyCategories = ['어학', '프로그래밍'];
 
 export default function Page1({ moveNextPage }: Props) {
   const now = dayjs();
-  const { register: recruitDatePickerRegister, selectedDateRange: recruitDateRange } = useDatePicker({
+  const {
+    register: recruitDatePickerRegister,
+    selectedDateRange: { end: recruitDeadline },
+  } = useDatePicker({
     calendarRange: {
-      start: { year: now.get('year'), month: now.get('month') },
-      end: { year: now.get('year') + 1, month: 12 },
+      start: now.format(),
+      end: now.add(1, 'year').set('month', 12).format(),
     },
     initialSelectMode: 'endDate',
   });
-  const { register: studyRangeDatePickerRegister, selectedDateRange: studyRangeDateRange } = useDatePicker({
+  const {
+    register: studyRangeDatePickerRegister,
+    selectedDateRange: studyRangeDateRange,
+    setSelectMode: setStudyRangeSelectMode,
+    selectMode: studyRangeSelectMode,
+  } = useDatePicker({
     calendarRange: {
-      start: { year: now.get('year'), month: now.get('month') },
-      end: { year: now.get('year') + 1, month: 12 },
+      start: now.format(),
+      end: now.add(1, 'year').set('month', 12).format(),
     },
   });
   const [showRecruitDatePicker, setShowRecruitDatePicker] = useState(false);
   const [showStudyRangeDatePicker, setShowStudyRangeDatePicker] = useState(false);
+
+  const handleClickRecruitDatePicker = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    setShowStudyRangeDatePicker(false);
+    setShowRecruitDatePicker(true);
+  };
+
+  const handleClickStudyRangeDatePicker = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    pickerType: SelectMode,
+  ) => {
+    e.stopPropagation();
+    setShowRecruitDatePicker(false);
+    if (pickerType === studyRangeSelectMode) {
+      setShowStudyRangeDatePicker((prev) => !prev);
+    } else {
+      setStudyRangeSelectMode((prev) => (prev === 'startDate' ? 'endDate' : 'startDate'));
+    }
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', () => {
+      setShowRecruitDatePicker(false);
+      setShowStudyRangeDatePicker(false);
+    });
+  }, []);
+
+  const recruitDeadlineText = recruitDeadline
+    ? `${recruitDeadline.year}-${addLeadingZero(recruitDeadline.month)}-${addLeadingZero(recruitDeadline.date)}`
+    : dateFormatInitText;
+  const studyRangeStartText = studyRangeDateRange.start
+    ? `${studyRangeDateRange.start.year}-${addLeadingZero(studyRangeDateRange.start.month)}-${addLeadingZero(
+        studyRangeDateRange.start.date,
+      )}`
+    : dateFormatInitText;
+  const studyRangeEndText = studyRangeDateRange.end
+    ? `${studyRangeDateRange.end.year}-${studyRangeDateRange.end.month}-${studyRangeDateRange.end.date}`
+    : dateFormatInitText;
   return (
     <div>
       <h3 className=' text-16 text-black font-medium mb-20'>스터디 인원 및 진행 방식</h3>
@@ -93,10 +143,13 @@ export default function Page1({ moveNextPage }: Props) {
       {/* 모집 마감일 선택 달력 */}
       <h6 className='text-gray_70 text-14 font-medium mb-5'>모집 마감일</h6>
       <button
-        onClick={() => setShowRecruitDatePicker((prev) => !prev)}
-        className=' w-350 min-h-40 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black'
+        onClick={handleClickRecruitDatePicker}
+        className={cls(
+          'w-350 min-h-40 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black',
+          showRecruitDatePicker ? 'border-primary' : '',
+        )}
       >
-        <span>2023-12-08</span>
+        <span>{recruitDeadlineText}</span>
         <CalendarIcon width='24' color='#9AA8BC' />
       </button>
       <div className=' relative mb-20'>
@@ -108,20 +161,26 @@ export default function Page1({ moveNextPage }: Props) {
         <div>
           <h6 className=' text-gray_70 text-14 font-medium mb-5'>스터디 예정 시작일</h6>
           <button
-            onClick={() => setShowStudyRangeDatePicker((prev) => !prev)}
-            className=' w-175 min-h-40 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black'
+            onClick={(e) => handleClickStudyRangeDatePicker(e, 'startDate')}
+            className={cls(
+              'w-175 min-h-40 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black',
+              showStudyRangeDatePicker && studyRangeSelectMode === 'startDate' ? 'border-primary' : '',
+            )}
           >
-            <span>2023-12-08</span>
+            <span>{studyRangeStartText}</span>
             <CalendarIcon width='24' color='#9AA8BC' />
           </button>
         </div>
         <div>
           <h6 className=' text-gray_70 text-14 font-medium mb-5'>스터디 예정 마감일</h6>
           <button
-            onClick={() => setShowStudyRangeDatePicker((prev) => !prev)}
-            className=' w-175 min-h-40 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black'
+            onClick={(e) => handleClickStudyRangeDatePicker(e, 'endDate')}
+            className={cls(
+              'w-175 min-h-40 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black',
+              showStudyRangeDatePicker && studyRangeSelectMode === 'endDate' ? 'border-primary' : '',
+            )}
           >
-            <span>2023-12-08</span>
+            <span>{studyRangeEndText}</span>
             <CalendarIcon width='24' color='#9AA8BC' />
           </button>
         </div>
