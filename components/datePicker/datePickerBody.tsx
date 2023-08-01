@@ -33,18 +33,33 @@ const DatePickerBody: React.FC<Props> = ({ showingDate, selectedDateRange, selec
   const handleSelectDate = (selectedMonth: number, selectedDate: number) => {
     const { year } = showingDate;
 
-    // 시작일 선택 모드
-    if (selectMode === 'startDate') {
+    // 시작일 선택 모드 && 종료일이 선택되지 않았다면
+    // 검사 없이 날짜 선택
+    if (selectMode === 'startDate' && !selectedDateRange.end) {
       setSelectedDateRange((prev) => ({ ...prev, start: { year, month: selectedMonth, date: selectedDate } }));
-    } else {
-      // 종료일 선택 모드
-      // 종료일보다 시작일이 앞에 있어야 함
-      if (!selectedDateRange.start) {
-        return new Error('시작일을 설정하지 않고 종료일을 선택할 수 없음');
+      return;
+    }
+
+    // 종료일 선택 모드 && 시작일이 선택되지 않았다면
+    // 검사 없이 날짜 선택
+    if (selectMode === 'endDate' && !selectedDateRange.start) {
+      setSelectedDateRange((prev) => ({ ...prev, end: { year, month: selectedMonth, date: selectedDate } }));
+      return;
+    }
+
+    if (selectMode === 'startDate') {
+      const startDateFormat = dayjs(`${year}-${selectedMonth}-${selectedDate}`);
+      const { year: startYear, month: startMonth, date: startDate } = selectedDateRange.end!;
+      const endDateFormat = dayjs(`${startYear}-${startMonth}-${startDate}`);
+      if (startDateFormat.isBefore(endDateFormat)) {
+        setSelectedDateRange((prev) => ({ ...prev, start: { year, month: selectedMonth, date: selectedDate } }));
       }
-      const { year: startYear, month: startMonth, date: startDate } = selectedDateRange.start;
-      const startDateFormat = dayjs(`${startYear}-${startMonth}-${startDate}`);
+    } else {
+      // 시작일이 종료일보다 앞에 있는지 검사
+      // true일 경우만 날짜 선택
       const endDateFormat = dayjs(`${year}-${selectedMonth}-${selectedDate}`);
+      const { year: startYear, month: startMonth, date: startDate } = selectedDateRange.start!;
+      const startDateFormat = dayjs(`${startYear}-${startMonth}-${startDate}`);
       if (startDateFormat.isBefore(endDateFormat)) {
         setSelectedDateRange((prev) => ({ ...prev, end: { year, month: selectedMonth, date: selectedDate } }));
       }
@@ -121,7 +136,7 @@ const DatePickerBody: React.FC<Props> = ({ showingDate, selectedDateRange, selec
             key={i}
             onClick={() => handleSelectDate(month, date)}
             className={cls(
-              'py-10 flex justify-center items-center text-17 cursor-pointer',
+              'py-10 flex justify-center items-center text-13 cursor-pointer',
               hoverClassName,
               textClassName,
               isToday ? 'font-bold' : '',
