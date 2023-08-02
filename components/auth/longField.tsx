@@ -1,6 +1,6 @@
 import { HTMLAttributes, useState } from 'react';
-import Warning from '../public/icons/warning.svg';
-import QuestionMark from '../public/icons/question_mark.svg';
+import Warning from '../../public/icons/warning.svg';
+import QuestionMark from '../../public/icons/question_mark.svg';
 import PasswordRule from './passwordRule';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {

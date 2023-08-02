@@ -1,11 +1,13 @@
-import { HTMLAttributes, useState } from 'react';
-import Warning from '../public/icons/warning.svg';
+import { HTMLAttributes, memo, useCallback, useState } from 'react';
+import Warning from '../../public/icons/warning.svg';
 import { Timer } from './timer';
+import { fetchNicknameCheck } from '@/apis/auth/join';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   field: FieldType;
   btnText?: string;
   activation?: boolean;
+  onClick?: () => void;
 }
 
 export interface FieldType {
@@ -17,13 +19,21 @@ export interface FieldType {
   onChange: (value: string) => void;
 }
 
-const ShortField: React.FC<Props> = ({ field, btnText, activation, ...props }) => {
+const ShortField: React.FC<Props> = ({ field, btnText, activation, onClick, ...props }) => {
   const { label, placeholder, errMsg, authMsg, type, onChange } = field;
   const _btnText = btnText;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
+
+  const handleButtonClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault(); // 버튼 클릭 시 기본 동작(새로고침)을 막습니다.
+      if (onClick) onClick();
+    },
+    [onClick],
+  );
 
   return (
     <div className='relative'>
@@ -42,6 +52,8 @@ const ShortField: React.FC<Props> = ({ field, btnText, activation, ...props }) =
         ></input>
         {_btnText ? (
           <button
+            disabled={activation ? false : true}
+            onClick={handleButtonClick}
             className={`${
               activation ? 'bg-purple_sub text-white' : 'bg-gray text-gray_90'
             } flex text-16 w-72 h-50 px-7 py-5 rounded-17 items-center justify-center
@@ -50,7 +62,7 @@ const ShortField: React.FC<Props> = ({ field, btnText, activation, ...props }) =
             {_btnText}
           </button>
         ) : (
-          <Timer />
+          <Timer isActive={activation} />
         )}
       </div>
 
@@ -65,4 +77,4 @@ const ShortField: React.FC<Props> = ({ field, btnText, activation, ...props }) =
   );
 };
 
-export default ShortField;
+export default memo(ShortField);

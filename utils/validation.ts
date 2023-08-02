@@ -1,7 +1,7 @@
 // 유효성 검사 함수
 
 export const validateEmail = (value: string) => {
-  const emailRegex = /^[A-Za-z0-9._%+-]+@mju.ac.kr$/;
+  const emailRegex = /^[A-Za-z0-9._%+-]+@mju\.ac\.kr$/;
 
   if (!emailRegex.test(value)) {
     return '이메일 형식에 맞지 않습니다.';
