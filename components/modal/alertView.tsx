@@ -23,7 +23,7 @@ export default function AlertView() {
               <CancleIcon width='16' height='16' />
             </button>
             <div className={'font-semibold text-18'}>{alertViewTitle}</div>
-            <div className='mt-15 text-14'>{alertViewDesc}</div>
+            {alertViewDesc && <div className='mt-15 text-14'>{alertViewDesc}</div>}
             <div className='mt-28 flex justify-end items-end gap-10'>
               {alertActions.map((action, i) => (
                 <AlertAction key={i} {...action} closeAlert={closeAlert} />
