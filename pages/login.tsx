@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { HTMLAttributes, useEffect, useState } from 'react';
 import LongField from '../components/auth/longField';
 import MainBtn from '@/components/auth/mainBtn';
 import Image from 'next/image';
 import BasicLayout from '@/components/layouts/basicLayout';
 import { validateEmail, validatePassword } from '@/utils/validation';
+import { LoginFormType } from '@/apis/auth/login';
 
-export interface LoginFormType {
-  email: string;
-  password: string;
+export interface Props extends HTMLAttributes<HTMLDivElement> {
+  btnType: 'login' | 'register' | 'email';
 }
 
 const initialForm: LoginFormType = {
@@ -65,7 +65,7 @@ const LoginForm: React.FC = () => {
               hasMark={true}
             />{' '}
             <br />
-            <MainBtn text='로그인' activation={activation} />
+            <MainBtn text='로그인' activation={activation} toPath='#' btnType='login' form={form} />
             <div className='flex-col justify-center mt-37 space-y-3'>
               <div className='text-15 text-gray_70 font-normal text-center'>
                 회원이 아니신가요?{' '}

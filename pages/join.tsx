@@ -222,7 +222,7 @@ const JoinForm: React.FC = () => {
               }}
             />
             <br />
-            <MainBtn text='회원가입하기' activation={activation} toPath='/login' form={form} />
+            <MainBtn text='회원가입하기' activation={activation} toPath='/login' btnType='join' form={form} />
           </form>
         </div>
       </div>

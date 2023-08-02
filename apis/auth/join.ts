@@ -50,7 +50,6 @@ export const fetchCodeCheck = async (email: string) => {
       params: { email },
     });
     if (response.status === 200) {
-      console.log('좀 보자잉', response);
       return response.data;
     } else {
       console.log('Code check failed');

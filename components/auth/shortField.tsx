@@ -1,7 +1,6 @@
 import { HTMLAttributes, memo, useCallback, useState } from 'react';
 import Warning from '../../public/icons/warning.svg';
 import { Timer } from './timer';
-import { fetchNicknameCheck } from '@/apis/auth/join';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   field: FieldType;
@@ -52,7 +51,7 @@ const ShortField: React.FC<Props> = ({ field, btnText, activation, onClick, ...p
         ></input>
         {_btnText ? (
           <button
-            disabled={activation ? false : true}
+            disabled={!activation}
             onClick={handleButtonClick}
             className={`${
               activation ? 'bg-purple_sub text-white' : 'bg-gray text-gray_90'
