@@ -1,0 +1,8 @@
+.scale-element :not(:hover) {
+  transform: scale(0);
+}
+
+.scale-element :hover {
+  transform: scale(1);
+  transform-origin: right;
+}

@@ -1,9 +1,9 @@
 import Layout from '@/components/layouts/layout';
-import Page1 from '@/components/study/new/page1';
-import Page2 from '@/components/study/new/page2';
-import Page3 from '@/components/study/new/page3';
+import Page1 from '@/components/pages/study/new/page1';
+import Page2 from '@/components/pages/study/new/page2';
+import Page3 from '@/components/pages/study/new/page3';
 import { cls } from '@/utils/cls';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const pageTitles = ['스터디 기본 정보', '스터디 규칙 생성', '스터디 소개글'];
 
@@ -16,12 +16,19 @@ export type StudyOutRule = {
 const New = () => {
   const [page, setPage] = useState(1);
   const [studyOutRule, setStudyOutRule] = useState<StudyOutRule>({ lateToAbsent: 3, absentToOut: 1, outToRemove: 3 });
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  // useEffect(() => {
+  //   titleRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // }, [page]);
 
   return (
     <Layout>
-      <main className=' flex flex-col items-center pt-60 px-200'>
-        <div className=' w-full px-30 '>
-          <h1 className=' text-[#1A212B] font-semibold text-30 mb-60'>스터디 생성하기</h1>
+      <main className='flex flex-col items-center pt-60 px-200'>
+        <div className='w-full px-30'>
+          <h1 ref={titleRef} className='text-[#1A212B] font-semibold text-30 mb-60'>
+            스터디 생성하기
+          </h1>
           {/* <h5 className=' text-10 text-[#1A212B] mb-50'>스터디를 직접 생성해봐요</h5> */}
 
           {/* 페이지 정보 */}

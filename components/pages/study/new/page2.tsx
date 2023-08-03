@@ -37,9 +37,7 @@ export default function Page2({ studyOutRule, setStudyOutRule, movePrevPage, mov
       onChange: (value: number) => setStudyOutRule((prev) => ({ ...prev, outToRemove: value })),
     },
   ];
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+
   const studyOutRuleTexts: React.ReactNode[] = [
     <div key={1}>
       <span className=' text-black'>지각 </span>

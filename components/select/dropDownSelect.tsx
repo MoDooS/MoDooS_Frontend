@@ -8,12 +8,12 @@ export interface DropDownOption {
 }
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  defaultValue: any;
+  value: any;
   options: DropDownOption[];
   selectHandler: (value: any) => void;
 }
 
-export default function DropDownSelect({ defaultValue, options, selectHandler, ...props }: Props) {
+export default function DropDownSelect({ value, options, selectHandler, ...props }: Props) {
   const [showOptions, setShowOptions] = useState(false);
   useEffect(() => {
     const closeDropDown = () => setShowOptions(false);
@@ -25,7 +25,6 @@ export default function DropDownSelect({ defaultValue, options, selectHandler, .
 
   const handleOnClickMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation(); // body의 eventListener 적용 안되게
-    console.log(!showOptions);
     setShowOptions((prev) => !prev);
   };
   return (
@@ -34,17 +33,17 @@ export default function DropDownSelect({ defaultValue, options, selectHandler, .
         onClick={handleOnClickMenu}
         className='w-full py-6 px-13 flex items-center justify-between text-14 font-normal text-black shadow-neumorphism rounded-4'
       >
-        <span>{defaultValue}</span>
+        <span>{value}</span>
         <ChevronBottom width='16' height='16' />
       </button>
       {showOptions && (
         <div className='relative w-full'>
-          <ul className='absolute top-10 left-0 shadow-neumorphism w-full box-border'>
+          <ul className='absolute top-10 left-0 shadow-neumorphism w-full box-border bg-white'>
             {options.map((option, i) => (
               <li
                 key={option.value}
                 className={cls(
-                  ' py-7 px-12 text-14 text-gray_70 font-normal border-t-1 cursor-pointer hover:bg-gray-50',
+                  ' py-7 px-12 text-14 text-gray_70 font-normal border-t-1 cursor-pointer hover:bg-[#EFEFEF]',
                   i !== 0 ? ' border-t-gray_60' : ' border-t-white',
                 )}
               >

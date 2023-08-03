@@ -46,6 +46,7 @@ const DatePickerHeader: React.FC<Props> = ({ calendarRange, showingDate, setShow
 
   // 다음 달로
   function toNextMonth(date: DateType): DateType {
+    console.log('hi');
     const { year, month } = date;
     if (year === endYear && month === endMonth) return date;
     if (month === 12) {
@@ -55,12 +56,17 @@ const DatePickerHeader: React.FC<Props> = ({ calendarRange, showingDate, setShow
     }
   }
   return (
-    <div className='flex justify-between items-center gap-50'>
+    <div className='flex justify-between items-center gap-35'>
       <button onClick={() => setShowingDate((prev) => toPrevMonth(prev))}>
-        <ChevronLeft width='16px' />
+        <ChevronLeft width='16' />
       </button>
-      <div className='flex items-center gap-10 text-20 font-medium'>
-        <select value={showingDate.month} onChange={onChangeMonth} className='py-12 px-15 cursor-pointer outline-none'>
+      <div className='flex items-center gap-0 text-14 font-medium'>
+        <select
+          value={showingDate.month}
+          onChange={onChangeMonth}
+          style={{}}
+          className='py-12 px-10 cursor-pointer outline-none'
+        >
           {monthOptions.map((month) => (
             <option key={month} value={month + 1}>
               {month + 1}월
