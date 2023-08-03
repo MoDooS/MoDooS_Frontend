@@ -29,3 +29,12 @@ export const validateNickname = (value: string) => {
     return '';
   }
 };
+
+export const validateCode = (value: string, code: string) => {
+  // console.log('코드', code);
+  if (value === code) {
+    return true;
+  } else {
+    return false;
+  }
+};

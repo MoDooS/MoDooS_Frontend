@@ -1,49 +1,72 @@
-// 파일: MainBtn.tsx
 import { JoinFormType, fetchJoin } from '@/apis/auth/join';
 import { LoginFormType, fetchLogin } from '@/apis/auth/login';
+import { fetchResetPassword } from '@/apis/auth/resetPassword';
 import { useRouter } from 'next/router';
-import React, { HTMLAttributes, memo, useCallback } from 'react';
+import { HTMLAttributes, memo, useCallback } from 'react';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLButtonElement> {
   text: string;
   activation?: boolean;
-  btnType: string;
+  btnType?: string;
   toPath?: string;
   form?: JoinFormType | LoginFormType;
+  onLoginFailure?: (error: string) => void;
+  onClick?: () => void; // 비동기 함수 허용
 }
 
-const MainBtn: React.FC<Props> = ({ text, activation, toPath, form, btnType }) => {
+const MainBtn: React.FC<Props> = ({ text, activation, toPath, form, btnType, onClick, onLoginFailure }) => {
   const router = useRouter();
 
-  const handleClick = useCallback(
-    async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-
-      if (!activation || !toPath) {
-        return;
-      }
-      // 비동기 처리는 useEffect 안에서 호출하거나, 즉시 실행 함수로 감싸서 사용
-      try {
-        if (btnType === 'join') {
-          if (!form) return;
-          const res = await fetchJoin(form as JoinFormType);
-          router.push(toPath);
-        } else if (btnType === 'login') {
-          if (!form) return;
-          const res = await fetchLogin(form as LoginFormType);
-          router.push('#');
-        }
-      } catch (error) {
-        console.error('요청에 실패했습니다:', error);
-      }
+      if (onClick) onClick();
     },
-    [activation, toPath, form, btnType, router],
+    [onClick],
   );
+
+  const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    if (!activation || !toPath) {
+      return;
+    }
+    // 비동기 처리는 useEffect 안에서 호출하거나, 즉시 실행 함수로 감싸서 사용
+    try {
+      if (btnType === 'join') {
+        if (!form) return;
+        const res = await fetchJoin(form as JoinFormType);
+        router.push(toPath);
+      } else if (btnType === 'login') {
+        if (!form) return;
+        const res = await fetchLogin(form as LoginFormType);
+        if (res) {
+          router.push(toPath);
+        } else {
+          // 로그인 실패
+          if (onLoginFailure) {
+            onLoginFailure('이메일/비밀번호가 일치하지 않습니다.');
+          }
+        }
+      } else if (btnType === 'resetPassword') {
+        if (!form) return;
+        const res = await fetchResetPassword(form as JoinFormType);
+        router.push(toPath);
+      } else if (btnType === 'email') {
+        // onClick 함수가 유효한 경우에만 호출
+        if (onClick) {
+          onClick();
+        }
+      }
+    } catch (error) {
+      console.error('요청에 실패했습니다:', error);
+    }
+  };
 
   return (
     <button
       disabled={!activation}
-      onClick={handleClick}
+      onClick={activation ? handleClick : handleButtonClick}
       type='submit'
       className={`${
         activation ? 'bg-purple_sub text-white' : 'bg-gray text-gray_70 '

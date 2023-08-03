@@ -31,10 +31,12 @@ export const fetchEmailCheck = async (email: string) => {
     const response = await modoosAxios.post('/api/auth/email-check', null, {
       params: { email },
     });
-
+    console.log('호출되는거?');
     if (response.data.status !== 'SUCCESS') {
+      console.log('이메일중복');
       return { emailDuplicate: true, code: '' };
     } else {
+      console.log('이메일 가능', response);
       const codeResponse = await fetchCodeCheck(email);
       return { emailDuplicate: false, code: codeResponse };
     }

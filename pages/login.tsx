@@ -4,7 +4,8 @@ import MainBtn from '@/components/auth/mainBtn';
 import Image from 'next/image';
 import BasicLayout from '@/components/layouts/basicLayout';
 import { validateEmail, validatePassword } from '@/utils/validation';
-import { LoginFormType } from '@/apis/auth/login';
+import { LoginFormType, fetchLogin } from '@/apis/auth/login';
+import { useRouter } from 'next/router';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   btnType: 'login' | 'register' | 'email';
@@ -16,6 +17,8 @@ const initialForm: LoginFormType = {
 };
 
 const LoginForm: React.FC = () => {
+  const router = useRouter();
+
   const [form, setForm] = useState<LoginFormType>(initialForm);
   const [activation, setActivation] = useState(false);
 
@@ -38,6 +41,10 @@ const LoginForm: React.FC = () => {
   const handlePasswordChange = (value: string) => {
     setForm((prev) => ({ ...prev, password: value }));
     setPasswordErr(validatePassword(value));
+  };
+
+  const handleLoginFailure = (error: string) => {
+    setPasswordErr(error);
   };
 
   return (
@@ -65,7 +72,14 @@ const LoginForm: React.FC = () => {
               hasMark={true}
             />{' '}
             <br />
-            <MainBtn text='로그인' activation={activation} toPath='#' btnType='login' form={form} />
+            <MainBtn
+              text='로그인'
+              activation={activation}
+              btnType='login'
+              form={form}
+              toPath='#'
+              onLoginFailure={handleLoginFailure}
+            />
             <div className='flex-col justify-center mt-37 space-y-3'>
               <div className='text-15 text-gray_70 font-normal text-center'>
                 회원이 아니신가요?{' '}
