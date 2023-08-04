@@ -1,8 +1,8 @@
+import React from 'react';
+import Link from 'next/link';
 import { StudyInfo } from '@/pages';
 import { cls } from '@/utils/cls';
-import React from 'react';
 import HeartIcon from '../../../public/icons/heart.svg';
-import Link from 'next/link';
 
 type Props = {
   studyInfo: StudyInfo;
@@ -11,7 +11,7 @@ type Props = {
 export default function StudyCard({ studyInfo }: Props) {
   return (
     <Link
-      href={`/study/${studyInfo.id}`}
+      href={`/recruit/${studyInfo.id}`}
       className='w-270 h-306 flex flex-col justify-between pt-40 pb-22 px-24 border-1 border-[#D1D1D1] rounded-20'
     >
       <div>
