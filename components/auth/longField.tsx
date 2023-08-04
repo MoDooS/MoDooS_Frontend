@@ -1,6 +1,6 @@
 import { HTMLAttributes, useState } from 'react';
-import Warning from '../public/icons/warning.svg';
-import QuestionMark from '../public/icons/question_mark.svg';
+import Warning from '../../public/icons/warning.svg';
+import QuestionMark from '../../public/icons/question_mark.svg';
 import PasswordRule from './passwordRule';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -12,12 +12,13 @@ export interface FieldType {
   label: string;
   placeholder: string;
   errMsg?: string;
+  authMsg?: string;
   type?: string;
   onChange: (value: string) => void;
 }
 
 const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
-  const { label, placeholder, errMsg, type, onChange } = field;
+  const { label, placeholder, errMsg, authMsg, type, onChange } = field;
   const [showPasswordRule, setShowPasswordRule] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,8 +43,8 @@ const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
       <input
         type={type}
         onChange={handleChange}
-        className={`border ${
-          errMsg ? 'border-input_red' : 'border-gray_70'
+        className={`border ${errMsg ? 'border-input_red' : 'border-gray_70'} ${
+          authMsg ? 'border-purple_sub' : 'border-gray_70'
         } w-360 py-11 px-15 mt-4 rounded-17 placeholder-gray_70 placeholder: text-14`}
         placeholder={placeholder}
       ></input>
@@ -54,6 +55,7 @@ const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
           &nbsp;{errMsg}
         </div>
       )}
+      {authMsg && <div className='ml-14 mt-4 flex text-13 text-purple_sub mb-20'>&nbsp;{authMsg}</div>}
     </div>
   );
 };
