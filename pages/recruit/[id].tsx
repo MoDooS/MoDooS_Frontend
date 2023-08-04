@@ -1,3 +1,4 @@
+import Hr from '@/components/Hr';
 import Layout from '@/components/layouts/layout';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -15,7 +16,7 @@ export default function StudyDetail({}: Props) {
         <div className='w-full'>
           <h1 className=' mb-50 font-bold text-36'>알고리즘 스터디</h1>
           <span className='block mb-30 text-gray_70 font-normal text-14'>박지수 {' | '} 2023.07.12</span>
-          <hr className='mb-30' />
+          <Hr className='mb-30' />
           {/* 상단 모집 정보 */}
           <div className='flex items-center gap-300 mb-100'>
             <div className='flex items-center gap-40'>
@@ -49,7 +50,7 @@ export default function StudyDetail({}: Props) {
           </div>
           {/* 스터디 소개 */}
           <h3 className='mb-30 font-semibold text-28'>스터디 소개</h3>
-          <hr className='mb-30' />
+          <Hr className='mb-30' />
           <div className=' mb-100 font-medium text-16 text-black leading-50'>
             스터디 열심히 참여하실 분 모집합니다. 알고리즘 문제풀이 위주로 하고, 언어는 python으로 진행할 예정입니다.
             현재 비기너 수준의 2명이 있습니다. 스터디 열심히 참여하실 분 모집합니다. 알고리즘 문제풀이 위주로 하고,
@@ -60,7 +61,7 @@ export default function StudyDetail({}: Props) {
 
           {/* 스터디 규칙 */}
           <h3 className='mb-30 font-semibold text-28'>스터디 규칙</h3>
-          <hr className='mb-30' />
+          <Hr className='mb-30' />
           <div className=' mb-200 font-medium text-16 text-black leading-50'>
             스터디 열심히 참여하실 분 모집합니다. 알고리즘 문제풀이 위주로 하고, 언어는 python으로 진행할 예정입니다.
             현재 비기너 수준의 2명이 있습니다. 스터디 열심히 참여하실 분 모집합니다. 알고리즘 문제풀이 위주로 하고,
@@ -68,13 +69,13 @@ export default function StudyDetail({}: Props) {
             모집합니다. 알고리즘 문제풀이 위주로 하고, 언어는 python으로 진행할 예정입니다. 현재 비기너 수준의 2명이
             있습니다.
           </div>
-          <hr className='mb-30' />
+          <Hr className='mb-30' />
 
           {/* 댓글 쓰기 */}
           <h5 className=' font-semibold text-20 mb-30'>댓글 1개</h5>
           <div className='flex gap-10 mb-20'>
             <Avatar />
-            <div className=' w-full border-1 border-black rounded-14'></div>
+            <textarea className='w-full p-14 border-1 border-black rounded-14 text-14 outline-primary'></textarea>
           </div>
           <div className='flex justify-end'>
             <button className='py-8 px-23 bg-primary text-white text-16 font-semibold rounded-16'>댓글 등록</button>

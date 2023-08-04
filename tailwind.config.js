@@ -23,6 +23,7 @@ module.exports = {
         input_red: '#F14A58',
         dark_blue: '#445275',
         gray: '#ECEFF4',
+        gray_50: '#CBD4E1',
         gray_60: '#DEDEDE',
         gray_70: '#728197',
         gray_90: '#9AA8BC',
