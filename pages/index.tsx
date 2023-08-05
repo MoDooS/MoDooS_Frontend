@@ -1,15 +1,10 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-import DatePicker, { CalendarRange, SelectedDateRange } from '@/components/datePicker/datePicker';
-import dayjs from 'dayjs';
-import useDatePicker from '@/hooks/useDatePicker';
 import DropDownSelect, { DropDownOption } from '@/components/select/dropDownSelect';
-import useAlert from '@/recoil/alert/useAlert';
 import Layout from '@/components/layouts/layout';
 import { useState } from 'react';
 import { cls } from '@/utils/cls';
 import StudyCard from '@/components/pages/index/studyCard';
 import CreateStudyBtn from '@/components/pages/index/createStudyBtn';
+import { useRouter } from 'next/router';
 
 export type StudyInfo = {
   id: number;
@@ -77,6 +72,7 @@ const studySortingOptions: DropDownOption[] = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [selectedCategories, setSelectedCategories] = useState<string[]>(['ALL']);
   const [studySortingMethod, setStudySortingMethod] = useState<StudySortingMethod>('최신순');
   const handleSelectCategory = (category: string) => {
@@ -130,7 +126,7 @@ export default function Home() {
             <StudyCard key={study.id} studyInfo={study} />
           ))}
         </main>
-        <CreateStudyBtn onClick={() => {}} className='fixed z-[9999] bottom-50 right-140' />
+        <CreateStudyBtn onClick={() => router.push('/recruit/new')} className='fixed z-[9999] bottom-50 right-140' />
       </div>
     </Layout>
   );

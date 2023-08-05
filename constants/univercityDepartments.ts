@@ -1,4 +1,4 @@
-const univercityDepartments = {
+export const univercityDepartments = {
   seoul: [
     '경영정보학과',
     '경영학과',
