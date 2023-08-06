@@ -18,6 +18,7 @@ export default function Page3({ newRecruitForm, setNewRecruitForm, movePrevPage,
       <input
         type='text'
         value={newRecruitForm.title}
+        placeholder='스터디 제목을 작성해주세요'
         onChange={(e) =>
           setNewRecruitForm((form) => {
             form.title = e.target.value;

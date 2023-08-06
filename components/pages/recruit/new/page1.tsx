@@ -10,6 +10,7 @@ import { NewRecruitFormType, StudyCategoryType, StudyChannelType } from '@/types
 import { Updater } from 'use-immer';
 import DatePicker from '@/components/datePicker/datePicker';
 import Hr from '@/components/hr';
+import { CalendarRange } from '@/types/datePicker';
 
 type Props = {
   newRecruitForm: NewRecruitFormType;
@@ -25,7 +26,7 @@ const studyCategories: StudyCategoryType[] = ['언어', '취업', '고시/공무
 export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage }: Props) {
   const now = dayjs();
 
-  const calendarRange = {
+  const calendarRange: CalendarRange = {
     start: now.format(),
     end: now.add(1, 'year').set('month', 11).set('date', 31).format(), // 달력 범위 - 다음해 12월
   };
