@@ -98,7 +98,7 @@ const New = () => {
       title: title.trim(),
       description: description.trim(),
     };
-    const response = await postNewRecruit(requestBody);
+    const response = await mutate(requestBody);
     console.log(response);
   };
 

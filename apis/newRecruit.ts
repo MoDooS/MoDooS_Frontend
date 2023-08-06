@@ -1,11 +1,11 @@
-import { StudyCategoryType, StudyChannelType } from '@/types/newRecruitFormType';
+import { StudyCategory, StudyChannel } from '@/types/studyInfo';
 import modoosAxios from './modoosAxios';
 
 export type NewRecruitRequestType = {
   campus: '인문' | '자연' | '공통'; // 캠퍼스
   recruits_count: number; // 모집 인원
-  channel: StudyChannelType; // 스터디 진행 방식
-  category: StudyCategoryType; // 카테고리
+  channel: StudyChannel; // 스터디 진행 방식
+  category: StudyCategory; // 카테고리
   recruit_deadline: string; // 모집 마감일
   expected_start_at: string; // 스터디 예정 시작일
   expected_end_at: string; // 스터디 예정 마감일
