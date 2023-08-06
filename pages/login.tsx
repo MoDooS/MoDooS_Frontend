@@ -77,7 +77,7 @@ const LoginForm: React.FC = () => {
               activation={activation}
               btnType='login'
               form={form}
-              toPath='#'
+              toPath='/'
               onLoginFailure={handleLoginFailure}
             />
             <div className='flex-col justify-center mt-37 space-y-3'>

@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, useEffect, useState } from 'react';
 import ChevronBottom from '../../public/icons/chevron_bottom.svg';
 import { cls } from '@/utils/cls';
+import StopPropagation from '../stopPropagation';
 
 export interface DropDownOption {
   value: any;
@@ -31,29 +32,34 @@ export default function DropDownSelect({ value, options, selectHandler, ...props
     <div className={props.className ?? ''}>
       <button
         onClick={handleOnClickMenu}
-        className='w-full py-6 px-13 flex items-center justify-between text-14 font-normal text-black shadow-neumorphism rounded-4'
+        className='w-full py-6 px-13 flex items-center justify-between font-normal text-black shadow-neumorphism rounded-5'
       >
         <span>{value}</span>
         <ChevronBottom width='16' height='16' />
       </button>
       {showOptions && (
         <div className='relative w-full'>
-          <ul className='absolute top-10 left-0 shadow-neumorphism w-full box-border bg-white'>
+          <ul
+            className={cls(
+              'absolute top-10 left-0 shadow-neumorphism w-full box-border bg-white rounded-5',
+              props.className ?? '',
+            )}
+          >
             {options.map((option, i) => (
               <li
                 key={option.value}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log('hi');
+                  selectHandler(option.value);
+                  setShowOptions(false);
+                }}
                 className={cls(
-                  ' py-7 px-12 text-14 text-gray_70 font-normal border-t-1 cursor-pointer hover:bg-[#EFEFEF]',
+                  ' py-7 px-12 text-gray_70 font-normal border-t-1 cursor-pointer hover:bg-[#EFEFEF]',
                   i !== 0 ? ' border-t-gray_60' : ' border-t-white',
                 )}
               >
-                <button
-                  onClick={(e) => {
-                    selectHandler(option.value);
-                  }}
-                >
-                  {option.content}
-                </button>
+                {option.content}
               </li>
             ))}
           </ul>
