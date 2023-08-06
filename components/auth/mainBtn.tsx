@@ -41,6 +41,7 @@ const MainBtn: React.FC<Props> = ({ text, activation, toPath, form, btnType, onC
         if (!form) return;
         const res = await fetchLogin(form as LoginFormType);
         if (res) {
+          // console.log(res);
           router.push(toPath);
         } else {
           // 로그인 실패

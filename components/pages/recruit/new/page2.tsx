@@ -3,6 +3,7 @@ import ChevronBottomIcon from '../../../../public/icons/chevron_bottom.svg';
 import Hr from '@/components/hr';
 import { NewRecruitFormType } from '@/types/newRecruitFormType';
 import { Updater } from 'use-immer';
+import { CHECK_LIST_LIMIT } from '@/constants/studySettings';
 
 type Props = {
   newRecruitForm: NewRecruitFormType;
@@ -17,8 +18,6 @@ type StudyOutRuleOption = {
   optionCount: number;
   onChange: (value: number) => void;
 };
-
-const CHECK_LIST_LIMIT = 10;
 
 export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage, moveNextPage }: Props) {
   const studyOutRuleOptions: StudyOutRuleOption[] = [
@@ -115,18 +114,6 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
               }
               className='w-350 min-h-40 h-full px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black outline-primary'
             />
-            {newRecruitForm.checkList.length !== 1 && (
-              <button
-                onClick={() =>
-                  setNewRecruitForm((form) => {
-                    form.checkList = form.checkList.filter((_, idx) => idx !== i);
-                  })
-                }
-                className='w-35 h-35 flex justify-center items-center shrink-0 bg-white text-primary border-1 border-primary rounded-10 text-14 font-bold hover:bg-primary hover:text-white'
-              >
-                -
-              </button>
-            )}
             {newRecruitForm.checkList.length < CHECK_LIST_LIMIT && newRecruitForm.checkList.length === i + 1 && (
               <button
                 onClick={() =>
@@ -137,6 +124,18 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
                 className='w-35 h-35 flex justify-center items-center shrink-0 bg-white text-primary border-1 border-primary rounded-10 text-14 font-bold hover:bg-primary hover:text-white'
               >
                 +
+              </button>
+            )}
+            {newRecruitForm.checkList.length !== 1 && (
+              <button
+                onClick={() =>
+                  setNewRecruitForm((form) => {
+                    form.checkList = form.checkList.filter((_, idx) => idx !== i);
+                  })
+                }
+                className='w-35 h-35 flex justify-center items-center shrink-0 bg-white text-primary border-1 border-primary rounded-10 text-14 font-bold hover:bg-primary hover:text-white'
+              >
+                -
               </button>
             )}
           </article>
