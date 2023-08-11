@@ -32,10 +32,10 @@ const Evaluation = () => {
               </div>
             ))}
           </div>
-          <div className='bg-gray_50 w-full h-1 my-25'></div>
+          <div className='bg-gray_30 w-full h-1 my-25'></div>
           <AnswerBtn />
 
-          <div className='bg-gray_50 w-full h-1 mt-32'></div>
+          <div className='bg-gray_30 w-full h-1 mt-32'></div>
           <div className='flex justify-end mt-24'>
             <button className='bg-purple_sub text-white text-13 py-13 px-19 rounded-13'>다음</button>
           </div>

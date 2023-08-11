@@ -20,8 +20,8 @@ const Attandance: React.FC = () => {
           <div className='flex-1 box bg-purple_sub border-r border-white' style={boxStyle}></div>
           <div className='flex-1 box bg-purple_sub border-r border-white' style={boxStyle}></div>
           <div className='flex-1 box bg-purple_sub border-r border-white' style={boxStyle}></div>
-          <div className='flex-1 box bg-gray_50 border-r border-white' style={boxStyle}></div>
-          <div className='flex-1 box bg-gray_50 border-r border-white rounded-r-lg' style={boxStyle}></div>
+          <div className='flex-1 box bg-gray_30 border-r border-white' style={boxStyle}></div>
+          <div className='flex-1 box bg-gray_30 border-r border-white rounded-r-lg' style={boxStyle}></div>
         </div>
       </div>
     </div>

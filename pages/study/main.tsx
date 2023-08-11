@@ -23,7 +23,7 @@ const Main = () => {
             </button>
           </div>
 
-          <div className='bg-gray_50 w-full h-1'></div>
+          <div className='bg-gray_30 w-full h-1'></div>
           <Attandance />
           <Title text='체크리스트 통과여부' />
 
