@@ -1,13 +1,34 @@
-import { useUserQuery } from '@/query/user/useUserQuery';
+import { USER_QUERY_KEY, useUserQuery } from '@/query/user/useUserQuery';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BellIcon from '../../public/icons/bell.svg';
 import AvatarIcon from '../../public/icons/avatar.svg';
+import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from 'react-query';
+import { postLogout } from '@/apis/logout';
+import DropDownMenu, { DropDownMenuOption } from '../select/dropDownMenu';
 
 const Header = () => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const { user, isLoading: isUserLoading, isError: isUserError } = useUserQuery();
-  // console.log(user, isUserLoading, isUserError);
+  const logoutMutation = useMutation(postLogout);
+  const [showProfileIconMenu, setShowProfileIconMenu] = useState(false);
+
+  const profileIconMenus: DropDownMenuOption[] = [
+    { content: '마이페이지', selectHandler: () => router.push('/mypage/feedback') },
+    { content: '로그아웃', selectHandler: handleLogout },
+  ];
+
+  function handleLogout() {
+    logoutMutation.mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(USER_QUERY_KEY);
+        router.push('/');
+      },
+    });
+  }
   return (
     <nav className='fixed w-full h-60 flex justify-center bg-white z-header'>
       <div className='flex justify-between items-center w-full px-60 max-w-[1344px]'>
@@ -36,8 +57,24 @@ const Header = () => {
           )}
           {user && (
             <>
-              <BellIcon width='25' height='25' />
-              <AvatarIcon width='25' height='25' />
+              <button>
+                <BellIcon width='30' height='30' />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowProfileIconMenu((prev) => !prev);
+                }}
+              >
+                <AvatarIcon width='30' height='30' />
+              </button>
+              {showProfileIconMenu && (
+                <DropDownMenu
+                  className='absolute top-50 w-150 text-16'
+                  options={profileIconMenus}
+                  closeDropDown={() => setShowProfileIconMenu(false)}
+                />
+              )}
             </>
           )}
         </div>
