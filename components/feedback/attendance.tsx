@@ -1,7 +1,7 @@
 const Attandance: React.FC = () => {
   const boxWidth = Math.floor(620 / 8);
   const boxStyle: React.CSSProperties = {
-    width: `${boxWidth}px`,
+    width: '100%',
     height: '26px',
     pointerEvents: 'none', // 클릭 가능한 동작 비활성화
     maxWidth: `${boxWidth}px`, // 박스의 최대 너비 설정
