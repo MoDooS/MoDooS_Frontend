@@ -27,14 +27,19 @@ export default function MypageLayout({ children }: Props) {
                   creditScore={700}
                   className='w-150 h-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-25%]'
                 />
+                <span>신용</span>
               </article>
               <article className='p-12 rounded-10 bg-bg1 w-full h-150 flex justify-center items-center relative'>
-                <h5 className=' absolute top-12 left-12 text-16 text-black font-normal'>명지대에서의 랭킹</h5>
-                <div className='flex justify-center w-full text-26 font-bold text-primary'>8등</div>
+                <h5 className=' absolute top-12 left-12 text-16 text-black font-normal'>
+                  내가 관심있게 보는 스터디 태그
+                </h5>
+                <div className='flex justify-center w-full text-26 font-bold text-primary'>프로그래밍</div>
               </article>
               <article className='p-12 rounded-10 bg-bg1 w-full h-150 flex justify-center items-center relative'>
-                <h5 className=' absolute top-12 left-12 text-16 text-black font-normal'>순위</h5>
-                <div className='flex justify-center w-full text-26 font-bold text-primary'>상위 10%</div>
+                <h5 className=' absolute top-12 left-12 text-16 text-black font-normal'>
+                  내가 관심있게 본 스터디 개수
+                </h5>
+                <div className='flex justify-center w-full text-26 font-bold text-primary'>5개</div>
               </article>
             </div>
           </section>
