@@ -11,6 +11,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  mode: 'jit',
   theme: {
     extend: {
       colors: {
@@ -57,20 +58,13 @@ module.exports = {
       top: px0_1000,
       left: px0_1000,
       right: px0_1000,
-    },
-    zIndex: {
-      header: 80,
-      dropdown: 90,
-      backdrop_1: 100,
-      backdrop_2: 101,
-      modal_component: 102,
-    },
-    zIndex: {
-      header: 80,
-      dropdown: 90,
-      backdrop_1: 100,
-      backdrop_2: 101,
-      modal_component: 102,
+      zIndex: {
+        header: 80,
+        dropdown: 90,
+        backdrop_1: 100,
+        backdrop_2: 101,
+        modal_component: 102,
+      },
     },
   },
   plugins: [],

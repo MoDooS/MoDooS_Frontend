@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ModalView from './modalView';
 import useAlert from '@/recoil/alert/useAlert';
 import AlertAction from './alertAction';
@@ -14,6 +14,14 @@ export default function AlertView() {
     closeAlert,
   } = useAlert();
 
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  });
+
   return (
     <>
       {show && (
@@ -23,7 +31,7 @@ export default function AlertView() {
               <CancleIcon width='16' height='16' />
             </button>
             <div className={'font-semibold text-18'}>{alertViewTitle}</div>
-            <div className='mt-15 text-14'>{alertViewDesc}</div>
+            {alertViewDesc && <div className='mt-15 text-14'>{alertViewDesc}</div>}
             <div className='mt-28 flex justify-end items-end gap-10'>
               {alertActions.map((action, i) => (
                 <AlertAction key={i} {...action} closeAlert={closeAlert} />
