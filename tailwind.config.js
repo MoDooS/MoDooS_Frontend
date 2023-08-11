@@ -29,7 +29,6 @@ module.exports = {
         gray: '#ECEFF4',
         gray_30: '##D9D9D9',
         gray_40: '#F9FAFB',
-        gray_50: '#D9D9D9',
         gray_60: '#DEDEDE',
         gray_70: '#728197',
         gray_90: '#9AA8BC',
