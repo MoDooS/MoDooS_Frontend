@@ -1,12 +1,10 @@
 import modoosAxios from '@/apis/modoosAxios';
-import { StudyCategory } from '@/types/studyInfo';
+import { StudyCategory, StudyStatus } from '@/types/studyInfo';
 import { StudySortingMethod } from '@/types/studyParams';
 import { AxiosError, AxiosResponse } from 'axios';
 import { UseQueryOptions, useQuery } from 'react-query';
 
-type StudyStatus = '모집 중' | '모집 마감';
-
-export const studyStatusMapping: StudyStatus[] = ['모집 중', '모집 마감'];
+export const studyStatusMapping: StudyStatus[] = ['모집 중', '모집 임박', '모집 마감'];
 
 export type StudyInfo = {
   id: number;
@@ -69,7 +67,7 @@ export function useRecruitsQuery(
   options?: UseQueryOptions<AxiosResponse<ResponseType>, AxiosError>,
 ) {
   const { data, isLoading, isError } = useQuery<AxiosResponse<ResponseType>, AxiosError>(
-    ['useRecruitsQuery', params],
+    ['RecruitsQuery', params],
     () => fetchRecruits(params),
     {
       ...options,
