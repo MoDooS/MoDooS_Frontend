@@ -50,22 +50,6 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
     },
   ];
 
-  const studyOutRuleTexts: React.ReactNode[] = [
-    <div key={1}>
-      <span className=' text-black'>지각 </span>
-      <span className=' text-primary'>{newRecruitForm.late}번</span>
-      <span className=' text-black'>이면 1결석</span>
-    </div>,
-    <div key={2}>
-      <span className=' text-black'>결석 </span>
-      <span className=' text-primary'>{newRecruitForm.absent}번</span>
-      <span className=' text-black'>이면 1out</span>
-    </div>,
-    <div key={3}>
-      <span className=' text-primary'>{newRecruitForm.out} out</span>
-      <span className=' text-black'>시 스터디에서 자동 퇴출</span>
-    </div>,
-  ];
   return (
     <div>
       {/* 지각,결석,아웃 스터디 규칙 생성 상자 */}
@@ -90,7 +74,24 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
       </div>
 
       {/* 변경한 규칙 보여주기 */}
-      <div className=' flex flex-col gap-10 mb-30 text-16 font-normal'>{...studyOutRuleTexts}</div>
+      <div className=' flex flex-col gap-10 mb-30 text-16 font-normal'>
+        <div>
+          <span className=' text-black'>지각 </span>
+          <span className=' text-primary'>{newRecruitForm.late}번</span>
+          <span className=' text-black'>이면 1결석</span>
+        </div>
+
+        <div>
+          <span className=' text-black'>결석 </span>
+          <span className=' text-primary'>{newRecruitForm.absent}번</span>
+          <span className=' text-black'>이면 1out</span>
+        </div>
+
+        <div>
+          <span className=' text-primary'>{newRecruitForm.out} out</span>
+          <span className=' text-black'>시 스터디에서 자동 퇴출</span>
+        </div>
+      </div>
 
       {/* 체크리스트 생성 상자 */}
       <h3 className=' text-20 text-black font-medium mb-10'>체크리스트</h3>
@@ -143,7 +144,7 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
       </div>
 
       {/* 자율 규칙 생성 상자 */}
-      <h3 className=' text-20 text-black font-medium mb-10'>자율 규칙이 있다면 작성해주세요!</h3>
+      {/* <h3 className=' text-20 text-black font-medium mb-10'>자율 규칙이 있다면 작성해주세요!</h3>
       <h6 className='text-gray_70 font-medium text-14 mb-5'>자율 규칙은 아웃과 관련이 없습니다.</h6>
       <textarea
         spellCheck={false}
@@ -154,7 +155,7 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
           })
         }
         className='w-full min-h-200 mb-100 py-12 px-16 text-16 text-black font-normal bg-white border-gray_60 border-1 border-solid rounded-10 outline-primary outline-1'
-      ></textarea>
+      ></textarea> */}
       <Hr className='mb-50' />
 
       {/* 다음 버튼 */}

@@ -1,8 +1,8 @@
-import { StudyCategory, StudyChannel } from '@/types/studyInfo';
+import { StudyCampus, StudyCategory, StudyChannel } from '@/types/studyInfo';
 import modoosAxios from './modoosAxios';
 
 export type NewRecruitRequestType = {
-  campus: '인문' | '자연' | '공통'; // 캠퍼스
+  campus: StudyCampus; // 캠퍼스
   recruits_count: number; // 모집 인원
   channel: StudyChannel; // 스터디 진행 방식
   category: StudyCategory; // 카테고리
@@ -20,6 +20,10 @@ export type NewRecruitRequestType = {
   description: string; // 스터디 소개글 (내용)
 };
 
+type ResponseType = {
+  id: number;
+};
+
 export async function postNewRecruit(reqBody: NewRecruitRequestType) {
-  return await modoosAxios.post('/api/recruit/post', reqBody);
+  return await modoosAxios.post<ResponseType>('/api/recruit/post', reqBody);
 }

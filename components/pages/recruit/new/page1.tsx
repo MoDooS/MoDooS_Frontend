@@ -6,11 +6,12 @@ import DateRangePicker, { SelectMode } from '@/components/datePicker/dateRangePi
 import { addLeadingZero } from '@/utils/addLeadingZero';
 import { cls } from '@/utils/cls';
 import { univercityDepartments } from '@/constants/univercityDepartments';
-import { NewRecruitFormType, StudyCategoryType, StudyChannelType } from '@/types/newRecruitFormType';
+import { NewRecruitFormType } from '@/types/newRecruitFormType';
 import { Updater } from 'use-immer';
 import DatePicker from '@/components/datePicker/datePicker';
 import Hr from '@/components/hr';
 import { CalendarRange } from '@/types/datePicker';
+import { StudyCategory, StudyChannel } from '@/types/studyInfo';
 
 type Props = {
   newRecruitForm: NewRecruitFormType;
@@ -20,8 +21,8 @@ type Props = {
 
 const dateFormatInitText = 'YYYY-MM-DD';
 
-const studyMethods: StudyChannelType[] = ['온라인', '오프라인', '병행'];
-const studyCategories: StudyCategoryType[] = ['언어', '취업', '고시/공무원', '취미/교양', '프로그래밍', '기타'];
+const studyMethods: StudyChannel[] = ['온라인', '오프라인', '병행'];
+const studyCategories: StudyCategory[] = ['언어', '취업', '고시/공무원', '취미/교양', '프로그래밍', '기타'];
 
 export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage }: Props) {
   const now = dayjs();
@@ -117,7 +118,7 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
               checked={newRecruitForm.channel === method}
               onChange={(e) =>
                 setNewRecruitForm((form) => {
-                  form.channel = e.target.value as StudyChannelType;
+                  form.channel = e.target.value as StudyChannel;
                 })
               }
               type='radio'
@@ -138,7 +139,7 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
           value={newRecruitForm.category}
           onChange={(e) =>
             setNewRecruitForm((form) => {
-              form.category = e.target.value as StudyCategoryType;
+              form.category = e.target.value as StudyCategory;
             })
           }
           className='w-full rounded-13 py-10 px-12 border-1 border-solid border-[#9AA8BC] outline-none text-14 font-normal text-black cursor-pointer appearance-none'

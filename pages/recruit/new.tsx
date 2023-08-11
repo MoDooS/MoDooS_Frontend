@@ -5,7 +5,7 @@ import Page3 from '@/components/pages/recruit/new/page3';
 import Hr from '@/components/hr';
 import { NewRecruitFormType } from '@/types/newRecruitFormType';
 import { cls } from '@/utils/cls';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { useMutation } from 'react-query';
 import { NewRecruitRequestType, postNewRecruit } from '@/apis/newRecruit';
@@ -38,13 +38,13 @@ const New = () => {
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [newRecruitForm, setNewRecruitForm] = useImmer(initialNewRecruitForm);
-  const { mutate, isLoading, isError } = useMutation(postNewRecruit);
+  const newRecruitMutation = useMutation(postNewRecruit);
   const { showAlert } = useAlert();
 
-  // useEffect(() => {
-  //   // titleRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }, [page]);
+  useEffect(() => {
+    // titleRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
 
   const handleSubmitForm = async () => {
     const {
@@ -68,8 +68,11 @@ const New = () => {
       setPage(1);
       return;
     }
-    if (dayjs(expected_start_at).isBefore(recruit_deadline, 'day')) {
-      alert('스터디 예정 시작일은 모집 마감일보다 빠를 수 없습니다.');
+    if (
+      dayjs(expected_start_at).isBefore(recruit_deadline, 'day') ||
+      dayjs(expected_start_at).isSame(recruit_deadline, 'day')
+    ) {
+      alert('스터디 예정 시작일은 모집 마감일과 같거나 빠를 수 없습니다.');
       setPage(1);
       return;
     }
@@ -80,11 +83,7 @@ const New = () => {
     }
 
     //  const fetchNewRecruit = (reqbody: NewRecruitRequestType) => {
-    //    mutate(reqbody, {
-    //      onSuccess: () => {
-    //        showAlert({ alertViewTitle: '모집글이 생성되었습니다.', alertActions:[{title:'모집글로 이동하기',style:'primary',handler:()=>router.push('/')}] });
-    //      },
-    //    });
+
     //  };
     const requestBody: NewRecruitRequestType = {
       ...newRecruitForm,
@@ -98,8 +97,21 @@ const New = () => {
       title: title.trim(),
       description: description.trim(),
     };
-    const response = await mutate(requestBody);
-    console.log(response);
+    newRecruitMutation.mutate(requestBody, {
+      onSuccess: (response) => {
+        showAlert({
+          alertViewTitle: '모집글 생성',
+          alertViewDesc: '모집글이 생성되었습니다.',
+          alertActions: [
+            {
+              title: '모집글로 이동하기',
+              style: 'primary',
+              handler: () => router.push(`/recruit/${response.data.id}`),
+            },
+          ],
+        });
+      },
+    });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ModalView from './modalView';
 import useAlert from '@/recoil/alert/useAlert';
 import AlertAction from './alertAction';
@@ -13,6 +13,14 @@ export default function AlertView() {
     },
     closeAlert,
   } = useAlert();
+
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  });
 
   return (
     <>

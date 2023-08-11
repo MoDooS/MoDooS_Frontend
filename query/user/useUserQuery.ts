@@ -1,12 +1,14 @@
 import modoosAxios from '@/apis/modoosAxios';
 import { CreditRating } from '@/lib/creditRating';
+import { StudyCampus } from '@/types/studyInfo';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
 type ResponseType = {
+  memberId: number;
   nickname: string;
   email: string;
-  campus: '인문' | '자연' | '공통';
+  campus: StudyCampus;
   department: string;
   ranking: CreditRating;
   score: number;

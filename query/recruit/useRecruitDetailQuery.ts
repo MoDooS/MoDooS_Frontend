@@ -36,7 +36,7 @@ type ResponseType = {
       content: string;
     },
   ];
-  written: true;
+  written: boolean;
 };
 
 const fetchRecruitDetail = async (id: string) => {
@@ -45,11 +45,10 @@ const fetchRecruitDetail = async (id: string) => {
 
 export function useRecruitDetailQuery(id: string) {
   const { data, isLoading, isError } = useQuery<AxiosResponse<ResponseType>, AxiosError>(
-    ['useRecruitDetailQuery', id],
+    ['RecruitDetailQuery', id],
     () => fetchRecruitDetail(id),
     {
-      retry: 1,
-      refetchOnWindowFocus: false, // 다른 창 갔다가 돌아올 경우 다시 요청할지
+      enabled: !!id,
     },
   );
   return { study: data?.data, isLoading, isError };
