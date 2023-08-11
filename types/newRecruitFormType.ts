@@ -1,7 +1,7 @@
-import { StudyCategory, StudyChannel } from './studyInfo';
+import { StudyCampus, StudyCategory, StudyChannel } from './studyInfo';
 
 export type NewRecruitFormType = {
-  campus: '인문' | '자연' | '공통'; // 캠퍼스
+  campus: StudyCampus; // 캠퍼스
   recruits_count: number; // 모집 인원
   channel: StudyChannel; // 스터디 진행 방식
   category: StudyCategory; // 카테고리

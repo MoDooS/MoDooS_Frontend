@@ -11,3 +11,4 @@ export const studyCategories: StudyCategory[] = [
 
 export type StudyChannel = '온라인' | '오프라인' | '병행';
 export type StudyCampus = '인문' | '자연' | '공통';
+export type StudyStatus = '모집 중' | '모집 임박' | '모집 마감';
