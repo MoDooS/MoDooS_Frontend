@@ -1,26 +1,26 @@
 import React from 'react';
 import Hr from '@/components/hr';
 import { Updater } from 'use-immer';
-import { NewRecruitFormType } from '@/types/newRecruitFormType';
+import { RecruitFormType } from '@/types/recruitForm';
 
 type Props = {
-  newRecruitForm: NewRecruitFormType;
-  setNewRecruitForm: Updater<NewRecruitFormType>;
+  recruitForm: RecruitFormType;
+  setRecruitForm: Updater<RecruitFormType>;
   movePrevPage: () => void;
   handleSubmitForm: () => void;
 };
 
-export default function Page3({ newRecruitForm, setNewRecruitForm, movePrevPage, handleSubmitForm }: Props) {
+export default function Page3({ recruitForm, setRecruitForm, movePrevPage, handleSubmitForm }: Props) {
   return (
     <div>
       <h2 className=' text-20 text-black font-medium mb-30'>스터디 소개글을 작성해주세요</h2>
       <h3 className=' text-16 text-black font-medium mb-10'>제목</h3>
       <input
         type='text'
-        value={newRecruitForm.title}
+        value={recruitForm.title}
         placeholder='스터디 제목을 작성해주세요'
         onChange={(e) =>
-          setNewRecruitForm((form) => {
+          setRecruitForm((form) => {
             form.title = e.target.value;
           })
         }
@@ -29,9 +29,9 @@ export default function Page3({ newRecruitForm, setNewRecruitForm, movePrevPage,
       <h3 className=' text-16 text-black font-medium mb-10'>내용</h3>
       <textarea
         spellCheck={false}
-        value={newRecruitForm.description}
+        value={recruitForm.description}
         onChange={(e) =>
-          setNewRecruitForm((form) => {
+          setRecruitForm((form) => {
             form.description = e.target.value;
           })
         }

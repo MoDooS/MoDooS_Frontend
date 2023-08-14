@@ -23,10 +23,6 @@ export function useRecruitCommentsQuery(recruitId: string) {
   const { data, isLoading, isError } = useQuery<AxiosResponse<CommentType[]>, AxiosError>(
     [RECRUIT_COMMENTS_QUERY_KEY, recruitId],
     () => fetchRecruitComments(recruitId),
-    {
-      retry: 1,
-      refetchOnWindowFocus: false, // 다른 창 갔다가 돌아올 경우 다시 요청할지
-    },
   );
   return { comments: data?.data, isLoading, isError };
 }

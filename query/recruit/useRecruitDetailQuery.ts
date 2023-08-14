@@ -4,8 +4,16 @@ import { StudyCampus, StudyCategory, StudyChannel } from '@/types/studyInfo';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
-type ResponseType = {
+type RecruitDetailResponse = {
   id: number;
+  campus: StudyCampus;
+  recruits_count: number;
+  channel: StudyChannel;
+  recruit_deadline: string;
+  expected_start_at: string;
+  expected_end_at: string;
+  contact: string | null;
+  link: string | null;
   leader_id: number;
   leader_nickname: string;
   leader_ranking: CreditRating;
@@ -13,29 +21,11 @@ type ResponseType = {
   description: string;
   status: number;
   category: StudyCategory;
-  campus: StudyCampus;
-  recruits_count: number;
   participants_count: number;
-  channel: StudyChannel;
-  recruit_deadline: string;
-  expected_start_at: string;
-  expected_end_at: string;
-  link: string | null;
-  contact: string | null;
-  checkList: [
-    {
-      id: number;
-      content: string;
-    },
-    {
-      id: number;
-      content: string;
-    },
-    {
-      id: number;
-      content: string;
-    },
-  ];
+  checkList: { id: number; content: string }[];
+  late: number;
+  absent: number;
+  out: number;
   written: boolean;
 };
 
@@ -44,12 +34,12 @@ const fetchRecruitDetail = async (id: string) => {
 };
 
 export function useRecruitDetailQuery(id: string) {
-  const { data, isLoading, isError } = useQuery<AxiosResponse<ResponseType>, AxiosError>(
+  const { data, isLoading, isError } = useQuery<AxiosResponse<RecruitDetailResponse>, AxiosError>(
     ['RecruitDetailQuery', id],
     () => fetchRecruitDetail(id),
     {
       enabled: !!id,
     },
   );
-  return { study: data?.data, isLoading, isError };
+  return { recruit: data?.data, isLoading, isError };
 }
