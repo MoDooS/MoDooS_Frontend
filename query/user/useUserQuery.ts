@@ -4,7 +4,7 @@ import { StudyCampus } from '@/types/studyInfo';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
-type ResponseType = {
+type UserResponse = {
   memberId: number;
   nickname: string;
   email: string;
@@ -21,9 +21,6 @@ const fetchUser = async () => {
 export const USER_QUERY_KEY = 'useUserQuery';
 
 export function useUserQuery() {
-  const { data, isLoading, isError } = useQuery<AxiosResponse<ResponseType>, AxiosError>(USER_QUERY_KEY, fetchUser, {
-    retry: 0,
-    refetchOnWindowFocus: false, // 다른 창 갔다가 돌아올 경우 다시 요청할지
-  });
+  const { data, isLoading, isError } = useQuery<AxiosResponse<UserResponse>, AxiosError>(USER_QUERY_KEY, fetchUser);
   return { user: data?.data, isLoading, isError };
 }
