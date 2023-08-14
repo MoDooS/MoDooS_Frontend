@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { RecruitForm } from '@/types/recruitForm';
+import { RecruitFormType } from '@/types/recruitForm';
 import { cls } from '@/utils/cls';
 import { useImmer } from 'use-immer';
 import { useMutation } from 'react-query';
@@ -17,7 +17,7 @@ import { editNewRecruit } from '@/apis/editRecruit';
 type Props = {
   recruitId?: number;
   mode: 'new' | 'edit';
-  defaultForm: RecruitForm;
+  defaultForm: RecruitFormType;
 };
 
 const pageTitles = ['스터디 기본 정보', '스터디 규칙 생성', '스터디 소개글'];

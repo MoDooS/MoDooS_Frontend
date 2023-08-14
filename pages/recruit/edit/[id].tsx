@@ -1,5 +1,4 @@
 import Layout from '@/components/layouts/layout';
-import { RecruitFormType } from '@/types/recruitForm';
 import React from 'react';
 import RecruitForm from '@/components/recruitForm';
 import { useRouter } from 'next/router';

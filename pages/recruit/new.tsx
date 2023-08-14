@@ -1,7 +1,7 @@
 import Layout from '@/components/layouts/layout';
+import RecruitForm from '@/components/recruitForm';
 import { RecruitFormType } from '@/types/recruitForm';
 import React from 'react';
-import RecruitForm from '@/components/recruitForm';
 
 const initialRecruitForm: RecruitFormType = {
   campus: '인문', // 캠퍼스
@@ -17,7 +17,6 @@ const initialRecruitForm: RecruitFormType = {
   absent: 2, // 결석 몇 번이면 1아웃
   out: 3, // 아웃 몇 번이면 퇴출
   checkList: [''],
-  rule_content: '', // 자율 규칙
   title: '', // 스터디 소개글 (제목)
   description: '', // 스터디 소개글 (내용)
 };
