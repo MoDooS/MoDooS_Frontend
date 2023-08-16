@@ -1,10 +1,10 @@
 export interface TFeedback {
-  '이런 점이 좋았어요!': string[];
+  '이런 점이 좋았어요': string[];
   '이런 점이 아쉬워요': string[];
 }
 
 export const feedback: TFeedback = {
-  '이런 점이 좋았어요!': [
+  '이런 점이 좋았어요': [
     '친절해요',
     '적극적으로 참여해요',
     '책임감 있어요',
