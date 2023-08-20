@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { cls } from '@/utils/cls';
 import HeartIcon from '../../../public/icons/heart.svg';
-import { StudyInfo, studyStatusMapping } from '@/query/recruit/useRecruitsQuery';
+import { StudyInfo, studyStatusMapping } from '@/types/studyInfo';
 
 type Props = {
   studyInfo: StudyInfo;

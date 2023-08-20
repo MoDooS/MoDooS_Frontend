@@ -1,15 +1,12 @@
-import { postNewRecruitComment } from '@/apis/newRecruitComment';
-import { postNewRecruit } from '@/apis/newRecruit';
-import AutoResizableTextarea from '@/components/autoResizableTextarea';
 import Hr from '@/components/hr';
 import Layout from '@/components/layouts/layout';
 import Comments from '@/components/pages/recruit/[id]/comments';
 import { useRecruitDetailQuery } from '@/query/recruit/useRecruitDetailQuery';
-import { studyStatusMapping } from '@/query/recruit/useRecruitsQuery';
 import { useRouter } from 'next/router';
 import React from 'react';
 import LinkIcon from '../../public/icons/link.svg';
 import StudyStatus from '@/components/studyStatus';
+import { studyStatusMapping } from '@/types/studyInfo';
 
 const Avatar = () => <div className=' w-60 h-60 bg-gray_60 rounded-full shrink-0'></div>;
 

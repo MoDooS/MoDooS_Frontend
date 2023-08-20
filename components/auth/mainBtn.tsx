@@ -1,8 +1,10 @@
 import { JoinFormType, fetchJoin } from '@/apis/auth/join';
 import { LoginFormType, fetchLogin } from '@/apis/auth/login';
 import { fetchResetPassword } from '@/apis/auth/resetPassword';
+import { authToken } from '@/class/authToken';
 import { useRouter } from 'next/router';
 import { HTMLAttributes, memo, useCallback } from 'react';
+import { useMutation } from 'react-query';
 
 export interface Props extends HTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -16,6 +18,7 @@ export interface Props extends HTMLAttributes<HTMLButtonElement> {
 
 const MainBtn: React.FC<Props> = ({ text, activation, toPath, form, btnType, onClick, onLoginFailure }) => {
   const router = useRouter();
+  const loginMutation = useMutation(fetchLogin);
 
   const handleButtonClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -35,25 +38,32 @@ const MainBtn: React.FC<Props> = ({ text, activation, toPath, form, btnType, onC
     try {
       if (btnType === 'join') {
         if (!form) return;
-        const res = await fetchJoin(form as JoinFormType);
+        await fetchJoin(form as JoinFormType);
         router.push(toPath);
-      } else if (btnType === 'login') {
+        return;
+      }
+
+      if (btnType === 'login') {
         if (!form) return;
-        const res = await fetchLogin(form as LoginFormType);
-        if (res) {
-          // console.log(res);
-          router.push(toPath);
-        } else {
-          // 로그인 실패
-          if (onLoginFailure) {
-            onLoginFailure('이메일/비밀번호가 일치하지 않습니다.');
-          }
-        }
-      } else if (btnType === 'resetPassword') {
+        loginMutation.mutate(form, {
+          onSuccess: (res) => {
+            authToken.setToken(res.data.accessToken);
+            console.log(authToken.getToken());
+            router.push(toPath);
+          },
+          onError: () => onLoginFailure && onLoginFailure('이메일/비밀번호가 일치하지 않습니다.'),
+        });
+        return;
+      }
+
+      if (btnType === 'resetPassword') {
         if (!form) return;
-        const res = await fetchResetPassword(form as JoinFormType);
+        await fetchResetPassword(form as JoinFormType);
         router.push(toPath);
-      } else if (btnType === 'email') {
+        return;
+      }
+
+      if (btnType === 'email') {
         // onClick 함수가 유효한 경우에만 호출
         if (onClick) {
           onClick();

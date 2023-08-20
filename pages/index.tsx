@@ -1,6 +1,7 @@
 import DropDownSelect, { DropDownOption } from '@/components/select/dropDownSelect';
 import Layout from '@/components/layouts/layout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { cls } from '@/utils/cls';
 import StudyCard from '@/components/pages/index/studyCard';
 import CreateStudyBtn from '@/components/pages/index/createStudyBtn';
@@ -21,10 +22,23 @@ export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<StudyCategory[]>(['ALL']);
   const [studySortingMethod, setStudySortingMethod] = useState<StudySortingMethod>('recent');
 
-  const { studies, isLoading, isError } = useRecruitsQuery({
-    categories: selectedCategories,
-    sort: studySortingMethod,
-  });
+  const { recruitList, isLoading, isError, getNextRecruits, getRecruitsIsSuccess, getNextRecruitsIsPossible } =
+    useRecruitsQuery({
+      categories: selectedCategories,
+      sort: studySortingMethod,
+      size: 12,
+    });
+
+  console.log(recruitList);
+
+  const [scrollRef, inView] = useInView();
+
+  useEffect(() => {
+    console.log('getNextRecruits');
+    if (inView && getNextRecruitsIsPossible) {
+      getNextRecruits();
+    }
+  }, [inView, getNextRecruitsIsPossible, getNextRecruits]);
 
   const handleSelectCategory = (category: StudyCategory) => {
     if (category === 'ALL') {
@@ -79,9 +93,10 @@ export default function Home() {
           />
         </div>
         <main className='flex flex-wrap gap-24'>
-          {studies?.content?.map((studyInfo) => (
+          {recruitList?.map((studyInfo) => (
             <StudyCard key={studyInfo.id} studyInfo={studyInfo} />
           ))}
+          <div ref={scrollRef}></div>
         </main>
         <CreateStudyBtn onClick={() => router.push('/recruit/new')} className='fixed z-[9999] bottom-50 right-140' />
       </div>

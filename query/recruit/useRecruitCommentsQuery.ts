@@ -20,9 +20,11 @@ const fetchRecruitComments = async (recruitId: string) => {
 export const RECRUIT_COMMENTS_QUERY_KEY = 'RecruitCommentsQuery';
 
 export function useRecruitCommentsQuery(recruitId: string) {
-  const { data, isLoading, isError } = useQuery<AxiosResponse<CommentType[]>, AxiosError>(
-    [RECRUIT_COMMENTS_QUERY_KEY, recruitId],
-    () => fetchRecruitComments(recruitId),
-  );
+  const { data, isLoading, isError } = useQuery<AxiosResponse<CommentType[]>, AxiosError>({
+    queryKey: [RECRUIT_COMMENTS_QUERY_KEY, recruitId],
+    queryFn: () => fetchRecruitComments(recruitId),
+    enabled: !!recruitId,
+    staleTime: 1000 * 60 * 30, // 30분 캐시
+  });
   return { comments: data?.data, isLoading, isError };
 }

@@ -1,78 +1,26 @@
-import modoosAxios from '@/apis/modoosAxios';
-import { StudyCategory, StudyStatus } from '@/types/studyInfo';
-import { StudySortingMethod } from '@/types/studyParams';
-import { AxiosError, AxiosResponse } from 'axios';
-import { UseQueryOptions, useQuery } from 'react-query';
+import { RecruitsParams, getRecruitList } from '@/apis/getRecruitList';
+import { useInfiniteQuery, useQuery } from 'react-query';
 
-export const studyStatusMapping: StudyStatus[] = ['모집 중', '모집 임박', '모집 마감'];
-
-export type StudyInfo = {
-  id: number;
-  leader_id: number;
-  leader_nickname: string;
-  leader_ranking: string;
-  title: string;
-  status: number;
-  category: StudyCategory;
-  recruits_count: number;
-  participants_count: number;
-  recruit_deadline: string;
-};
-
-type ResponseType = {
-  content: StudyInfo[];
-  pageable: {
-    sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
-    };
-    offset: number;
-    pageNumber: number;
-    pageSize: number;
-    paged: boolean;
-    unpaged: boolean;
-  };
-  size: number;
-  number: number;
-  sort: {
-    empty: boolean;
-    sorted: boolean;
-    unsorted: boolean;
-  };
-  numberOfElements: number;
-  first: boolean;
-  last: boolean;
-  empty: boolean;
-};
-
-type RecruitsParams = {
-  categories: StudyCategory[];
-  sort: StudySortingMethod;
-  searchBy?: string;
-};
-
-const fetchRecruits = async (recruitsParams: RecruitsParams) => {
-  const { categories, sort, searchBy } = recruitsParams;
-  const params = {
-    category: categories.length && categories[0] === 'ALL' ? '' : categories.join(','),
-    sort: sort === 'recent' ? '' : sort,
-  };
-  return await modoosAxios.get('/api/recruit/posts', { params });
-};
-
-export function useRecruitsQuery(
-  params: RecruitsParams,
-  options?: UseQueryOptions<AxiosResponse<ResponseType>, AxiosError>,
-) {
-  const { data, isLoading, isError } = useQuery<AxiosResponse<ResponseType>, AxiosError>(
-    ['RecruitsQuery', params],
-    () => fetchRecruits(params),
-    {
-      ...options,
-      retry: 1,
-      refetchOnWindowFocus: false, // 다른 창 갔다가 돌아올 경우 다시 요청할지
+export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastIndex'>) {
+  const {
+    data: recruitInfiniteData,
+    isLoading,
+    isError,
+    fetchNextPage: getNextRecruits,
+    isSuccess: getRecruitsIsSuccess,
+    hasNextPage: getNextRecruitsIsPossible,
+  } = useInfiniteQuery({
+    queryKey: ['RecruitsQuery', params],
+    queryFn: ({ pageParam = 0 }) => getRecruitList({ ...params, lastIndex: pageParam }),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.last) {
+        return undefined;
+      }
+      return lastPage.lastId + lastPage.size;
     },
-  );
-  return { studies: data?.data, isLoading, isError };
+    // staleTime: 1000 * 60 * 30, // 30분 동안 캐시
+  });
+  const recruitList = recruitInfiniteData?.pages.map((recruits) => recruits.content).flat();
+  // console.log('recruitList:', recruitInfiniteData);
+  return { recruitList, isLoading, isError, getNextRecruits, getRecruitsIsSuccess, getNextRecruitsIsPossible };
 }

@@ -3,10 +3,10 @@ import Header from './header';
 import Footer from './footer';
 import Banner from './banner';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
   hasFooter?: boolean;
-}
+};
 
 const Layout: React.FC<Props> = ({ hasFooter, children }) => {
   return (

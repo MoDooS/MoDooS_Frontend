@@ -34,12 +34,11 @@ const fetchRecruitDetail = async (id: string) => {
 };
 
 export function useRecruitDetailQuery(id: string) {
-  const { data, isLoading, isError } = useQuery<AxiosResponse<RecruitDetailResponse>, AxiosError>(
-    ['RecruitDetailQuery', id],
-    () => fetchRecruitDetail(id),
-    {
-      enabled: !!id,
-    },
-  );
+  const { data, isLoading, isError } = useQuery<AxiosResponse<RecruitDetailResponse>, AxiosError>({
+    queryKey: ['RecruitDetailQuery', id],
+    queryFn: () => fetchRecruitDetail(id),
+    enabled: !!id,
+    staleTime: 1000 * 60 * 30, // 30분 캐시
+  });
   return { recruit: data?.data, isLoading, isError };
 }

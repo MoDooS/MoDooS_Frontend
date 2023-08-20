@@ -22,7 +22,7 @@ jobs:
         with:
           source-directory: 'output'
           destination-github-username: 'jisupark123'
-          destination-repository-name: 'MoDooS'
+          destination-repository-name: 'modoos'
           user-email: ${{ secrets.ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
