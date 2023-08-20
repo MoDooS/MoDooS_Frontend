@@ -1,6 +1,7 @@
 import { CreditRating } from '@/lib/creditRating';
 import { StudyCampus } from '@/types/studyInfo';
 import modoosAxios from './modoosAxios';
+import { authToken } from '@/class/authToken';
 
 type UserResponse = {
   memberId: number;
@@ -12,10 +13,10 @@ type UserResponse = {
   score: number;
 };
 
-export async function getUser(accessToken: string | null) {
+export async function getUser() {
   return await modoosAxios.get<UserResponse>(`/api/member/myInfo`, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${authToken.getToken()}`,
     },
   });
 }

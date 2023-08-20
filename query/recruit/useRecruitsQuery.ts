@@ -1,6 +1,8 @@
 import { RecruitsParams, getRecruitList } from '@/apis/getRecruitList';
 import { useInfiniteQuery, useQuery } from 'react-query';
 
+export const RECRUITS_QUERY_KEY = 'recruitsQuery';
+
 export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastIndex'>) {
   const {
     data: recruitInfiniteData,
@@ -10,7 +12,7 @@ export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastIndex'>) {
     isSuccess: getRecruitsIsSuccess,
     hasNextPage: getNextRecruitsIsPossible,
   } = useInfiniteQuery({
-    queryKey: ['RecruitsQuery', params],
+    queryKey: [RECRUITS_QUERY_KEY, params],
     queryFn: ({ pageParam = 0 }) => getRecruitList({ ...params, lastIndex: pageParam }),
     getNextPageParam: (lastPage) => {
       if (lastPage.last) {
