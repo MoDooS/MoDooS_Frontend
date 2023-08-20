@@ -1,13 +1,13 @@
 import React from 'react';
 import ChevronBottomIcon from '../../../../public/icons/chevron_bottom.svg';
 import Hr from '@/components/hr';
-import { NewRecruitFormType } from '@/types/newRecruitFormType';
+import { RecruitFormType } from '@/types/recruitForm';
 import { Updater } from 'use-immer';
 import { CHECK_LIST_LIMIT } from '@/constants/studySettings';
 
 type Props = {
-  newRecruitForm: NewRecruitFormType;
-  setNewRecruitForm: Updater<NewRecruitFormType>;
+  recruitForm: RecruitFormType;
+  setRecruitForm: Updater<RecruitFormType>;
   movePrevPage: () => void;
   moveNextPage: () => void;
 };
@@ -19,32 +19,32 @@ type StudyOutRuleOption = {
   onChange: (value: number) => void;
 };
 
-export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage, moveNextPage }: Props) {
+export default function Page2({ recruitForm, setRecruitForm, movePrevPage, moveNextPage }: Props) {
   const studyOutRuleOptions: StudyOutRuleOption[] = [
     {
       title: '지각 횟수',
-      defaultValue: newRecruitForm.late,
+      defaultValue: recruitForm.late,
       optionCount: 5,
       onChange: (value: number) =>
-        setNewRecruitForm((form) => {
+        setRecruitForm((form) => {
           form.late = value;
         }),
     },
     {
       title: '결석 횟수',
-      defaultValue: newRecruitForm.absent,
+      defaultValue: recruitForm.absent,
       optionCount: 5,
       onChange: (value: number) =>
-        setNewRecruitForm((form) => {
+        setRecruitForm((form) => {
           form.absent = value;
         }),
     },
     {
       title: 'Out 횟수',
-      defaultValue: newRecruitForm.out,
+      defaultValue: recruitForm.out,
       optionCount: 5,
       onChange: (value: number) =>
-        setNewRecruitForm((form) => {
+        setRecruitForm((form) => {
           form.out = value;
         }),
     },
@@ -77,18 +77,18 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
       <div className=' flex flex-col gap-10 mb-30 text-16 font-normal'>
         <div>
           <span className=' text-black'>지각 </span>
-          <span className=' text-primary'>{newRecruitForm.late}번</span>
+          <span className=' text-primary'>{recruitForm.late}번</span>
           <span className=' text-black'>이면 1결석</span>
         </div>
 
         <div>
           <span className=' text-black'>결석 </span>
-          <span className=' text-primary'>{newRecruitForm.absent}번</span>
+          <span className=' text-primary'>{recruitForm.absent}번</span>
           <span className=' text-black'>이면 1out</span>
         </div>
 
         <div>
-          <span className=' text-primary'>{newRecruitForm.out} out</span>
+          <span className=' text-primary'>{recruitForm.out} out</span>
           <span className=' text-black'>시 스터디에서 자동 퇴출</span>
         </div>
       </div>
@@ -99,26 +99,26 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
         <h6 className='text-gray_70 font-medium text-14 '>
           피드백 폼에 들어갈 내용입니다. 체크리스트 중 하나라도 어기면 1out입니다.
         </h6>
-        <span className='text-primary font-medium text-14'>{`(${newRecruitForm.checkList.length}/${CHECK_LIST_LIMIT})`}</span>
+        <span className='text-primary font-medium text-14'>{`(${recruitForm.checkList.length}/${CHECK_LIST_LIMIT})`}</span>
       </div>
       <div className='flex flex-col gap-10 mb-30'>
-        {newRecruitForm.checkList.map((item, i) => (
+        {recruitForm.checkList.map((item, i) => (
           <article key={i} className=' flex items-center gap-10'>
             <input
               type='text'
               value={item}
               spellCheck={false}
               onChange={(e) =>
-                setNewRecruitForm((form) => {
+                setRecruitForm((form) => {
                   form.checkList[i] = e.target.value;
                 })
               }
               className='w-350 min-h-40 h-full px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black outline-primary'
             />
-            {newRecruitForm.checkList.length < CHECK_LIST_LIMIT && newRecruitForm.checkList.length === i + 1 && (
+            {recruitForm.checkList.length < CHECK_LIST_LIMIT && recruitForm.checkList.length === i + 1 && (
               <button
                 onClick={() =>
-                  setNewRecruitForm((form) => {
+                  setRecruitForm((form) => {
                     form.checkList = [...form.checkList, ''];
                   })
                 }
@@ -127,10 +127,10 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
                 +
               </button>
             )}
-            {newRecruitForm.checkList.length !== 1 && (
+            {recruitForm.checkList.length !== 1 && (
               <button
                 onClick={() =>
-                  setNewRecruitForm((form) => {
+                  setRecruitForm((form) => {
                     form.checkList = form.checkList.filter((_, idx) => idx !== i);
                   })
                 }
@@ -148,9 +148,9 @@ export default function Page2({ newRecruitForm, setNewRecruitForm, movePrevPage,
       <h6 className='text-gray_70 font-medium text-14 mb-5'>자율 규칙은 아웃과 관련이 없습니다.</h6>
       <textarea
         spellCheck={false}
-        value={newRecruitForm.rule_content}
+        value={recruitForm.rule_content}
         onChange={(e) =>
-          setNewRecruitForm((form) => {
+          setRecruitForm((form) => {
             form.rule_content = e.target.value;
           })
         }

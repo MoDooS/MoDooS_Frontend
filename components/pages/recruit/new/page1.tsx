@@ -6,7 +6,7 @@ import DateRangePicker, { SelectMode } from '@/components/datePicker/dateRangePi
 import { addLeadingZero } from '@/utils/addLeadingZero';
 import { cls } from '@/utils/cls';
 import { univercityDepartments } from '@/constants/univercityDepartments';
-import { NewRecruitFormType } from '@/types/newRecruitFormType';
+import { RecruitFormType } from '@/types/recruitForm';
 import { Updater } from 'use-immer';
 import DatePicker from '@/components/datePicker/datePicker';
 import Hr from '@/components/hr';
@@ -14,8 +14,8 @@ import { CalendarRange } from '@/types/datePicker';
 import { StudyCategory, StudyChannel } from '@/types/studyInfo';
 
 type Props = {
-  newRecruitForm: NewRecruitFormType;
-  setNewRecruitForm: Updater<NewRecruitFormType>;
+  recruitForm: RecruitFormType;
+  setRecruitForm: Updater<RecruitFormType>;
   moveNextPage: () => void;
 };
 
@@ -24,7 +24,7 @@ const dateFormatInitText = 'YYYY-MM-DD';
 const studyMethods: StudyChannel[] = ['온라인', '오프라인', '병행'];
 const studyCategories: StudyCategory[] = ['언어', '취업', '고시/공무원', '취미/교양', '프로그래밍', '기타'];
 
-export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage }: Props) {
+export default function Page1({ recruitForm, setRecruitForm, moveNextPage }: Props) {
   const now = dayjs();
 
   const calendarRange: CalendarRange = {
@@ -115,9 +115,9 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
             <input
               name='studyMethod'
               value={method}
-              checked={newRecruitForm.channel === method}
+              checked={recruitForm.channel === method}
               onChange={(e) =>
-                setNewRecruitForm((form) => {
+                setRecruitForm((form) => {
                   form.channel = e.target.value as StudyChannel;
                 })
               }
@@ -136,9 +136,9 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
       <h6 className='text-gray_70 text-14 font-medium mb-5'>카테고리</h6>
       <div className='relative w-350 mb-20'>
         <select
-          value={newRecruitForm.category}
+          value={recruitForm.category}
           onChange={(e) =>
-            setNewRecruitForm((form) => {
+            setRecruitForm((form) => {
               form.category = e.target.value as StudyCategory;
             })
           }
@@ -162,15 +162,15 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
           showRecruitDeadlineDatePicker ? 'border-primary' : '',
         )}
       >
-        <span>{newRecruitForm.recruit_deadline ?? dateFormatInitText}</span>
+        <span>{recruitForm.recruit_deadline ?? dateFormatInitText}</span>
         <CalendarIcon width='24' color='#9AA8BC' />
       </button>
       <div className=' relative mb-20'>
         {showRecruitDeadlineDatePicker && (
           <DatePicker
-            dateValue={newRecruitForm.recruit_deadline}
+            dateValue={recruitForm.recruit_deadline}
             onDateChange={(dateFormat) =>
-              setNewRecruitForm((form) => {
+              setRecruitForm((form) => {
                 console.log(dateFormat);
                 form.recruit_deadline = dateFormat;
               })
@@ -192,7 +192,7 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
               showStudyStartEndDatePicker && studyStartEndSelectMode === 'startDate' ? 'border-primary' : '',
             )}
           >
-            <span>{newRecruitForm.expected_start_at ?? dateFormatInitText}</span>
+            <span>{recruitForm.expected_start_at ?? dateFormatInitText}</span>
             <CalendarIcon width='24' color='#9AA8BC' />
           </button>
         </div>
@@ -205,7 +205,7 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
               showStudyStartEndDatePicker && studyStartEndSelectMode === 'endDate' ? 'border-primary' : '',
             )}
           >
-            <span>{newRecruitForm.expected_end_at ?? dateFormatInitText}</span>
+            <span>{recruitForm.expected_end_at ?? dateFormatInitText}</span>
             <CalendarIcon width='24' color='#9AA8BC' />
           </button>
         </div>
@@ -215,9 +215,9 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
           <DateRangePicker
             calendarRange={calendarRange}
             selectMode={studyStartEndSelectMode}
-            dateRangeValue={{ start: newRecruitForm.expected_start_at, end: newRecruitForm.expected_end_at }}
+            dateRangeValue={{ start: recruitForm.expected_start_at, end: recruitForm.expected_end_at }}
             onDateRangeChange={(dateRange) =>
-              setNewRecruitForm((form) => {
+              setRecruitForm((form) => {
                 form.expected_start_at = dateRange.start;
                 form.expected_end_at = dateRange.end;
               })
@@ -232,9 +232,9 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
       <h6 className='text-gray_70 text-14 font-medium mb-5'>연락 방법</h6>
       <input
         type='text'
-        value={newRecruitForm.contact ?? ''}
+        value={recruitForm.contact ?? ''}
         onChange={(e) =>
-          setNewRecruitForm((form) => {
+          setRecruitForm((form) => {
             form.contact = e.target.value;
           })
         }
@@ -243,9 +243,9 @@ export default function Page1({ newRecruitForm, setNewRecruitForm, moveNextPage 
       <h6 className='text-gray_70 text-14 font-medium mb-5'>링크</h6>
       <input
         type='text'
-        value={newRecruitForm.link ?? ''}
+        value={recruitForm.link ?? ''}
         onChange={(e) =>
-          setNewRecruitForm((form) => {
+          setRecruitForm((form) => {
             form.link = e.target.value;
           })
         }

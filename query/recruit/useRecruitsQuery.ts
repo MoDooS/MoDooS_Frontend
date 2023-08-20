@@ -58,7 +58,6 @@ const fetchRecruits = async (recruitsParams: RecruitsParams) => {
     category: categories.length && categories[0] === 'ALL' ? '' : categories.join(','),
     sort: sort === 'recent' ? '' : sort,
   };
-  console.log(params);
   return await modoosAxios.get('/api/recruit/posts', { params });
 };
 
