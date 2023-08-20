@@ -81,7 +81,7 @@ export default function StudySetting({}: Props) {
       ? getStudyEndInfo(studySettings.start, studySettings.end, studySettings.cycle_of_week)
       : null;
   return (
-    <Layout hasFooter>
+    <Layout hasFooter onlyAccess='user'>
       <main className='flex flex-col items-center pt-60 px-200'>
         <div className='w-full px-30 py-30 bg-white rounded-30'>
           <h1 className='text-[#1A212B] font-semibold text-30 mb-5'>스터디 시작 전 최종 상세 설정</h1>

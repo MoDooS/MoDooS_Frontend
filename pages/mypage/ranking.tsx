@@ -20,7 +20,7 @@ const rankingInfo: { name: string; rating: string }[] = [
 
 export default function Ranking({}: Props) {
   return (
-    <Layout>
+    <Layout onlyAccess='user'>
       <MypageLayout>
         <section className='p-15 bg-white h-full rounded-12 border-1 border-gray_60 overflow-hidden'>
           <h4 className=' text-18 text-black font-medium mb-14'>전체 랭킹</h4>

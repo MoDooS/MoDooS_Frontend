@@ -7,11 +7,14 @@ import { useStudyDetailQuery } from '@/query/study/useStudyDetailQuery';
 import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
 
-const Main = () => {
+const StudyHome = () => {
   const router = useRouter();
   const studyId = router.query.id as string;
   const queryClient = useQueryClient();
   const { studyDetail, isLoading: isStudyDetailLoading, isError: isStudyDetailError } = useStudyDetailQuery(studyId);
+
+  // TODO: 해당 스터디원이 아니면 접근 불가능하게 하는 로직
+
   return (
     <Layout>
       <main className='flex flex-col items-center pt-60 px-200'>
@@ -52,4 +55,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default StudyHome;

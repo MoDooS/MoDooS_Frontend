@@ -14,7 +14,7 @@ const rankingInfo = () => {
   const ranks = ['S+', 'S', 'A+', 'A', 'B', 'C', 'F'];
 
   return (
-    <Layout>
+    <Layout onlyAccess='user'>
       <MypageLayout>
         <main className=' flex justify-center'>
           <div className='max-w-[1200px] w-full flex gap-20'>

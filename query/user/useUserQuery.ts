@@ -10,7 +10,6 @@ import { useQuery } from 'react-query';
 export const USER_QUERY_KEY = 'userQuery';
 
 export function useUserQuery() {
-  const accessToken = authToken.getToken();
   const {
     data: user,
     isLoading,

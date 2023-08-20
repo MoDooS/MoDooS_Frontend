@@ -21,7 +21,7 @@ const Setting = () => {
   };
 
   return (
-    <Layout>
+    <Layout onlyAccess='user'>
       <MypageLayout>
         <main className='flex justify-center h-100vh'>
           <div className='max-w-[1200px] w-full flex gap-20'>
