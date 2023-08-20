@@ -101,7 +101,7 @@ export default function Page2({ recruitForm, setRecruitForm, movePrevPage, moveN
         </h6>
         <span className='text-primary font-medium text-14'>{`(${recruitForm.checkList.length}/${CHECK_LIST_LIMIT})`}</span>
       </div>
-      <div className='flex flex-col gap-10 mb-30'>
+      <div className='flex flex-col gap-10 mb-100'>
         {recruitForm.checkList.map((item, i) => (
           <article key={i} className=' flex items-center gap-10'>
             <input

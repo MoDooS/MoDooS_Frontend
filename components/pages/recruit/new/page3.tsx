@@ -1,16 +1,18 @@
 import React from 'react';
 import Hr from '@/components/hr';
 import { Updater } from 'use-immer';
-import { RecruitFormType } from '@/types/recruitForm';
+import { RecruitFormMode, RecruitFormType } from '@/types/recruitForm';
+import AutoResizableTextarea from '@/components/autoResizableTextarea';
 
 type Props = {
+  mode: RecruitFormMode;
   recruitForm: RecruitFormType;
   setRecruitForm: Updater<RecruitFormType>;
   movePrevPage: () => void;
   handleSubmitForm: () => void;
 };
 
-export default function Page3({ recruitForm, setRecruitForm, movePrevPage, handleSubmitForm }: Props) {
+export default function Page3({ mode, recruitForm, setRecruitForm, movePrevPage, handleSubmitForm }: Props) {
   return (
     <div>
       <h2 className=' text-20 text-black font-medium mb-30'>스터디 소개글을 작성해주세요</h2>
@@ -27,16 +29,16 @@ export default function Page3({ recruitForm, setRecruitForm, movePrevPage, handl
         className=' w-full min-h-40 mb-20 px-10 flex items-center justify-between bg-white rounded-12 border-1 border-solid border-gray_60 text-14 text-black outline-primary'
       />
       <h3 className=' text-16 text-black font-medium mb-10'>내용</h3>
-      <textarea
+      <AutoResizableTextarea
         spellCheck={false}
         value={recruitForm.description}
-        onChange={(e) =>
+        textareaOnChange={(e) =>
           setRecruitForm((form) => {
             form.description = e.target.value;
           })
         }
         className='w-full min-h-200 mb-100 py-12 px-16 text-16 text-black font-normal bg-white border-gray_60 border-1 border-solid rounded-10 outline-primary'
-      ></textarea>
+      />
       <Hr className='mb-50' />
 
       {/* 다음 버튼 */}
@@ -45,7 +47,7 @@ export default function Page3({ recruitForm, setRecruitForm, movePrevPage, handl
           이전
         </button>
         <button onClick={handleSubmitForm} className='py-12 px-18 bg-primary text-white rounded-16 text-16 font-normal'>
-          생성하기
+          {mode === 'new' ? '생성하기' : '수정하기'}
         </button>
       </div>
     </div>
