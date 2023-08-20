@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { feedback } from '@/enum/feedback';
 
 enum FeedbackCategory {
-  good = '이런 점이 좋았어요!',
+  good = '이런 점이 좋았어요',
   bad = '이런 점이 아쉬워요',
 }
 

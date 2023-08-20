@@ -8,7 +8,7 @@ type Props = {
 export default function MypageLayout({ children }: Props) {
   return (
     <main className=' pt-20 flex justify-center'>
-      <div className='max-w-[1200px] w-full flex gap-20'>
+      <div className='max-w-[1200px] w-full flex gap-20 min-h-screen'>
         <section className='flex flex-col items-center shrink-0 w-200 h-full bg-white py-60 px-20 rounded-12 border-1 border-gray_60 overflow-hidden'>
           <div className='w-80 h-80 bg-gray_60 mb-13 rounded-full'></div>
           <span className='block text-14 font-normal text-black mb-80'>삼식이</span>

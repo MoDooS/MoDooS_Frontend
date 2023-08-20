@@ -1,12 +1,5 @@
 import modoosAxios from '@/apis/modoosAxios';
-
-export interface JoinFormType {
-  nickname: string;
-  email: string;
-  password: string;
-  campus: string;
-  department: string;
-}
+import { JoinFormType } from '@/types/joinType';
 
 export const fetchJoin = async (formData: JoinFormType) => {
   try {
@@ -31,7 +24,6 @@ export const fetchEmailCheck = async (email: string) => {
     const response = await modoosAxios.post('/api/auth/email-check', null, {
       params: { email },
     });
-    console.log('호출되는거?');
     if (response.data.status !== 'SUCCESS') {
       console.log('이메일중복');
       return { emailDuplicate: true, code: '' };
