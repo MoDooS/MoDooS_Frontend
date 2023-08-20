@@ -8,6 +8,7 @@ import LinkIcon from '../../public/icons/link.svg';
 import StudyStatus from '@/components/studyStatus';
 import { studyStatusMapping } from '@/types/studyInfo';
 import RecruitForm from '@/components/recruitForm';
+import Banner from '@/components/layouts/banner';
 
 const Avatar = () => <div className=' w-60 h-60 bg-gray_60 rounded-full shrink-0'></div>;
 
@@ -23,6 +24,7 @@ export default function RecruitDetail() {
 
   return (
     <Layout>
+      <Banner title='' description='' />
       {recruit && (
         <main className='flex flex-col items-center pt-100 px-200'>
           <div className='w-full bg-white p-50 rounded-30'>

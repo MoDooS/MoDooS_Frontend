@@ -3,7 +3,7 @@ import { useInfiniteQuery, useQuery } from 'react-query';
 
 export const RECRUITS_QUERY_KEY = 'recruitsQuery';
 
-export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastIndex'>) {
+export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastId'>) {
   const {
     data: recruitInfiniteData,
     isLoading,
@@ -13,12 +13,12 @@ export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastIndex'>) {
     hasNextPage: getNextRecruitsIsPossible,
   } = useInfiniteQuery({
     queryKey: [RECRUITS_QUERY_KEY, params],
-    queryFn: ({ pageParam = 0 }) => getRecruitList({ ...params, lastIndex: pageParam }),
+    queryFn: ({ pageParam = 0 }) => getRecruitList({ ...params, lastId: pageParam }),
     getNextPageParam: (lastPage) => {
       if (lastPage.last) {
         return undefined;
       }
-      return lastPage.lastId + lastPage.size;
+      return lastPage.lastId;
     },
     // staleTime: 1000 * 60 * 30, // 30분 동안 캐시
   });
