@@ -1,4 +1,4 @@
-import { useUserQuery } from '@/query/user/useUserQuery';
+import { useUserQuery } from '@/hooks/queries/user/useUserQuery';
 import useAlert from '@/recoil/alert/useAlert';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';

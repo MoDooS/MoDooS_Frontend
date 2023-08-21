@@ -2,9 +2,8 @@ import Layout from '@/components/layouts/layout';
 import React, { useEffect } from 'react';
 import RecruitForm from '@/components/recruitForm';
 import { useRouter } from 'next/router';
-import { useRecruitDetailQuery } from '@/query/recruit/useRecruitDetailQuery';
-import { useUserQuery } from '@/query/user/useUserQuery';
 import useAlert from '@/recoil/alert/useAlert';
+import { useRecruitDetailQuery } from '@/hooks/queries/recruit/useRecruitDetailQuery';
 
 const Edit = () => {
   const router = useRouter();

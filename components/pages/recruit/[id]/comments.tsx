@@ -1,18 +1,13 @@
-import AutoResizableTextarea from '@/components/autoResizableTextarea';
-import Hr from '@/components/hr';
-import {
-  CommentType,
-  RECRUIT_COMMENTS_QUERY_KEY,
-  useRecruitCommentsQuery,
-} from '@/query/recruit/useRecruitCommentsQuery';
-import { useUserQuery } from '@/query/user/useUserQuery';
-import React, { HTMLAttributes, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import Comment from './comment';
 import { useMutation, useQueryClient } from 'react-query';
 import { postEditRecruitComment } from '@/apis/editRecruitComment';
 import { postNewChildRecruitComment } from '@/apis/newChildRecruitComment';
 import { deleteRecruitComment } from '@/apis/deleteRecruitComment';
 import { postNewRecruitComment } from '@/apis/newRecruitComment';
+import { RECRUIT_COMMENTS_QUERY_KEY, useRecruitCommentsQuery } from '@/hooks/queries/recruit/useRecruitCommentsQuery';
+import Hr from '@/components/hr';
+import AutoResizableTextarea from '@/components/autoResizableTextarea';
 
 type Props = {
   recruitId: string;

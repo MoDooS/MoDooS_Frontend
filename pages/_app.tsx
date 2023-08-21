@@ -1,7 +1,5 @@
 import AlertView from '@/components/modal/alertView';
-import useApiError from '@/hooks/useApiError';
 import '@/styles/globals.css';
-import { AxiosError } from 'axios';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';

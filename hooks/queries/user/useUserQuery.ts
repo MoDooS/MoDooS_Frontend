@@ -1,10 +1,5 @@
 import { getUser } from '@/apis/getUser';
-import modoosAxios from '@/apis/modoosAxios';
 import { withVerify } from '@/apis/withVerify';
-import { authToken } from '@/class/authToken';
-import { CreditRating } from '@/lib/creditRating';
-import { StudyCampus } from '@/types/studyInfo';
-import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
 export const USER_QUERY_KEY = 'userQuery';
