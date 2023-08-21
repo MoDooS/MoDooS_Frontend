@@ -25,7 +25,7 @@ export default function Home() {
 
   const {
     recruitList,
-    isLoading: isRecruitListLoading,
+    isFetching: isRecruitListLoading,
     isError,
     getNextRecruits,
     getRecruitsIsSuccess,
@@ -39,7 +39,6 @@ export default function Home() {
   const [scrollRef, inView] = useInView();
 
   useEffect(() => {
-    console.log('getNextRecruits');
     if (inView && getNextRecruitsIsPossible) {
       getNextRecruits();
     }

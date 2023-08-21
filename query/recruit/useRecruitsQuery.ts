@@ -6,7 +6,7 @@ export const RECRUITS_QUERY_KEY = 'recruitsQuery';
 export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastId'>) {
   const {
     data: recruitInfiniteData,
-    isLoading,
+    isFetching,
     isError,
     fetchNextPage: getNextRecruits,
     isSuccess: getRecruitsIsSuccess,
@@ -23,6 +23,5 @@ export function useRecruitsQuery(params: Omit<RecruitsParams, 'lastId'>) {
     // staleTime: 1000 * 60 * 30, // 30분 동안 캐시
   });
   const recruitList = recruitInfiniteData?.pages.map((recruits) => recruits.content).flat();
-  // console.log('recruitList:', recruitInfiniteData);
-  return { recruitList, isLoading, isError, getNextRecruits, getRecruitsIsSuccess, getNextRecruitsIsPossible };
+  return { recruitList, isFetching, isError, getNextRecruits, getRecruitsIsSuccess, getNextRecruitsIsPossible };
 }
