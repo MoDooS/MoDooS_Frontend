@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from 'react-query';
 import { postLogout } from '@/apis/logout';
 import DropDownMenu, { DropDownMenuOption } from '../select/dropDownMenu';
+import { authToken } from '@/class/authToken';
 
 const Header = () => {
   const router = useRouter();
@@ -25,7 +26,8 @@ const Header = () => {
     logoutMutation.mutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries(USER_QUERY_KEY);
-        router.push('/');
+        authToken.deleteToken();
+        window.location.href = '/';
       },
     });
   }

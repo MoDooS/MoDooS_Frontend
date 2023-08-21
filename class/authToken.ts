@@ -12,6 +12,10 @@ class AuthToken {
   setToken(newToken: string) {
     this._token = newToken;
   }
+
+  deleteToken() {
+    this._token = null;
+  }
 }
 
 export const authToken = new AuthToken();

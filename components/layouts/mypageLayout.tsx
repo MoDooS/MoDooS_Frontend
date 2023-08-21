@@ -49,8 +49,11 @@ export default function MypageLayout({ children }: Props) {
             스터디 요청
           </MenuBtn>
           <h4 className='flex justify-start w-full text-14 font-normal text-black mb-10'>랭킹</h4>
-          <MenuBtn active={router.pathname === '/mypage/ranking'} to='/mypage/ranking' className='mb-50'>
+          <MenuBtn active={router.pathname === '/mypage/ranking'} to='/mypage/ranking' className='mb-10'>
             전체 랭킹
+          </MenuBtn>
+          <MenuBtn active={router.pathname === '/mypage/ranking-info'} to='/mypage/ranking-info' className='mb-50'>
+            신용 등급
           </MenuBtn>
           <h4 className='flex justify-start w-full text-14 font-normal text-black mb-10'>설정</h4>
           <MenuBtn active={router.pathname === '/mypage/notice'} to='/mypage/notice' className='mb-10'>
@@ -88,7 +91,9 @@ export default function MypageLayout({ children }: Props) {
               </article>
             </div>
           </section>
-          {children}
+          <section className='relative px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60'>
+            {children}
+          </section>
         </div>
       </div>
     </main>
