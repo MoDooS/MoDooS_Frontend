@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { cls } from '@/utils/cls';
-import HeartIcon from '../../../public/icons/heart.svg';
+import HeartIcon from '../public/icons/heart.svg';
 import { StudyInfo, studyStatusMapping } from '@/types/studyInfo';
+import { useMutation, useQueryClient } from 'react-query';
+import heartRecruit from '@/apis/heartRecruit';
+import { StudyContent } from '@/apis/getRecruitList';
+import { RECRUITS_QUERY_KEY } from '@/hooks/queries/recruit/useRecruitsQuery';
+import { useRouter } from 'next/router';
+import { useUserQuery } from '@/hooks/queries/user/useUserQuery';
+import { INTEREST_STUDIES_QUERY_KEY } from '@/hooks/queries/study/useInterestStudiesQuery';
 
 type Props = {
-  studyInfo: StudyInfo;
+  studyInfo: StudyContent;
 };
 
 export default function StudyCard({ studyInfo }: Props) {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const [isHeartRecruit, setIsHeartRecruit] = useState(studyInfo.hearted);
   const studyStatus = studyStatusMapping[studyInfo.status];
+  const { user } = useUserQuery();
+  const heartRecruitMutation = useMutation(heartRecruit, {
+    onMutate: () => setIsHeartRecruit((prev) => !prev),
+    onSuccess: () => {
+      queryClient.invalidateQueries(RECRUITS_QUERY_KEY);
+      queryClient.invalidateQueries(INTEREST_STUDIES_QUERY_KEY);
+    },
+  });
+
   return (
-    <Link
-      href={`/recruit/${studyInfo.id}`}
+    <article
+      onClick={() => router.push(`/recruit/${studyInfo.id}`)}
       className='w-270 h-306 flex flex-col justify-between pt-40 pb-22 px-24 bg-white border-1 border-[#D1D1D1] rounded-20'
     >
       <div>
@@ -31,7 +50,16 @@ export default function StudyCard({ studyInfo }: Props) {
               {studyStatus}
             </div>
           </div>
-          {/* <HeartIcon width='25' height='25' /> */}
+          {user && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                heartRecruitMutation.mutate(studyInfo.id);
+              }}
+            >
+              {isHeartRecruit ? <div className='w-20 h-20 bg-red'></div> : <HeartIcon />}
+            </button>
+          )}
         </div>
 
         {/* 마감일 */}
@@ -50,6 +78,6 @@ export default function StudyCard({ studyInfo }: Props) {
           <span className=' font-medium text-black text-12'>{studyInfo.leader_nickname}</span>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }
