@@ -3,7 +3,7 @@ import Layout from '@/components/layouts/layout';
 import { cls } from '@/utils/cls';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMemberListQuery } from '@/query/feedback/useMemberListQuery';
+import { useMemberListQuery } from '@/hooks/queries/feedback/useMemberListQuery';
 import { useQueryClient } from 'react-query';
 
 type Props = {

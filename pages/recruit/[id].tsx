@@ -1,7 +1,6 @@
 import Hr from '@/components/hr';
 import Layout from '@/components/layouts/layout';
 import Comments from '@/components/pages/recruit/[id]/comments';
-import { useRecruitDetailQuery } from '@/query/recruit/useRecruitDetailQuery';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import LinkIcon from '../../public/icons/link.svg';
@@ -9,6 +8,7 @@ import StudyStatus from '@/components/studyStatus';
 import { studyStatusMapping } from '@/types/studyInfo';
 import RecruitForm from '@/components/recruitForm';
 import Banner from '@/components/layouts/banner';
+import { useRecruitDetailQuery } from '@/hooks/queries/recruit/useRecruitDetailQuery';
 
 const Avatar = () => <div className=' w-60 h-60 bg-gray_60 rounded-full shrink-0'></div>;
 

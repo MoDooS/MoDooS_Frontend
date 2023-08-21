@@ -1,7 +1,8 @@
 import AutoResizableTextarea from '@/components/autoResizableTextarea';
 import Hr from '@/components/hr';
-import { CommentType } from '@/query/recruit/useRecruitCommentsQuery';
-import { useUserQuery } from '@/query/user/useUserQuery';
+import { CommentType } from '@/hooks/queries/recruit/useRecruitCommentsQuery';
+import { useUserQuery } from '@/hooks/queries/user/useUserQuery';
+
 import useAlert from '@/recoil/alert/useAlert';
 import { cls } from '@/utils/cls';
 import { useRef, useState } from 'react';

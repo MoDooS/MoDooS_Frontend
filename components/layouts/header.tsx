@@ -1,4 +1,3 @@
-import { USER_QUERY_KEY, useUserQuery } from '@/query/user/useUserQuery';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -9,6 +8,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { postLogout } from '@/apis/logout';
 import DropDownMenu, { DropDownMenuOption } from '../select/dropDownMenu';
 import { authToken } from '@/class/authToken';
+import { USER_QUERY_KEY, useUserQuery } from '@/hooks/queries/user/useUserQuery';
 
 const Header = () => {
   const router = useRouter();

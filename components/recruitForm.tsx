@@ -13,8 +13,8 @@ import Page2 from './pages/recruit/new/page2';
 import Page3 from './pages/recruit/new/page3';
 import { RecruitRequest } from '@/types/recruitRequest';
 import { editRecruit } from '@/apis/editRecruit';
-import { RECRUITS_QUERY_KEY } from '@/query/recruit/useRecruitsQuery';
-import { RECRUIT_DETAIL_QUERY_KEY } from '@/query/recruit/useRecruitDetailQuery';
+import { RECRUITS_QUERY_KEY } from '@/hooks/queries/recruit/useRecruitsQuery';
+import { RECRUIT_DETAIL_QUERY_KEY } from '@/hooks/queries/recruit/useRecruitDetailQuery';
 
 type Props = {
   recruitId?: number;

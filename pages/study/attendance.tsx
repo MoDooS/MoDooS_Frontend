@@ -2,7 +2,7 @@ import Layout from '@/components/layouts/layout';
 import { useState } from 'react';
 import { cls } from '@/utils/cls';
 import { useMutation, useQueryClient } from 'react-query';
-import { RequestType, postAttendance } from '@/query/study/useAttendance';
+import { RequestType, postAttendance } from '@/hooks/queries/study/useAttendance';
 
 const pageTitles = ['박지수', '양채연', '안승연', '박상민'];
 const attendance = ['출석', '지각', '결석'];

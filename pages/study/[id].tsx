@@ -3,7 +3,7 @@ import CheckList from '@/components/feedback/checklist';
 import Feedback from '@/components/feedback/feedback';
 import Title from '@/components/feedback/title';
 import Layout from '@/components/layouts/layout';
-import { useStudyDetailQuery } from '@/query/study/useStudyDetailQuery';
+import { useStudyDetailQuery } from '@/hooks/queries/study/useStudyDetailQuery';
 import { useRouter } from 'next/router';
 import { useQueryClient } from 'react-query';
 

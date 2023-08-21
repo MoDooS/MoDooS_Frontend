@@ -8,9 +8,9 @@ import CreateStudyBtn from '@/components/pages/index/createStudyBtn';
 import { useRouter } from 'next/router';
 import Banner from '@/components/layouts/banner';
 import { StudySortingMethod, studySortingMethodMapping } from '@/types/studyParams';
-import { useRecruitsQuery } from '@/query/recruit/useRecruitsQuery';
 import { StudyCategory, studyCategories } from '@/types/studyInfo';
 import LoadingIcon from '../public/icons/loading.svg';
+import { useRecruitsQuery } from '@/hooks/queries/recruit/useRecruitsQuery';
 
 const studySortingOptions: DropDownOption[] = [
   { value: 'recent', content: '최신순' },
