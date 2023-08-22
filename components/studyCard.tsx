@@ -57,7 +57,7 @@ export default function StudyCard({ studyInfo }: Props) {
                 heartRecruitMutation.mutate(studyInfo.id);
               }}
             >
-              {isHeartRecruit ? <div className='w-20 h-20 bg-red'></div> : <HeartIcon />}
+              {isHeartRecruit ? <div className='text-28 w-28 h-27'>💘</div> : <HeartIcon />}
             </button>
           )}
         </div>
