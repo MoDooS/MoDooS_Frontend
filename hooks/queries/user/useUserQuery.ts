@@ -1,19 +1,19 @@
 import { getUser } from '@/apis/getUser';
 import { withVerify } from '@/apis/withVerify';
 import { authToken } from '@/class/authToken';
+
 import { useQuery } from 'react-query';
 
 export const USER_QUERY_KEY = 'userQuery';
 
 export function useUserQuery() {
-  const accessToken = authToken.getToken();
   const {
     data: user,
     isLoading,
     isError,
   } = useQuery({
     queryKey: USER_QUERY_KEY,
-    queryFn: () => withVerify(() => getUser(accessToken)),
+    queryFn: () => withVerify(getUser),
     select: (res) => res.data,
     onSuccess: (newData) => {
       console.log('Received updated user data:', newData); // 업데이트된 유저정보 확인용

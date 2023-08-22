@@ -5,12 +5,12 @@ import CheckList from '@/components/feedback/checklist';
 import Feedback from '@/components/feedback/feedback';
 import Title from '@/components/feedback/title';
 import Layout from '@/components/layouts/layout';
-import { useStudyDetailQuery } from '@/query/study/useStudyDetailQuery';
+import { useStudyDetailQuery } from '@/hooks/queries/study/useStudyDetailQuery';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 
-const Main = () => {
+const StudyHome = () => {
   const router = useRouter();
   const studyId = router.query.id as string;
   const queryClient = useQueryClient();
@@ -25,6 +25,8 @@ const Main = () => {
       setSelectedComponent(<Evaluation />);
     }
   };
+
+  // TODO: 해당 스터디원이 아니면 접근 불가능하게 하는 로직
 
   return (
     <Layout>
@@ -68,4 +70,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default StudyHome;

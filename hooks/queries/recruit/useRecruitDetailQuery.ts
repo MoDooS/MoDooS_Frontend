@@ -1,3 +1,4 @@
+import { getRecruitDetail } from '@/apis/getRecruitDetail';
 import modoosAxios from '@/apis/modoosAxios';
 import { CreditRating } from '@/lib/creditRating';
 import { StudyCampus, StudyCategory, StudyChannel } from '@/types/studyInfo';
@@ -29,14 +30,12 @@ type RecruitDetailResponse = {
   written: boolean;
 };
 
-const fetchRecruitDetail = async (id: string) => {
-  return await modoosAxios.get(`/api/recruit/postInfo/${id}`);
-};
+export const RECRUIT_DETAIL_QUERY_KEY = 'RecruitDetailQuery';
 
 export function useRecruitDetailQuery(id: string) {
   const { data, isLoading, isError } = useQuery<AxiosResponse<RecruitDetailResponse>, AxiosError>({
-    queryKey: ['RecruitDetailQuery', id],
-    queryFn: () => fetchRecruitDetail(id),
+    queryKey: [RECRUIT_DETAIL_QUERY_KEY, id],
+    queryFn: () => getRecruitDetail(id),
     enabled: !!id,
     staleTime: 1000 * 60 * 30, // 30분 캐시
   });

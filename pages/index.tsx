@@ -3,13 +3,14 @@ import Layout from '@/components/layouts/layout';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cls } from '@/utils/cls';
-import StudyCard from '@/components/pages/index/studyCard';
+import StudyCard from '@/components/studyCard';
 import CreateStudyBtn from '@/components/pages/index/createStudyBtn';
 import { useRouter } from 'next/router';
 import Banner from '@/components/layouts/banner';
 import { StudySortingMethod, studySortingMethodMapping } from '@/types/studyParams';
-import { useRecruitsQuery } from '@/query/recruit/useRecruitsQuery';
 import { StudyCategory, studyCategories } from '@/types/studyInfo';
+import LoadingIcon from '../public/icons/loading.svg';
+import { useRecruitsQuery } from '@/hooks/queries/recruit/useRecruitsQuery';
 
 const studySortingOptions: DropDownOption[] = [
   { value: 'recent', content: '최신순' },
@@ -22,19 +23,22 @@ export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<StudyCategory[]>(['ALL']);
   const [studySortingMethod, setStudySortingMethod] = useState<StudySortingMethod>('recent');
 
-  const { recruitList, isLoading, isError, getNextRecruits, getRecruitsIsSuccess, getNextRecruitsIsPossible } =
-    useRecruitsQuery({
-      categories: selectedCategories,
-      sort: studySortingMethod,
-      size: 12,
-    });
-
-  console.log(recruitList);
+  const {
+    recruitList,
+    isFetching: isRecruitListLoading,
+    isError,
+    getNextRecruits,
+    getRecruitsIsSuccess,
+    getNextRecruitsIsPossible,
+  } = useRecruitsQuery({
+    categories: selectedCategories,
+    sortBy: studySortingMethod,
+    size: 12,
+  });
 
   const [scrollRef, inView] = useInView();
 
   useEffect(() => {
-    console.log('getNextRecruits');
     if (inView && getNextRecruitsIsPossible) {
       getNextRecruits();
     }
@@ -62,7 +66,7 @@ export default function Home() {
   };
   return (
     <Layout hasFooter>
-      <Banner />
+      <Banner title='스터디 모집부터 관리까지 한번에!' description='지금 가입하고 모두의 스터디를 만나보세요 🔥' />
       <div className='pt-50 pb-200 px-140 min-h-1000'>
         <div className='flex items-center gap-30 mb-14'>
           {/* 필터링 박스들 */}
@@ -96,6 +100,7 @@ export default function Home() {
           {recruitList?.map((studyInfo) => (
             <StudyCard key={studyInfo.id} studyInfo={studyInfo} />
           ))}
+          {isRecruitListLoading && <LoadingIcon width='200' height='200' />}
           <div ref={scrollRef}></div>
         </main>
         <CreateStudyBtn onClick={() => router.push('/recruit/new')} className='fixed z-[9999] bottom-50 right-140' />

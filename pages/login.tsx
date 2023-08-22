@@ -6,6 +6,7 @@ import BasicLayout from '@/components/layouts/basicLayout';
 import { validateEmail, validatePassword } from '@/utils/validation';
 import { LoginFormType, fetchLogin } from '@/apis/auth/login';
 import { useRouter } from 'next/router';
+import Layout from '@/components/layouts/layout';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   btnType: 'login' | 'register' | 'email';
@@ -48,8 +49,8 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <BasicLayout>
-      <div className='flex-col'>
+    <Layout onlyAccess='notUser'>
+      <main className='flex flex-col items-center pt-100'>
         <Image src={'/imgs/logo_1.png'} alt='logo' width={160} height={0} className='mx-auto mt-45' />
         <div className='flex justify-center'>
           <form className='flex-col mt-30'>
@@ -96,8 +97,8 @@ const LoginForm: React.FC = () => {
             </div>
           </form>
         </div>
-      </div>
-    </BasicLayout>
+      </main>
+    </Layout>
   );
 };
 

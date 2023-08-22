@@ -1,5 +1,3 @@
-import BasicLayout from '@/components/layouts/basicLayout';
-
 import LongField from '@/components/auth/longField';
 import MainBtn from '@/components/auth/mainBtn';
 import ShortField from '@/components/auth/shortField';
@@ -9,8 +7,10 @@ import { useEffect, useState } from 'react';
 import { LoginFormType } from '@/apis/auth/login';
 import { useRecoilState } from 'recoil';
 import { timerState } from '@/recoil/timer/atoms';
-import { AuthType, initialAuthMsg } from './join';
+import { initialAuthMsg } from './join';
 import { fetchCodeCheck, fetchEmailCheck } from '@/apis/auth/join';
+import { AuthType } from '@/types/joinType';
+import Layout from '@/components/layouts/layout';
 
 const initialRepasswordForm: LoginFormType = {
   email: '',
@@ -110,8 +110,8 @@ const RepasswordForm: React.FC = () => {
   };
 
   return (
-    <BasicLayout>
-      <div className='flex-col mb-60'>
+    <Layout onlyAccess='notUser'>
+      <main className='flex flex-col items-center py-100'>
         <Image src={'/imgs/logo_1.png'} alt='logo' width={160} height={0} className='mx-auto mt-45' />
         <div className='flex justify-center'>
           <form className='flex-col mt-30'>
@@ -186,8 +186,8 @@ const RepasswordForm: React.FC = () => {
             </div>
           </form>
         </div>
-      </div>
-    </BasicLayout>
+      </main>
+    </Layout>
   );
 };
 export default RepasswordForm;

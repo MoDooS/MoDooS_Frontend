@@ -1,16 +1,18 @@
 import Hr from '@/components/hr';
 import Layout from '@/components/layouts/layout';
 import Comments from '@/components/pages/recruit/[id]/comments';
-import { useRecruitDetailQuery } from '@/query/recruit/useRecruitDetailQuery';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import LinkIcon from '../../public/icons/link.svg';
 import StudyStatus from '@/components/studyStatus';
 import { studyStatusMapping } from '@/types/studyInfo';
+import RecruitForm from '@/components/recruitForm';
+import Banner from '@/components/layouts/banner';
+import { useRecruitDetailQuery } from '@/hooks/queries/recruit/useRecruitDetailQuery';
 
 const Avatar = () => <div className=' w-60 h-60 bg-gray_60 rounded-full shrink-0'></div>;
 
-type UserType = 'owner' | 'participated' | 'unparticipated'; // 스터디 생성자 | 참여중인 | 아무것도 아닌
+type UserType = 'owner' | 'normal'; // 스터디 생성자 | 일반 유저
 
 export default function RecruitDetail() {
   const router = useRouter();
@@ -18,10 +20,11 @@ export default function RecruitDetail() {
   const { recruit, isLoading: isRecruitLoading, isError: isRecruitError } = useRecruitDetailQuery(recruitId);
 
   // TODO: 추후에 백엔드에서 unparticipated 정보 받으면 반영해야됨
-  const userType: UserType = !recruit ? 'unparticipated' : recruit.written ? 'owner' : 'participated';
+  const userType: UserType = recruit?.written ? 'owner' : 'normal';
 
   return (
     <Layout>
+      <Banner title='' description='' />
       {recruit && (
         <main className='flex flex-col items-center pt-100 px-200'>
           <div className='w-full bg-white p-50 rounded-30'>
@@ -95,9 +98,17 @@ export default function RecruitDetail() {
             <Hr className='mb-20' />
             <div className='mb-100 flex gap-50'></div> */}
             <div className='flex justify-end mb-30'>
-              <button className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'>
-                {userType === 'owner' ? '수정하기' : '참여하기'}
-              </button>
+              {userType === 'owner' && (
+                <button
+                  onClick={() => router.push(`/recruit/edit/${recruit.id}`)}
+                  className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'
+                >
+                  수정하기
+                </button>
+              )}
+              {userType === 'normal' && (
+                <button className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'>참여하기</button>
+              )}
             </div>
             <Hr className='mb-30' />
 

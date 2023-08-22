@@ -11,6 +11,7 @@ import { useRecoilState } from 'recoil';
 import { timerState } from '@/recoil/timer/atoms';
 import { AuthType, JoinErrType, JoinFormType, JoinName } from '@/types/joinType';
 import { useImmer } from 'use-immer';
+import Layout from '@/components/layouts/layout';
 
 const initialForm: JoinFormType = {
   nickname: '',
@@ -154,8 +155,8 @@ const JoinForm: React.FC = () => {
   };
 
   return (
-    <BasicLayout>
-      <div className='flex-col mb-60'>
+    <Layout onlyAccess='notUser'>
+      <main className='flex flex-col items-center pt-100 pb-100'>
         <Image src={'/imgs/logo_1.png'} alt='logo' width={160} height={0} className='mx-auto mt-45' />
         <div className='flex justify-center'>
           <form className='flex-col mt-30'>
@@ -218,8 +219,8 @@ const JoinForm: React.FC = () => {
             <MainBtn text='회원가입하기' activation={activation} toPath='/login' btnType='join' form={joinForm} />
           </form>
         </div>
-      </div>
-    </BasicLayout>
+      </main>
+    </Layout>
   );
 };
 

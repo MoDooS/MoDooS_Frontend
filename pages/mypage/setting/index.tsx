@@ -5,12 +5,10 @@ import SettingInfo from '@/components/settingInfo/settingInfo';
 import SettingButtons from '@/components/settingInfo/SettingBtn';
 import { MyInfoRequest } from '@/types/myInfoRequest';
 import { useImmer } from 'use-immer';
-import { useUserQuery } from '@/query/user/useUserQuery';
+import { useUserQuery, USER_QUERY_KEY } from '@/hooks/queries/user/useUserQuery';
 import { Draft } from 'immer';
 import { newUserInfo } from '@/apis/newUserInfo';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
-import { authToken } from '@/class/authToken';
-import { USER_QUERY_KEY } from '@/query/user/useUserQuery';
 import { UserResponse } from '@/apis/getUser';
 
 export type SettingInfoProps = {
@@ -53,7 +51,7 @@ const Setting = () => {
   };
 
   return (
-    <Layout>
+    <Layout onlyAccess='user'>
       <MypageLayout>
         <main className='flex justify-center h-100vh'>
           <div className='max-w-[1200px] w-full flex gap-20'>

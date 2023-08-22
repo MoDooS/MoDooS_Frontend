@@ -1,7 +1,8 @@
-import { JoinFormType, fetchJoin } from '@/apis/auth/join';
+import { fetchJoin } from '@/apis/auth/join';
 import { LoginFormType, fetchLogin } from '@/apis/auth/login';
 import { fetchResetPassword } from '@/apis/auth/resetPassword';
 import { authToken } from '@/class/authToken';
+import { JoinFormType } from '@/types/joinType';
 import { useRouter } from 'next/router';
 import { HTMLAttributes, memo, useCallback } from 'react';
 import { useMutation } from 'react-query';

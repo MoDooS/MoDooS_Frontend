@@ -16,9 +16,7 @@ function AutoResizableTextarea({ textareaRef, textareaOnChange, ...props }: Prop
     // height 늘리기
     const newHeight = scrollHeight + parseInt(borderTopWidth) + parseInt(borderBottomWidth);
     event.target.style.height = `${newHeight}px`;
-    if (textareaOnChange) {
-      textareaOnChange(event);
-    }
+    textareaOnChange && textareaOnChange(event);
   };
 
   return <textarea ref={textareaRef} onChange={handleTextareaChange} {...props}></textarea>;

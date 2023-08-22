@@ -1,5 +1,6 @@
 import { RecruitRequest } from './recruitRequest';
 
+export type RecruitFormMode = 'new' | 'edit';
 export interface RecruitFormType
   extends Omit<RecruitRequest, 'recruit_deadline' | 'expected_start_at' | 'expected_end_at'> {
   recruit_deadline: string | null; // 모집 마감일

@@ -1,20 +1,68 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import CreditChart from '../creditChart';
+import { cls } from '@/utils/cls';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-type Props = {
+interface Props extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-};
+}
 
-export default function MypageLayout({ children }: Props) {
+const MenuBtn = ({
+  active,
+  children,
+  to,
+  ...props
+}: { active: boolean; to: string } & HTMLAttributes<HTMLAnchorElement>) => (
+  <Link
+    href={to}
+    className={cls(
+      'w-full py-8 text-12 rounded-5 flex justify-center items-center',
+      active ? 'bg-primary text-white' : 'bg-bg1 text-[#454545]',
+      props.className ?? '',
+    )}
+  >
+    {children}
+  </Link>
+);
+
+export default function MypageLayout({ children, ...props }: Props) {
+  const router = useRouter();
   return (
-    <main className=' pt-20 flex justify-center'>
+    <main className=' py-20 flex justify-center'>
       <div className='max-w-[1200px] w-full flex gap-20 min-h-screen'>
+        {/* 좌측 메뉴바 */}
         <section className='flex flex-col items-center shrink-0 w-200 h-full bg-white py-60 px-20 rounded-12 border-1 border-gray_60 overflow-hidden'>
           <div className='w-80 h-80 bg-gray_60 mb-13 rounded-full'></div>
           <span className='block text-14 font-normal text-black mb-80'>삼식이</span>
 
-          <div className='flex justify-start w-full text-14 font-normal text-black mb-10'>랭킹</div>
-          <button className='w-full bg-primary text-white py-8 text-12 rounded-5'>전체 랭킹</button>
+          <h4 className='flex justify-start w-full text-14 font-semibold text-black mb-10'>스터디 정보</h4>
+          <MenuBtn active={router.pathname === '/mypage/feedback'} to='/mypage/feedback' className='mb-10'>
+            나에 대한 피드백
+          </MenuBtn>
+          <MenuBtn active={router.pathname === '/mypage/my-study'} to='/mypage/my-study' className='mb-10'>
+            내 스터디
+          </MenuBtn>
+          <MenuBtn active={router.pathname === '/mypage/interest-study'} to='/mypage/interest-study' className='mb-10'>
+            관심 스터디
+          </MenuBtn>
+          <MenuBtn active={router.pathname === '/mypage/study-apply'} to='/mypage/study-apply' className='mb-50'>
+            스터디 요청
+          </MenuBtn>
+          <h4 className='flex justify-start w-full text-14 font-semibold text-black mb-10'>랭킹</h4>
+          <MenuBtn active={router.pathname === '/mypage/ranking'} to='/mypage/ranking' className='mb-10'>
+            전체 랭킹
+          </MenuBtn>
+          <MenuBtn active={router.pathname === '/mypage/ranking-info'} to='/mypage/ranking-info' className='mb-50'>
+            신용 등급
+          </MenuBtn>
+          <h4 className='flex justify-start w-full text-14 font-normal text-black mb-10'>설정</h4>
+          <MenuBtn active={router.pathname === '/mypage/notice'} to='/mypage/notice' className='mb-10'>
+            알림
+          </MenuBtn>
+          <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting'>
+            계정
+          </MenuBtn>
         </section>
         <div className='flex flex-col gap-20 w-full'>
           <section className='w-full bg-white p-15 shrink-0 rounded-12 border-1 border-gray_60 overflow-hidden'>
@@ -44,7 +92,15 @@ export default function MypageLayout({ children }: Props) {
               </article>
             </div>
           </section>
-          {children}
+          <section
+            {...props}
+            className={cls(
+              'relative px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60',
+              props.className ?? '',
+            )}
+          >
+            {children}
+          </section>
         </div>
       </div>
     </main>
