@@ -29,7 +29,7 @@ const MenuBtn = ({
 export default function MypageLayout({ children }: Props) {
   const router = useRouter();
   return (
-    <main className=' pt-20 flex justify-center'>
+    <main className=' py-20 flex justify-center'>
       <div className='max-w-[1200px] w-full flex gap-20 min-h-screen'>
         {/* 좌측 메뉴바 */}
         <section className='flex flex-col items-center shrink-0 w-200 h-full bg-white py-60 px-20 rounded-12 border-1 border-gray_60 overflow-hidden'>
