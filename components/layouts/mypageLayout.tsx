@@ -4,9 +4,9 @@ import { cls } from '@/utils/cls';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-type Props = {
+interface Props extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-};
+}
 
 const MenuBtn = ({
   active,
@@ -26,7 +26,7 @@ const MenuBtn = ({
   </Link>
 );
 
-export default function MypageLayout({ children }: Props) {
+export default function MypageLayout({ children, ...props }: Props) {
   const router = useRouter();
   return (
     <main className=' py-20 flex justify-center'>
@@ -45,7 +45,7 @@ export default function MypageLayout({ children }: Props) {
           <MenuBtn active={router.pathname === '/mypage/interest-study'} to='/mypage/interest-study' className='mb-10'>
             관심 스터디
           </MenuBtn>
-          <MenuBtn active={router.pathname === '/mypage/study-request'} to='/mypage/study-request' className='mb-50'>
+          <MenuBtn active={router.pathname === '/mypage/study-apply'} to='/mypage/study-apply' className='mb-50'>
             스터디 요청
           </MenuBtn>
           <h4 className='flex justify-start w-full text-14 font-semibold text-black mb-10'>랭킹</h4>
@@ -91,7 +91,13 @@ export default function MypageLayout({ children }: Props) {
               </article>
             </div>
           </section>
-          <section className='relative px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60'>
+          <section
+            {...props}
+            className={cls(
+              'relative px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60',
+              props.className ?? '',
+            )}
+          >
             {children}
           </section>
         </div>
