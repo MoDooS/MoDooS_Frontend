@@ -1,5 +1,5 @@
 import { feedback } from '@/enum/feedback';
-import { neg, pos } from '@/pages/study/evaluation';
+import { neg, pos } from '@/components/evaluation';
 
 enum Category {
   good = '이런 점이 좋았어요',

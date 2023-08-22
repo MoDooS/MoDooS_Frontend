@@ -17,7 +17,10 @@ const Header = () => {
   const [showProfileIconMenu, setShowProfileIconMenu] = useState(false);
 
   const profileIconMenus: DropDownMenuOption[] = [
-    { content: '마이페이지', selectHandler: () => router.push('/mypage/feedback') },
+    {
+      content: '마이페이지',
+      selectHandler: () => router.push('/mypage/setting'),
+    },
     { content: '로그아웃', selectHandler: handleLogout },
   ];
 

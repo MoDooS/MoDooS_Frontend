@@ -2,7 +2,7 @@ import { CreditRating } from '@/lib/creditRating';
 import { StudyCampus } from '@/types/studyInfo';
 import modoosAxios from './modoosAxios';
 
-type UserResponse = {
+export type UserResponse = {
   memberId: number;
   nickname: string;
   email: string;

@@ -12,6 +12,7 @@ export default function MypageLayout({ children }: Props) {
         <section className='flex flex-col items-center shrink-0 w-200 h-full bg-white py-60 px-20 rounded-12 border-1 border-gray_60 overflow-hidden'>
           <div className='w-80 h-80 bg-gray_60 mb-13 rounded-full'></div>
           <span className='block text-14 font-normal text-black mb-80'>삼식이</span>
+
           <div className='flex justify-start w-full text-14 font-normal text-black mb-10'>랭킹</div>
           <button className='w-full bg-primary text-white py-8 text-12 rounded-5'>전체 랭킹</button>
         </section>

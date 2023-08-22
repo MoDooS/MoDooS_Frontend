@@ -56,7 +56,7 @@ const LoginForm: React.FC = () => {
             <LongField
               field={{
                 label: '이메일',
-                placeholder: 'matthew10164@mju.ac.kr',
+                placeholder: 'example@mju.ac.kr',
                 onChange: handleEmailChange,
                 errMsg: emailErr,
               }}
