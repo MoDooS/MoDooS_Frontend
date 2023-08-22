@@ -3,7 +3,7 @@ import Layout from '@/components/layouts/layout';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cls } from '@/utils/cls';
-import StudyCard from '@/components/pages/index/studyCard';
+import StudyCard from '@/components/studyCard';
 import CreateStudyBtn from '@/components/pages/index/createStudyBtn';
 import { useRouter } from 'next/router';
 import Banner from '@/components/layouts/banner';

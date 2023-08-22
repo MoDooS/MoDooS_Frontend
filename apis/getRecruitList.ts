@@ -2,8 +2,10 @@ import { StudyCategory, StudyInfo } from '@/types/studyInfo';
 import { StudySortingMethod } from '@/types/studyParams';
 import modoosAxios from './modoosAxios';
 
+export type StudyContent = StudyInfo & { hearted: boolean };
+
 type RecruitListResponse = {
-  content: StudyInfo[];
+  content: StudyContent[];
   pageable: {
     sort: {
       empty: boolean;
