@@ -3,7 +3,7 @@ import { StudyCampus } from '@/types/studyInfo';
 import modoosAxios from './modoosAxios';
 import { authToken } from '@/class/authToken';
 
-type UserResponse = {
+export type UserResponse = {
   memberId: number;
   nickname: string;
   email: string;

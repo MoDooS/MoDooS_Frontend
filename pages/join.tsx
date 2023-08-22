@@ -194,6 +194,7 @@ const JoinForm: React.FC = () => {
               }}
               activation={emailValidity}
             />
+            <div className='flex text-13 text-gray_70 justify-between max-w-360 w-full mt-15'>캠퍼스</div>
             <Category onChange={handleCategoryChange} />
             <LongField
               field={{

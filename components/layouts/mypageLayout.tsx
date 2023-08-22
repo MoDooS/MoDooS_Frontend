@@ -35,6 +35,7 @@ export default function MypageLayout({ children, ...props }: Props) {
         <section className='flex flex-col items-center shrink-0 w-200 h-full bg-white py-60 px-20 rounded-12 border-1 border-gray_60 overflow-hidden'>
           <div className='w-80 h-80 bg-gray_60 mb-13 rounded-full'></div>
           <span className='block text-14 font-normal text-black mb-80'>삼식이</span>
+
           <h4 className='flex justify-start w-full text-14 font-semibold text-black mb-10'>스터디 정보</h4>
           <MenuBtn active={router.pathname === '/mypage/feedback'} to='/mypage/feedback' className='mb-10'>
             나에 대한 피드백

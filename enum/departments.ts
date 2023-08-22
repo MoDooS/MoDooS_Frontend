@@ -1,6 +1,7 @@
 interface TDepartments {
   인문: string[];
   자연: string[];
+  공통: string[];
 }
 export const departments: TDepartments = {
   인문: [
@@ -57,4 +58,5 @@ export const departments: TDepartments = {
     '전공자유학부',
     '글로벌비즈니스전공',
   ],
+  공통: [],
 };
