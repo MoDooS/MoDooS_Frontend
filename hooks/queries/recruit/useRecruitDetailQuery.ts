@@ -1,7 +1,6 @@
 import { getRecruitDetail } from '@/apis/getRecruitDetail';
-import modoosAxios from '@/apis/modoosAxios';
 import { CreditRating } from '@/lib/creditRating';
-import { StudyCampus, StudyCategory, StudyChannel } from '@/types/studyInfo';
+import { StudyCampus, StudyCategory, StudyChannel, StudyStatusType } from '@/types/studyInfo';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
@@ -20,7 +19,7 @@ type RecruitDetailResponse = {
   leader_ranking: CreditRating;
   title: string;
   description: string;
-  status: number;
+  status: StudyStatusType;
   category: StudyCategory;
   participants_count: number;
   checkList: { id: number; content: string }[];

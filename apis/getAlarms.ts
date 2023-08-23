@@ -1,14 +1,9 @@
 import { authToken } from '@/class/authToken';
 import modoosAxios from './modoosAxios';
+import { Alarm, AlarmType } from '@/types/alarm';
 
-type ApplyInMyStudyResponse = {
-  content: {
-    standbyId: number;
-    memberId: number;
-    nickName: string;
-    studyId: number;
-    title: string;
-  }[];
+type GetAlarmsResponse = {
+  content: Alarm[];
   pageable: {
     sort: {
       empty: boolean;
@@ -34,8 +29,8 @@ type ApplyInMyStudyResponse = {
   empty: boolean;
 };
 
-export default function getApplyInMyStudy() {
-  return modoosAxios.get<ApplyInMyStudyResponse>('/api/participant/apply/all', {
+export default function getAlarms() {
+  return modoosAxios.get<GetAlarmsResponse>('/api/alarm/all', {
     headers: {
       Authorization: `Bearer ${authToken.getToken()}`,
     },

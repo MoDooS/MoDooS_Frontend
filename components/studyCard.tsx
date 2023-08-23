@@ -10,6 +10,7 @@ import { RECRUITS_QUERY_KEY } from '@/hooks/queries/recruit/useRecruitsQuery';
 import { useRouter } from 'next/router';
 import { useUserQuery } from '@/hooks/queries/user/useUserQuery';
 import { INTEREST_STUDIES_QUERY_KEY } from '@/hooks/queries/study/useInterestStudiesQuery';
+import StudyStatus from './studyStatus';
 
 type Props = {
   studyInfo: StudyContent;
@@ -19,7 +20,6 @@ export default function StudyCard({ studyInfo }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const [isHeartRecruit, setIsHeartRecruit] = useState(studyInfo.hearted);
-  const studyStatus = studyStatusMapping[studyInfo.status];
   const { user } = useUserQuery();
   const heartRecruitMutation = useMutation(heartRecruit, {
     onMutate: () => setIsHeartRecruit((prev) => !prev),
@@ -32,7 +32,7 @@ export default function StudyCard({ studyInfo }: Props) {
   return (
     <article
       onClick={() => router.push(`/recruit/${studyInfo.id}`)}
-      className='w-270 h-306 flex flex-col justify-between pt-40 pb-22 px-24 bg-white border-1 border-[#D1D1D1] rounded-20'
+      className='w-270 h-306 flex flex-col justify-between pt-40 pb-22 px-24 bg-white border-1 border-[#D1D1D1] rounded-20 cursor-pointer'
     >
       <div>
         {/* 카테고리 | 모집중 | 하트 아이콘 */}
@@ -41,14 +41,7 @@ export default function StudyCard({ studyInfo }: Props) {
             <div className='px-10 py-3 text-[#656565] font-bold text-14 bg-[#efefef] rounded-full'>
               {studyInfo.category}
             </div>
-            <div
-              className={cls(
-                'px-10 py-3 font-bold text-14 rounded-full',
-                studyStatus === '모집 중' ? 'bg-[#E1FCDE] text-[#016A1C]' : '',
-              )}
-            >
-              {studyStatus}
-            </div>
+            <StudyStatus status={studyInfo.status} />
           </div>
           {user && (
             <button
