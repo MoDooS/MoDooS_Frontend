@@ -20,7 +20,7 @@ export interface FieldType {
 
 const ShortField: React.FC<Props> = ({ field, btnText, activation, onClick, ...props }) => {
   const { label, placeholder, errMsg, authMsg, type, onChange } = field;
-  const _btnText = btnText;
+  let _btnText = btnText;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -28,7 +28,7 @@ const ShortField: React.FC<Props> = ({ field, btnText, activation, onClick, ...p
 
   const handleButtonClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault(); // 버튼 클릭 시 기본 동작(새로고침)을 막습니다.
+      event.preventDefault();
       if (onClick) onClick();
     },
     [onClick],

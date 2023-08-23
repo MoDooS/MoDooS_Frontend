@@ -1,3 +1,4 @@
+import creditColors from '@/constants/creditColors';
 import { CreditRating } from '@/lib/creditRating';
 import React, { HTMLAttributes } from 'react';
 
@@ -13,7 +14,11 @@ export default function CreditChart({ creditRating, creditScore, ...props }: Pro
   return (
     <div className={props.className ?? ''}>
       <div
-        style={{ background: `conic-gradient(from 270deg, #8b22ff 0% 35%, #fff 35% 50%, transparent 0` }}
+        style={{
+          background: `conic-gradient(from 270deg, #AC00FD 0% ${(creditScore / 1000) * 50}%, #fff ${
+            (creditScore / 1000) * 50
+          }% 50%, transparent 0`,
+        }}
         className='w-full h-full rounded-full flex justify-center items-center overflow-hidden'
       >
         <div className='bg-bg1 w-[calc(100%-14px)] h-[calc(100%-14px)] rounded-full flex flex-col items-center pt-25'>

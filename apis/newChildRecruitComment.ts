@@ -1,3 +1,4 @@
+import { authToken } from '@/class/authToken';
 import modoosAxios from './modoosAxios';
 
 type ResponseType = {
@@ -13,5 +14,13 @@ export async function postNewChildRecruitComment({
   parentId: number;
   content: string;
 }) {
-  return await modoosAxios.post<ResponseType>(`/api/comment/${recruitId}`, { parentId, content });
+  return await modoosAxios.post<ResponseType>(
+    `/api/comment/${recruitId}`,
+    { parentId, content },
+    {
+      headers: {
+        Authorization: `Bearer ${authToken.getToken()}`,
+      },
+    },
+  );
 }

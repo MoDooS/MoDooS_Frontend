@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { RecruitFormType } from '@/types/recruitForm';
+import { RecruitFormMode, RecruitFormType } from '@/types/recruitForm';
 import { cls } from '@/utils/cls';
 import { useImmer } from 'use-immer';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import useAlert from '@/recoil/alert/useAlert';
 import { useRouter } from 'next/router';
 import { postNewRecruit } from '@/apis/newRecruit';
@@ -12,11 +12,13 @@ import Page1 from './pages/recruit/new/page1';
 import Page2 from './pages/recruit/new/page2';
 import Page3 from './pages/recruit/new/page3';
 import { RecruitRequest } from '@/types/recruitRequest';
-import { editNewRecruit } from '@/apis/editRecruit';
+import { editRecruit } from '@/apis/editRecruit';
+import { RECRUITS_QUERY_KEY } from '@/hooks/queries/recruit/useRecruitsQuery';
+import { RECRUIT_DETAIL_QUERY_KEY } from '@/hooks/queries/recruit/useRecruitDetailQuery';
 
 type Props = {
   recruitId?: number;
-  mode: 'new' | 'edit';
+  mode: RecruitFormMode;
   defaultForm: RecruitFormType;
 };
 
@@ -24,10 +26,11 @@ const pageTitles = ['스터디 기본 정보', '스터디 규칙 생성', '스�
 
 export default function RecruitForm({ recruitId, mode, defaultForm }: Props) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const [recruitForm, setRecruitForm] = useImmer(defaultForm);
   const newRecruitMutation = useMutation(postNewRecruit);
-  const editRecruitMutation = useMutation(editNewRecruit);
+  const editRecruitMutation = useMutation(editRecruit);
   const { showAlert } = useAlert();
 
   const handleSubmitForm = async () => {
@@ -70,6 +73,7 @@ export default function RecruitForm({ recruitId, mode, defaultForm }: Props) {
     if (mode === 'new') {
       newRecruitMutation.mutate(reqBody, {
         onSuccess: (response) => {
+          queryClient.invalidateQueries(RECRUITS_QUERY_KEY);
           onSuccess(response.data.id);
         },
       });
@@ -81,6 +85,8 @@ export default function RecruitForm({ recruitId, mode, defaultForm }: Props) {
         { recruitId, reqBody },
         {
           onSuccess: (response) => {
+            queryClient.invalidateQueries(RECRUITS_QUERY_KEY);
+            queryClient.invalidateQueries(RECRUIT_DETAIL_QUERY_KEY);
             onSuccess(response.data.id);
           },
         },
@@ -91,8 +97,8 @@ export default function RecruitForm({ recruitId, mode, defaultForm }: Props) {
   // 요청 성공 시 alert 표시 후 모집글 상세 페이지로 보내기
   function onSuccess(recruitId: number) {
     showAlert({
-      alertViewTitle: '모집글 생성',
-      alertViewDesc: '모집글이 생성되었습니다.',
+      alertViewTitle: `모집글 ${mode === 'new' ? '생성' : '수정'}`,
+      alertViewDesc: `모집글이 ${mode === 'new' ? '생성' : '수정'}되었습니다.`,
       alertActions: [
         {
           title: '모집글로 이동하기',
@@ -132,7 +138,9 @@ export default function RecruitForm({ recruitId, mode, defaultForm }: Props) {
       {page === 2 && (
         <Page2 {...{ recruitForm, setRecruitForm }} movePrevPage={() => setPage(1)} moveNextPage={() => setPage(3)} />
       )}
-      {page === 3 && <Page3 {...{ recruitForm, setRecruitForm, handleSubmitForm }} movePrevPage={() => setPage(2)} />}
+      {page === 3 && (
+        <Page3 {...{ mode, recruitForm, setRecruitForm, handleSubmitForm }} movePrevPage={() => setPage(2)} />
+      )}
     </div>
   );
 }

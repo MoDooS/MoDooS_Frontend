@@ -23,8 +23,8 @@ const initialRecruitForm: RecruitFormType = {
 
 const New = () => {
   return (
-    <Layout>
-      <main className='flex flex-col items-center pt-60 px-200'>
+    <Layout onlyAccess='user'>
+      <main className='flex flex-col items-center py-60 px-200'>
         <RecruitForm defaultForm={initialRecruitForm} mode='new' />
       </main>
     </Layout>
