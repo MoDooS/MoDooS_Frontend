@@ -60,14 +60,14 @@ const Header = () => {
           <Image src={'/imgs/logo_header.png'} alt='logo' width={160} height={0} />
         </Link>
         <div className='flex justify-center items-center gap-20'>
-          <Link href={'/ranking'} className=' text-15 font-normal'>
+          {/* <Link href={'/ranking'} className=' text-15 font-normal'>
             랭킹보기
-          </Link>
+          </Link> */}
           {isUserError && (
             <>
               <Link
                 href={'/login'}
-                className='bg-bg1 border-1 border-solid border-gray-60 py-6 px-13 rounded-5 text-15 font-normal'
+                className='bg-bg1 border-1 border-solid border-gray_70 py-6 px-13 rounded-5 text-15 font-normal'
               >
                 로그인
               </Link>
@@ -89,7 +89,7 @@ const Header = () => {
                 className='relative'
               >
                 <BellIcon width='30' height='30' />
-                {alarms?.length ? (
+                {alarms && alarms?.length ? (
                   <div className='w-7 h-7 rounded-full bg-input_red absolute top-2 right-5'></div>
                 ) : null}
               </button>

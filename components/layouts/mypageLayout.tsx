@@ -33,7 +33,6 @@ export default function MypageLayout({ children, ...props }: Props) {
   const router = useRouter();
   const { user } = useUserQuery();
   const { member } = useSpecificMemberQuery(user?.memberId);
-  console.log(member);
   return (
     <main className=' py-20 flex justify-center'>
       <div className='max-w-[1200px] w-full flex gap-20 min-h-screen'>
@@ -104,7 +103,7 @@ export default function MypageLayout({ children, ...props }: Props) {
                   내가 관심있게 보는 스터디 태그
                 </h5>
                 <div className='flex justify-center w-full text-26 font-bold text-primary'>
-                  {member ? findMostCommonElement(member.categoryList) : '없음'}
+                  {member && member.categoryList.length ? findMostCommonElement(member.categoryList) : '없음'}
                 </div>
               </article>
               <article className='p-12 rounded-10 bg-bg1 w-full h-150 flex justify-center items-center relative'>
