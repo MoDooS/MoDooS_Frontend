@@ -1,6 +1,6 @@
 import { authToken } from '@/class/authToken';
 import modoosAxios from './modoosAxios';
-import { StudyCampus, StudyCategory, StudyChannel } from '@/types/studyInfo';
+import { StudyCampus, StudyCategory, StudyChannel, StudyStatusType } from '@/types/studyInfo';
 
 type InterestStudiesResponse = {
   content: {
@@ -10,7 +10,7 @@ type InterestStudiesResponse = {
     leader_ranking: 'B';
     title: string;
     description: string;
-    status: number;
+    status: StudyStatusType;
     category: StudyCategory;
     campus: StudyCampus;
     recruits_count: number;
