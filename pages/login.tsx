@@ -90,7 +90,7 @@ const LoginForm: React.FC = () => {
               </div>
               <div className='text-15 text-gray_70 font-normal text-center'>
                 비밀번호를 모르겠나요?{' '}
-                <a href={'/resetPassword'} className='text-purple_sub underline decoration-solid	'>
+                <a href={'/reset-password'} className='text-purple_sub underline decoration-solid	'>
                   비밀번호찾기
                 </a>
               </div>

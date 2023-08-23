@@ -1,4 +1,5 @@
 import modoosAxios from '@/apis/modoosAxios';
+import { authToken } from '@/class/authToken';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useQuery } from 'react-query';
 
@@ -23,16 +24,20 @@ type ResponseType = {
   leader: boolean;
 };
 
-const fetchMemberList = async (studyId: string, turn: string) => {
-  return await modoosAxios.get(`/api/study/feedback/${studyId}/${turn}`);
+const fetchMemberList = async (id: number, turn: number) => {
+  return await modoosAxios.get(`/api/study/feedback/${id}/${turn}`, {
+    headers: {
+      Authorization: `Bearer ${authToken.getToken()}`,
+    },
+  });
 };
 
-export function useMemberListQuery(studyId: string, turn: string) {
+export function useMemberListQuery(id: number, turn: number) {
   const { data, isLoading, isError } = useQuery<AxiosResponse<ResponseType>, AxiosError>(
-    ['MemberListQuery', studyId, turn],
-    () => fetchMemberList(studyId, turn),
+    ['MemberListQuery', id, turn],
+    () => fetchMemberList(id, turn),
     {
-      enabled: !!studyId && !!turn,
+      enabled: !!id && !!turn,
     },
   );
   return { memberList: data?.data, isLoading, isError };

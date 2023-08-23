@@ -8,7 +8,7 @@ import { useImmer } from 'use-immer';
 import { useUserQuery, USER_QUERY_KEY } from '@/hooks/queries/user/useUserQuery';
 import { Draft } from 'immer';
 import { newUserInfo } from '@/apis/newUserInfo';
-import { QueryClient, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { UserResponse } from '@/apis/getUser';
 
 export type SettingInfoProps = {
