@@ -34,7 +34,7 @@ const Category: React.FC<CategoryProps> = ({ onChange, defaultCampus, defaultDep
     <>
       <select
         onChange={handleCampusChange}
-        className='border border-gray_70 py-12 px-15 mt-4 mr-10 max-w-100 w-full rounded-17 text-gray_70 text-14'
+        className='border-2 border-gray_70 py-12 px-15 mt-4 mr-10 max-w-100 w-full rounded-17 text-gray_70 text-14 outline-gray_70'
       >
         <option value={'인문'}>인문</option>
         <option value={'자연'}>자연</option>
@@ -42,7 +42,7 @@ const Category: React.FC<CategoryProps> = ({ onChange, defaultCampus, defaultDep
 
       <select
         onChange={handleMajorChange}
-        className='border border-gray_70 py-12 px-15 mt-4 ml-6 max-w-244 w-full rounded-17 text-gray_70 text-14'
+        className='border-2 border-gray_70 py-12 px-15 mt-4 ml-6 max-w-244 w-full rounded-17 text-gray_70 text-14 outline-gray_70'
       >
         <option value=''>{defaultDepartment ? defaultDepartment : '학과를 선택해주세요'}</option>
         {departments[selectedCampus!].map((major) => (

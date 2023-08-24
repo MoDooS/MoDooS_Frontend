@@ -43,7 +43,7 @@ const LongField: React.FC<Props> = ({ field, hasMark = false, ...props }) => {
       <input
         type={type}
         onChange={handleChange}
-        className={`border ${errMsg ? 'border-input_red' : 'border-gray_70'} ${
+        className={`border-2 ${errMsg ? 'border-input_red outline-input_red' : 'border-gray_70 outline-gray_70'} ${
           authMsg ? 'border-purple_sub' : 'border-gray_70'
         } w-360 py-11 px-15 mt-4 rounded-17 placeholder-gray_70 placeholder: text-14`}
         placeholder={placeholder}
