@@ -44,9 +44,9 @@ const ShortField: React.FC<Props> = ({ field, btnText, activation, onClick, ...p
         <input
           type={type}
           onChange={handleChange}
-          className={`border ${errMsg ? 'border-input_red' : 'border-gray_70'} ${
+          className={`border-2 ${errMsg ? 'border-input_red outline-input_red' : 'border-gray_70 outline-gray_70'} ${
             authMsg ? 'border-purple_sub' : 'border-gray_70'
-          }  py-9 px-15 mt-4 mr-10 max-w-280 w-full rounded-17 placeholder-gray_70 placeholder: text-14`}
+          }  py-9 px-15 mt-4 mr-10 max-w-280 w-full rounded-17 placeholder-gray_70 placeholder: text-14 `}
           placeholder={placeholder}
         ></input>
         {_btnText ? (
