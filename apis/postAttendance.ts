@@ -1,6 +1,7 @@
 import modoosAxios from '@/apis/modoosAxios';
+import { authToken } from '@/class/authToken';
 
-type TAttendance = {
+export type TAttendance = {
   id: number;
   attendance: string;
 };
@@ -14,5 +15,9 @@ type ResponseType = {
 };
 
 export const postAttendance = async ({ id, reqBody }: { id: number; reqBody: RequestType }) => {
-  return await modoosAxios.post<ResponseType>(`api/study/attend/${id}`, reqBody);
+  return await modoosAxios.post<ResponseType>(`api/study/attend/${id}`, reqBody, {
+    headers: {
+      Authorization: `Bearer ${authToken.getToken()}`,
+    },
+  });
 };

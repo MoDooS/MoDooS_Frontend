@@ -1,5 +1,5 @@
 interface Prop {
-  text: string;
+  text?: string;
   startAt?: string;
   endAt?: string;
 }

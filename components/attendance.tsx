@@ -2,54 +2,85 @@ import Layout from '@/components/layouts/layout';
 import { useState } from 'react';
 import { cls } from '@/utils/cls';
 import { useMutation, useQueryClient } from 'react-query';
-import { RequestType, postAttendance } from '@/apis/useAttendance';
+import { RequestType, TAttendance, postAttendance } from '@/apis/postAttendance';
+import { TParticipant } from '@/apis/getStudyDetail';
+import { useRouter } from 'next/router';
+import StudyHome from '@/pages/study/[id]';
 
-const pageTitles = ['박지수', '양채연', '안승연', '박상민'];
 const attendance = ['출석', '지각', '결석'];
 
 type Props = {
   studyId: number;
+  participantList?: TParticipant[];
+  onComplete: () => void;
+  handleComponentClose: () => void;
 };
 
-const Attendance = ({ studyId }: Props) => {
+const Attendance = ({ studyId, participantList, onComplete, handleComponentClose }: Props) => {
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
+  const router = useRouter();
   const [current, setCurrent] = useState('');
   const attendacneMutation = useMutation(postAttendance);
+  const initialAttendanceList: TAttendance[] =
+    participantList?.map((participant) => ({
+      id: participant.id,
+      attendance: '출석', // You can initialize with a default value if needed
+    })) || [];
+
   const [form, setForm] = useState<RequestType>({
-    attendanceList: [],
+    attendanceList: initialAttendanceList,
   });
 
   const handleClick = (attendanceValue: string) => {
     setCurrent(attendanceValue);
   };
 
-  const handleClickAttendance = (id: number, attendanceValue: string) => {
-    const updatedAttendanceList = [...form.attendanceList];
-    updatedAttendanceList[id] = { id: id, attendance: attendanceValue };
+  const handleClickAttendance = (participantId: number, attendanceValue: string) => {
+    const participantIndex = participantList?.findIndex((participant) => participant.id === participantId);
 
-    setForm({
-      attendanceList: updatedAttendanceList,
-    });
+    if (participantIndex !== undefined && participantIndex !== -1) {
+      const updatedAttendanceList = [...form.attendanceList];
+      updatedAttendanceList[participantIndex] = { id: participantId, attendance: attendanceValue };
+
+      setForm({
+        attendanceList: updatedAttendanceList,
+      });
+    }
   };
 
   const handleSubmitAttendacne = () => {
     if (form.attendanceList.length > 0) {
       attendacneMutation.mutate(
-        { id: studyId, reqBody: form }, // Pass the studyId and the entire form
+        { id: studyId, reqBody: form },
         {
           onSuccess: () => {
-            queryClient.invalidateQueries('');
+            showCompletionMessage();
+            onComplete();
           },
         },
       );
     }
   };
+
+  const handleNextPage = () => {
+    if (participantList && page < participantList.length) {
+      setPage(page + 1);
+    } else {
+      console.log(form, '확인해보자');
+      handleSubmitAttendacne();
+    }
+  };
+
+  const showCompletionMessage = () => {
+    alert('모든 참여자를 출석체크했습니다.');
+    handleComponentClose();
+  };
   return (
     <>
       <div className='font-bold text-30 py-10 mb-'>출석체크</div>
       <div className='flex items-center gap-30 mb-20 mt-25'>
-        {pageTitles.map((title, i) => (
+        {participantList?.map((title, i) => (
           <div key={i} className='flex items-center gap-6'>
             <div
               className={cls(
@@ -60,7 +91,7 @@ const Attendance = ({ studyId }: Props) => {
               {i + 1}
             </div>
             <span className={cls('text-15 font-medium', i + 1 === page ? 'text-purple_sub' : 'text-black')}>
-              {title}
+              {title.nickname}
             </span>
           </div>
         ))}
@@ -72,7 +103,10 @@ const Attendance = ({ studyId }: Props) => {
           <button
             key={item}
             onClick={() => {
-              handleClick(item);
+              const currentParticipant = participantList && participantList[page - 1];
+              if (currentParticipant) {
+                handleClickAttendance(currentParticipant.id, item);
+              }
             }}
             className={`px-12 w-full max-w-195 py-10  my-24 rounded-20 border ${
               current === item ? 'border-purple_sub text-white bg-purple_sub' : 'border-purple_sub text-purple_sub'
@@ -84,7 +118,9 @@ const Attendance = ({ studyId }: Props) => {
       </div>
       <div className='bg-gray_30 w-full h-1 mt-32'></div>
       <div className='flex justify-end mt-24'>
-        <button className='bg-purple_sub text-white text-13 py-13 px-19 rounded-13'>다음</button>
+        <button onClick={handleNextPage} className='bg-purple_sub text-white text-13 py-13 px-19 rounded-13'>
+          다음
+        </button>
       </div>
     </>
   );

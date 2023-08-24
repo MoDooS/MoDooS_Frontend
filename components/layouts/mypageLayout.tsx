@@ -79,6 +79,9 @@ export default function MypageLayout({ children, ...props }: Props) {
           <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting'>
             계정
           </MenuBtn>
+          <MenuBtn active={router.pathname === '/study/8'} to='/study/8'>
+            스터디 관리
+          </MenuBtn>
         </section>
         <div className='flex flex-col gap-20 w-full'>
           <section className='w-full bg-white p-15 shrink-0 rounded-12 border-1 border-gray_60 overflow-hidden'>
