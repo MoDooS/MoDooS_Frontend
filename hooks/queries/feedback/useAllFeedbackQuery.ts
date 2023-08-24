@@ -5,14 +5,13 @@ import { useUserQuery } from '../user/useUserQuery';
 import round from '@/utils/round';
 
 export const ALL_FEEDBACK_QUERY_KEY = 'AllFeedback';
-export default function useAllFeedback() {
-  const { user } = useUserQuery();
+export default function useAllFeedback(memberId: number | undefined) {
   const {
     data: allFeedback,
     isLoading,
     isError,
   } = useQuery({
-    queryFn: () => getAllFeedback(user?.memberId),
+    queryFn: () => getAllFeedback(memberId),
     queryKey: ALL_FEEDBACK_QUERY_KEY,
     select: (res) => {
       // const positiveTotal = res.data.positiveList.reduce((a, b) => a + b.count, 0);
@@ -33,7 +32,7 @@ export default function useAllFeedback() {
           .map((item) => ({ ...item, ratio: (Math.random() * 100) / negativeTotal })),
       };
     },
-    enabled: !!user,
+    enabled: !!memberId,
   });
   return { allFeedback, isLoading, isError };
 }
