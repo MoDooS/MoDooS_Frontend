@@ -21,6 +21,13 @@ type RecruitDetailResponse = {
   description: string;
   status: StudyStatusType;
   category: StudyCategory;
+  participantList: {
+    attendanceList: null;
+    id: number;
+    nickname: string;
+    outCount: number;
+    ranking: CreditRating;
+  }[];
   participants_count: number;
   checkList: { id: number; content: string }[];
   late: number;
