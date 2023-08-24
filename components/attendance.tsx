@@ -6,6 +6,7 @@ import { RequestType, TAttendance, postAttendance } from '@/apis/postAttendance'
 import { TParticipant } from '@/apis/getStudyDetail';
 import { useRouter } from 'next/router';
 import StudyHome from '@/pages/study/[id]';
+import useAlert from '@/recoil/alert/useAlert';
 
 const attendance = ['출석', '지각', '결석'];
 
@@ -18,6 +19,7 @@ type Props = {
 
 const Attendance = ({ studyId, participantList, onComplete, handleComponentClose }: Props) => {
   const queryClient = useQueryClient();
+  const { showAlert } = useAlert();
   const [page, setPage] = useState(1);
   const router = useRouter();
   const [current, setCurrent] = useState('');
@@ -61,6 +63,7 @@ const Attendance = ({ studyId, participantList, onComplete, handleComponentClose
         },
       );
     }
+    showCompletionMessage();
   };
 
   const handleNextPage = () => {
@@ -73,8 +76,17 @@ const Attendance = ({ studyId, participantList, onComplete, handleComponentClose
   };
 
   const showCompletionMessage = () => {
-    alert('모든 참여자를 출석체크했습니다.');
-    handleComponentClose();
+    showAlert({
+      alertViewTitle: '출석체크 완료',
+      alertViewDesc: '모든 스터디원을 출석체크 했습니다.',
+      alertActions: [
+        {
+          title: '확인',
+          style: 'primary',
+          handler: () => handleComponentClose(),
+        },
+      ],
+    });
   };
   return (
     <>

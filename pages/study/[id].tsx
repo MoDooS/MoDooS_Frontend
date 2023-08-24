@@ -118,10 +118,7 @@ const StudyHome = () => {
               </ul>
             </>
           ) : (
-            <>
-              {selectedComponent}
-              <button onClick={handleComponentClose}>닫기</button>
-            </>
+            <>{selectedComponent}</>
           )}
         </div>
       </main>

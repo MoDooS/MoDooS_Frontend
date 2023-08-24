@@ -4,14 +4,13 @@ import { cls } from '@/utils/cls';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-
 import { useMutation, useQueryClient } from 'react-query';
 import { TChecklist, useMemberListQuery } from '@/hooks/queries/feedback/useMemberListQuery';
 import { FeedbackRequest, TFeedbackList, postFeedback } from '@/apis/newFeedback';
 import { useImmer } from 'use-immer';
 import { TChecklistDone, TParticipant } from '@/apis/getStudyDetail';
 import { feedback } from '@/enum/feedback';
-
+import useAlert from '@/recoil/alert/useAlert';
 
 type Props = {
   moveNextPage?: () => void;
@@ -43,6 +42,7 @@ const participateOptions = [
 ];
 
 const Evaluation = ({ id, turn, check, handleComponentClose }: Props) => {
+  const { showAlert } = useAlert();
   const [page, setPage] = useState(1);
   const router = useRouter();
   const { memberList, isLoading: isMemberListLoading, isError: isMemberListError } = useMemberListQuery(id!!, turn!!);
@@ -125,9 +125,20 @@ const Evaluation = ({ id, turn, check, handleComponentClose }: Props) => {
         handleComponentClose();
       },
     });
+    showCompletionMessage();
   };
   const showCompletionMessage = () => {
-    alert('모든 참여자를 평가했습니다.');
+    showAlert({
+      alertViewTitle: '평가 완료',
+      alertViewDesc: '모든 스터디 참여자를 평가했습니다.',
+      alertActions: [
+        {
+          title: '확인',
+          style: 'primary',
+          handler: () => handleComponentClose(),
+        },
+      ],
+    });
   };
 
   const handleChecklistClick = (index: number, checklistItemId: number) => {
