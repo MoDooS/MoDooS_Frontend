@@ -1,9 +1,11 @@
 import Layout from '@/components/layouts/layout';
 import MypageLayout from '@/components/layouts/mypageLayout';
 import useAllFeedback from '@/hooks/queries/feedback/useAllFeedbackQuery';
+import { useUserQuery } from '@/hooks/queries/user/useUserQuery';
 
 export default function Feedback() {
-  const { allFeedback } = useAllFeedback();
+  const { user } = useUserQuery();
+  const { allFeedback } = useAllFeedback(user?.memberId);
   return (
     <Layout>
       <MypageLayout>

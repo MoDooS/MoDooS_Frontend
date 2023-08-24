@@ -129,17 +129,37 @@ export default function RecruitDetail() {
               )}
             </div>
             {/* 스터디 참여 인원 */}
-            {/* <h3 className='mb-20 font-semibold text-24'>스터디 참여인원 </h3>
+            <h3 className='mb-20 font-semibold text-24'>스터디 참여인원 </h3>
             <Hr className='mb-20' />
-            <div className='mb-100 flex gap-50'></div> */}
+            <div className='mb-100 flex gap-10'>
+              {recruit.participantList.map((participant) => (
+                <button
+                  key={participant.id}
+                  onClick={() => router.push(`/user/${participant.id}`)}
+                  className='flex justify-center items-center border-1 border-gray_60 rounded-12 py-8 px-12 text-16 font-medium'
+                >
+                  {participant.nickname}
+                </button>
+              ))}
+            </div>
+
+            {/* 버튼들 */}
             <div className='flex justify-end mb-30'>
               {userType === 'owner' && recruit.status === '모집 중' && (
-                <button
-                  onClick={() => router.push(`/recruit/edit/${recruit.id}`)}
-                  className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'
-                >
-                  수정하기
-                </button>
+                <div className='flex items-center gap-10'>
+                  <button
+                    onClick={() => router.push(`/recruit/edit/${recruit.id}`)}
+                    className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'
+                  >
+                    수정하기
+                  </button>
+                  <button
+                    onClick={() => router.push(`/study/setting/${recruit.id}`)}
+                    className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'
+                  >
+                    생성하기
+                  </button>
+                </div>
               )}
               {userType === 'normal' && recruit.status === '모집 중' && (
                 <button
