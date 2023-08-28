@@ -1,13 +1,14 @@
 import { authToken } from '@/class/authToken';
 import modoosAxios from './modoosAxios';
 import { StudyCampus, StudyCategory, StudyChannel, StudyStatusType } from '@/types/studyInfo';
+import { CreditRating } from '@/lib/creditRating';
 
 type InterestStudiesResponse = {
   content: {
     id: number;
     leader_id: number;
     leader_nickname: string;
-    leader_ranking: 'B';
+    leader_ranking: CreditRating;
     title: string;
     description: string;
     status: StudyStatusType;

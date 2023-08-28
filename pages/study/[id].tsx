@@ -1,4 +1,4 @@
-import { useStudyDetailQuery } from '@/apis/getStudyDetail';
+import { useStudyDetailQuery } from '@/hooks/queries/study/useStudyDetailQuery';
 import Attendance from '@/components/attendance';
 import Evaluation from '@/components/evaluation';
 import Attandance from '@/components/feedback/attendance';
@@ -18,8 +18,7 @@ const StudyHome = () => {
 
   const queryClient = useQueryClient();
   const { studyDetail, isLoading: isStudyDetailLoading, isError: isStudyDetailError } = useStudyDetailQuery(studyId);
-
-  console.log('응답이 아닌가', studyDetail);
+  console.log(studyDetail);
 
   const [selectedComponent, setSelectedComponent] = useState<React.ReactNode | null>(null);
 

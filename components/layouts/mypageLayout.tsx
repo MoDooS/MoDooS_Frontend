@@ -79,7 +79,7 @@ export default function MypageLayout({ children, ...props }: Props) {
           <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting'>
             계정
           </MenuBtn>
-          <MenuBtn active={router.pathname === '/study/8'} to='/study/8'>
+          <MenuBtn active={router.pathname === '/study/11'} to='/study/11'>
             스터디 관리
           </MenuBtn>
         </section>
