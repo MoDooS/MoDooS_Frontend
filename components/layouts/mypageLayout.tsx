@@ -76,7 +76,7 @@ export default function MypageLayout({ children, ...props }: Props) {
           <MenuBtn active={router.pathname === '/mypage/notice'} to='/mypage/notice' className='mb-10'>
             알림
           </MenuBtn>
-          <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting'>
+          <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting' className='mb-10'>
             계정
           </MenuBtn>
           <MenuBtn active={router.pathname === '/study/11'} to='/study/11'>
@@ -119,10 +119,7 @@ export default function MypageLayout({ children, ...props }: Props) {
           </section>
           <section
             {...props}
-            className={cls(
-              'relative px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60',
-              props.className ?? '',
-            )}
+            className={cls('px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60', props.className ?? '')}
           >
             {children}
           </section>

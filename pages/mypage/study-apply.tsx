@@ -10,6 +10,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 export default function StudyApply() {
   const { applies } = useApplyInMyStudy();
+  console.log(applies);
   const { showAlert } = useAlert();
   const queryClient = useQueryClient();
   const acceptStudyMutation = useMutation(acceptStudy);

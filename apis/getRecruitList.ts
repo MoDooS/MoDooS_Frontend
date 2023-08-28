@@ -2,7 +2,7 @@ import { StudyCategory, StudyInfo } from '@/types/studyInfo';
 import { StudySortingMethod } from '@/types/studyParams';
 import modoosAxios from './modoosAxios';
 
-export type StudyContent = StudyInfo & { hearted: boolean };
+export type StudyContent = StudyInfo & { heart: boolean };
 
 type RecruitListResponse = {
   content: StudyContent[];

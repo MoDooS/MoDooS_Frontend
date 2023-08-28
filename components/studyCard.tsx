@@ -19,7 +19,7 @@ type Props = {
 export default function StudyCard({ studyInfo }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [isHeartRecruit, setIsHeartRecruit] = useState(studyInfo.hearted);
+  const [isHeartRecruit, setIsHeartRecruit] = useState(studyInfo.heart);
   const { user } = useUserQuery();
   const heartRecruitMutation = useMutation(heartRecruit, {
     onMutate: () => setIsHeartRecruit((prev) => !prev),

@@ -30,7 +30,7 @@ const Header = () => {
   const profileIconMenus: DropDownMenuOption[] = [
     {
       content: '마이페이지',
-      selectHandler: () => router.push('/mypage/setting'),
+      selectHandler: () => router.push('/mypage/feedback'),
     },
     { content: '로그아웃', selectHandler: handleLogout },
   ];

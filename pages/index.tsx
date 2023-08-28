@@ -11,6 +11,7 @@ import { StudySortingMethod, studySortingMethodMapping } from '@/types/studyPara
 import { StudyCategory, studyCategories } from '@/types/studyInfo';
 import LoadingIcon from '../public/icons/loading.svg';
 import { useRecruitsQuery } from '@/hooks/queries/recruit/useRecruitsQuery';
+import axios from 'axios';
 
 const studySortingOptions: DropDownOption[] = [
   { value: 'recent', content: '최신순' },
@@ -43,6 +44,13 @@ export default function Home() {
       getNextRecruits();
     }
   }, [inView, getNextRecruitsIsPossible, getNextRecruits]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get('https://modustudy.com/api/recruit/posts?category=언어&sortBy=&lastId=&size=12');
+      console.log(res);
+    })();
+  }, []);
 
   const handleSelectCategory = (category: StudyCategory) => {
     if (category === 'ALL') {
