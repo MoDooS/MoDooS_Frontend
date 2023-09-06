@@ -79,7 +79,7 @@ const Header = () => {
               </Link>
             </>
           )}
-          {user && (
+          {!isUserError && (
             <>
               <button
                 onClick={(e) => {

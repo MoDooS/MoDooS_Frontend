@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '@/components/layouts/layout';
 import MypageLayout from '@/components/layouts/mypageLayout';
-import StudyCard from '@/components/studyCard';
+import RecruitCard from '@/components/recruitCard';
 import useInterestStudiesQuery from '@/hooks/queries/study/useInterestStudiesQuery';
 
 export default function InterestStudy() {
@@ -19,7 +19,7 @@ export default function InterestStudy() {
         {!!studies?.length && (
           <div className='flex flex-wrap gap-24'>
             {studies.map((study) => (
-              <StudyCard key={study.id} studyInfo={{ ...study, heart: study.hearted }} />
+              <RecruitCard key={study.id} studyInfo={{ ...study, heart: study.hearted }} to={`/recruit/${study.id}`} />
             ))}
           </div>
         )}

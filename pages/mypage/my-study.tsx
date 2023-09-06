@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '@/components/layouts/layout';
 import MypageLayout from '@/components/layouts/mypageLayout';
-import StudyCard from '@/components/studyCard';
+import RecruitCard from '@/components/recruitCard';
 import useParticipatingStudiesQuery from '@/hooks/queries/study/useParticipatingStudiesQuery';
 import { StudyStatusType } from '@/types/studyInfo';
 import DropDownSelect, { DropDownOption } from '@/components/select/dropDownSelect';
@@ -14,7 +14,7 @@ const studyStatusOptions: DropDownOption[] = [
   { value: '종료', content: '종료' },
 ];
 
-export default function ParticipatingStudy() {
+export default function MyStudy() {
   const [studyStatus, setStudyStatus] = useState<StudyStatusType | '전체'>('전체');
   const { studies, isLoading, isError } = useParticipatingStudiesQuery(studyStatus);
 
@@ -39,7 +39,11 @@ export default function ParticipatingStudy() {
         {!!studies?.length && (
           <div className='flex flex-wrap gap-24'>
             {studies.map((study) => (
-              <StudyCard key={study.id} studyInfo={study} />
+              <RecruitCard
+                key={study.id}
+                studyInfo={study}
+                to={`/${['모집 중', '모집 마감'].includes(study.status) ? 'recruit' : 'study'}/${study.id}`}
+              />
             ))}
           </div>
         )}

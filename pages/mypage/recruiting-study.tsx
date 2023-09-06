@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '@/components/layouts/layout';
 import MypageLayout from '@/components/layouts/mypageLayout';
-import StudyCard from '@/components/studyCard';
+import RecruitCard from '@/components/recruitCard';
 import useRecruitingStudyQuery from '@/hooks/queries/useRecruitingStudyQuery';
 
 export default function RecruitingStudy() {
@@ -18,7 +18,7 @@ export default function RecruitingStudy() {
         {!!recruitingStudy?.length && (
           <div className='flex flex-wrap gap-24'>
             {recruitingStudy.map((study) => (
-              <StudyCard key={study.id} studyInfo={study} />
+              <RecruitCard key={study.id} studyInfo={study} to={`/recruit/${study.id}`} />
             ))}
           </div>
         )}

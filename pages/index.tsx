@@ -3,7 +3,6 @@ import Layout from '@/components/layouts/layout';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cls } from '@/utils/cls';
-import StudyCard from '@/components/studyCard';
 import CreateStudyBtn from '@/components/pages/index/createStudyBtn';
 import { useRouter } from 'next/router';
 import Banner from '@/components/layouts/banner';
@@ -12,6 +11,7 @@ import { StudyCategory, studyCategories } from '@/types/studyInfo';
 import LoadingIcon from '../public/icons/loading.svg';
 import { useRecruitsQuery } from '@/hooks/queries/recruit/useRecruitsQuery';
 import axios from 'axios';
+import RecruitCard from '@/components/recruitCard';
 
 const studySortingOptions: DropDownOption[] = [
   { value: 'recent', content: '최신순' },
@@ -44,13 +44,6 @@ export default function Home() {
       getNextRecruits();
     }
   }, [inView, getNextRecruitsIsPossible, getNextRecruits]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await axios.get('https://modustudy.com/api/recruit/posts?category=언어&sortBy=&lastId=&size=12');
-      console.log(res);
-    })();
-  }, []);
 
   const handleSelectCategory = (category: StudyCategory) => {
     if (category === 'ALL') {
@@ -105,9 +98,10 @@ export default function Home() {
           />
         </div>
         <main className='flex flex-wrap gap-24'>
-          {recruitList?.map((studyInfo) => (
-            <StudyCard key={studyInfo.id} studyInfo={studyInfo} />
-          ))}
+          {recruitList &&
+            recruitList.map((studyInfo) => (
+              <RecruitCard key={studyInfo.id} studyInfo={studyInfo} to={`/recruit/${studyInfo.id}`} />
+            ))}
           {isRecruitListLoading && <LoadingIcon width='200' height='200' />}
           <div ref={scrollRef}></div>
         </main>
