@@ -2,7 +2,7 @@ import getApplyInMyStudy from '@/apis/getApplyInMyStudy';
 import { authToken } from '@/class/authToken';
 import { useQuery } from 'react-query';
 
-export const All_APPLY_IN_MY_STUDY_QUERY_KEY = 'InterestStudies';
+export const All_APPLY_IN_MY_STUDY_QUERY_KEY = 'ApplyInMyStudy';
 export default function useApplyInMyStudy() {
   const {
     data: applies,

@@ -1,8 +1,9 @@
 import { StudyCategory, StudyInfo } from '@/types/studyInfo';
 import { StudySortingMethod } from '@/types/studyParams';
 import modoosAxios from './modoosAxios';
+import { authToken } from '@/class/authToken';
 
-export type StudyContent = StudyInfo & { hearted: boolean };
+export type StudyContent = StudyInfo & { heart: boolean };
 
 type RecruitListResponse = {
   content: StudyContent[];
@@ -46,7 +47,12 @@ export async function getRecruitList({ categories, sortBy, searchBy, lastId, siz
     lastId: lastId !== 0 ? lastId : '',
     size,
   };
-  const response = await modoosAxios.get<RecruitListResponse>('/api/recruit/posts', { params });
+  const response = await modoosAxios.get<RecruitListResponse>('/api/recruit/posts', {
+    params,
+    headers: {
+      Authorization: `Bearer ${authToken.getToken()}`,
+    },
+  });
   const nextLastId = response.data.content[response.data.content.length - 1].id;
   return { ...response.data, lastId: nextLastId };
 }

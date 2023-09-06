@@ -3,7 +3,7 @@
 import { authToken } from '@/class/authToken';
 import modoosAxios from './modoosAxios';
 
-type StudySettingInfoResponse = {
+export type StudySettingInfoResponse = {
   id: number;
   title: string;
   expected_start_at: string;

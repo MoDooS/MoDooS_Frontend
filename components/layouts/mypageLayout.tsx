@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useUserQuery } from '@/hooks/queries/user/useUserQuery';
 import { useSpecificMemberQuery } from '@/hooks/queries/user/useSpecificMemberQuery';
 import findMostCommonElement from '@/utils/findMostCommonElement';
+import CreditBadge from '../creditBadge';
 
 interface Props extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
@@ -38,7 +39,7 @@ export default function MypageLayout({ children, ...props }: Props) {
       <div className='max-w-[1200px] w-full flex gap-20 min-h-screen'>
         {/* 좌측 메뉴바 */}
         <section className='flex flex-col items-center shrink-0 w-200 h-full bg-white py-60 px-20 rounded-12 border-1 border-gray_60 overflow-hidden'>
-          <div className='w-80 h-80 bg-black mb-13 rounded-full'></div>
+          <CreditBadge credit={member?.ranking || 'A'} className='mb-30' />
           <span className='block text-16 font-normal text-black mb-80'>{user?.nickname}</span>
           <h4 className='flex justify-start w-full text-14 font-semibold text-black mb-10'>스터디 정보</h4>
           <MenuBtn active={router.pathname === '/mypage/feedback'} to='/mypage/feedback' className='mb-10'>
@@ -54,12 +55,8 @@ export default function MypageLayout({ children, ...props }: Props) {
           >
             모집중인 스터디
           </MenuBtn>
-          <MenuBtn
-            active={router.pathname === '/mypage/participating-study'}
-            to='/mypage/participating-study'
-            className='mb-10'
-          >
-            참여중인 스터디
+          <MenuBtn active={router.pathname === '/mypage/my-study'} to='/mypage/my-study' className='mb-10'>
+            내 스터디
           </MenuBtn>
 
           <MenuBtn active={router.pathname === '/mypage/study-apply'} to='/mypage/study-apply' className='mb-50'>
@@ -76,7 +73,7 @@ export default function MypageLayout({ children, ...props }: Props) {
           <MenuBtn active={router.pathname === '/mypage/notice'} to='/mypage/notice' className='mb-10'>
             알림
           </MenuBtn>
-          <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting'>
+          <MenuBtn active={router.pathname === '/mypage/setting'} to='/mypage/setting' className='mb-10'>
             계정
           </MenuBtn>
           <MenuBtn active={router.pathname === '/study/11'} to='/study/11'>
@@ -119,10 +116,7 @@ export default function MypageLayout({ children, ...props }: Props) {
           </section>
           <section
             {...props}
-            className={cls(
-              'relative px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60',
-              props.className ?? '',
-            )}
+            className={cls('px-20 py-15 bg-white h-full rounded-12 border-1 border-gray_60', props.className ?? '')}
           >
             {children}
           </section>
