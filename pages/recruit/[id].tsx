@@ -151,13 +151,13 @@ export default function RecruitDetail() {
                     onClick={() => router.push(`/recruit/edit/${recruit.id}`)}
                     className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'
                   >
-                    수정하기
+                    모집글 수정하기
                   </button>
                   <button
                     onClick={() => router.push(`/study/setting/${recruit.id}`)}
                     className=' text-14 font-medium px-14 py-10 text-white bg-primary rounded-14'
                   >
-                    생성하기
+                    스터디 시작하기
                   </button>
                 </div>
               )}

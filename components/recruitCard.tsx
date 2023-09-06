@@ -14,12 +14,13 @@ import StudyStatus from './studyStatus';
 
 type Props = {
   studyInfo: StudyContent;
+  to: string;
 };
 
-export default function StudyCard({ studyInfo }: Props) {
+export default function RecruitCard({ studyInfo, to }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [isHeartRecruit, setIsHeartRecruit] = useState(studyInfo.hearted);
+  const [isHeartRecruit, setIsHeartRecruit] = useState(!!studyInfo.heart);
   const { user } = useUserQuery();
   const heartRecruitMutation = useMutation(heartRecruit, {
     onMutate: () => setIsHeartRecruit((prev) => !prev),
@@ -31,7 +32,7 @@ export default function StudyCard({ studyInfo }: Props) {
 
   return (
     <article
-      onClick={() => router.push(`/recruit/${studyInfo.id}`)}
+      onClick={() => router.push(to)}
       className='w-270 h-306 flex flex-col justify-between pt-40 pb-22 px-24 bg-white border-1 border-[#D1D1D1] rounded-20 cursor-pointer'
     >
       <div>
