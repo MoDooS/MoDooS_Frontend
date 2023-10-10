@@ -14,7 +14,7 @@
 
 ## 팀원 👨‍👨‍👧‍👧👩‍👦‍👦
 
-|                                           Backend                                            |                                         Backend                                          | 
+|                                           Frontend                                            |                                         Frontend                                          | 
 |:--------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:|
 | <img src="https://avatars.githubusercontent.com/u/87124432?v=4" width=130px alt="박지수"/> | <img src="https://avatars.githubusercontent.com/u/69382168?v=4" width=130px alt="양채연"/> | 
 |                              [박지수](https://github.com/jisupark123)                               |                          [양채연](https://github.com/chaeyeon-yang)                           | 
@@ -25,7 +25,8 @@
 
 <p align="center">
 
-<img src="https://github.com/MoDooS/MoDooS_Backend/assets/88308933/f90c7ca7-7630-4c14-ac0a-b617ade6fdab"/>
+<img width="1512" alt="홈 화면" src="https://github.com/MoDooS/MoDooS_Frontend/assets/69382168/3b8a838f-a0ef-465c-aa4a-3b28bffe8921">
+
 
 **모두의 스터디**는 스터디 모집부터 모집 완료된 스터디의 관리까지 담당하는 기능을 모두 한번에 제공합니다. 사용자가 입력한 규칙에 맞추어 불성실한 스터디원을 자동 퇴출시키고, 동기부여를 위해 서로 피드백을
 익명으로 작성하도록 합니다. 이런 방식은 사용자가 스터디에만 오로지 집중할 수 있게 도울 수 있을 뿐더러 사용자의 성장의 양분을 지속적으로 제공합니다.
@@ -140,19 +141,6 @@ Git, Discord, Notion
 브랜치 명 : **기능명/작업자깃허브아이디**
 
 PR 생성 명 : **[Feat, Refactor, …] 작업 내용**
-
-<br>
-
-### 패키징 컨벤션
-
-도메인 별로 패키징하되 내부에서 레이어 페키징
-
-- Repository명 → `도메인Repository`
-- 서비스명 → `xxxManager` / `xxxService`
-- controller명 → `도메인Controller`
-- 요청dto → 도메인/request/`XXXRequest`
-- 응답dto → 도메인/response/`XXXResponse`
-- 일반dto → 도메인/dto/`XXXDto`
 
 <br>
 
