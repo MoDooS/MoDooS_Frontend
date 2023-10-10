@@ -16,7 +16,7 @@
 
 |                                           Backend                                            |                                         Backend                                          | 
 |:--------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:|
-| <img src="https://avatars.githubusercontent.com/u/87124432?v=4" width=130px alt="박지수"/> | <img src="[https:///u/126501685?v=4](https://avatars.githubusercontent.com/u/69382168?v=4)" width=130px alt="양채연"/> | 
+| <img src="https://avatars.githubusercontent.com/u/87124432?v=4" width=130px alt="박지수"/> | <img src="https://avatars.githubusercontent.com/u/69382168?v=4" width=130px alt="양채연"/> | 
 |                              [박지수](https://github.com/jisupark123)                               |                          [양채연](https://github.com/chaeyeon-yang)                           | 
 
 <br><br><br>
@@ -36,7 +36,7 @@
 
 ### 프론트엔드
 
-Next.js 13.4.7 Typescript 5.1.6 tailwindcss 3.3.2 react-query 3.39.3 axios 1.4.0 Recoil
+Next.js 13.4.7 Typescript 5.1.6 tailwindcss 3.3.2 react-query 3.39.3 axios 1.4.0 Recoil 0.7.7
 
 ### 아키텍쳐
 
